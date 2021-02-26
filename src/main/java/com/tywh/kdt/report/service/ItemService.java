@@ -1,10 +1,9 @@
 package com.tywh.kdt.report.service;
 
-import com.tywh.kdt.report.pojo.Condition;
-
-import java.util.Map;
+import com.tywh.kdt.report.pojo.WhcbQueryCondition;
+import com.tywh.kdt.report.pojo.WhcbResult;
 
 public interface ItemService {
 
-    Map<String,Object> queryItem(Condition condition);
+    WhcbResult queryItem(WhcbQueryCondition whcbQueryCondition);
 }

@@ -24,7 +24,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 不用配置sqlSessionFactory,会自动找 -->
 <!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
-        <property name="basePackage" value="com.tywh.kdterp.inventory.mapper"/>
+        <property name="basePackage" value="com.tywh.kdt.report.mapper"/>
     </bean>
 
 </beans>

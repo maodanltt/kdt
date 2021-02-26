@@ -3,7 +3,29 @@ package com.tywh.kdt.report.pojo;
 import java.util.Arrays;
 import java.util.List;
 
-public class Condition {
+public class WhcbQueryCondition {
+
+    private String bjbmmc;
+
+    private String xsbmmc;
+
+    private String tsfljc;
+
+    private String startdate;
+
+    private String enddate;
+
+    private List<String> fhzts = Arrays.asList("待发","已发");
+
+    private List<String> tsfljcRemove = Arrays.asList("%联考%","日历%","赠品%","宣传品%");
+
+    private String khbhRemove = "2000000747";
+
+    private String sxhRemove = "W%";
+
+    private String kwbh = "00HG";
+
+    private String kjqj = "2020-01";
 
     public String getBjbmmc() {
         return bjbmmc;
@@ -92,28 +114,5 @@ public class Condition {
     public void setKjqj(String kjqj) {
         this.kjqj = kjqj;
     }
-
-    private String bjbmmc;
-
-    private String xsbmmc;
-
-    private String tsfljc;
-
-    private String startdate;
-
-    private String enddate;
-
-    private List<String> fhzts = Arrays.asList("待发","已发");
-
-    private List<String> tsfljcRemove = Arrays.asList("%联考%","日历%","赠品%","宣传品%");
-
-    private String khbhRemove = "2000000747";
-
-    private String sxhRemove = "W%";
-
-    private String kwbh = "00HG";
-
-    private String kjqj = "2020-01";
-
 
 }

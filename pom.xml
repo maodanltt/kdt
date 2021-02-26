@@ -21,6 +21,7 @@
         <aspectj.version>1.8.7</aspectj.version>
         <slf4j.version>1.6.4</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
+        <jackson.version>2.4.2</jackson.version>
     </properties>
 
     <dependencies>
@@ -146,6 +147,12 @@
             <version>${log4j.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -155,6 +162,14 @@
             <resource>
                 <directory>src/main/java</directory><!--所在的目录-->
                 <includes><!--包括目录下的.properties,.xml文件都会扫描到-->
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
                     <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
