@@ -1,9 +1,9 @@
 package com.tywh.kdt.report.service.impl;
 
 import com.tywh.kdt.report.mapper.ItemMapper;
-import com.tywh.kdt.report.pojo.WhcbQueryCondition;
+import com.tywh.kdt.report.pojo.QueryConditionWhcb;
 import com.tywh.kdt.report.pojo.Item;
-import com.tywh.kdt.report.pojo.WhcbResult;
+import com.tywh.kdt.report.pojo.ResultWhcb;
 import com.tywh.kdt.report.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,10 +20,10 @@ public class ItemServiceImpl implements ItemService {
     private ItemMapper itemMapper;
 
     @Override
-    public WhcbResult queryItem(WhcbQueryCondition whcbQueryCondition) {
-        String ksqj = whcbQueryCondition.getStartdate().substring(0,7);
-        String jsqj = whcbQueryCondition.getEnddate().substring(0,7);
-        WhcbResult whcbResult = new WhcbResult();
+    public ResultWhcb queryItem(QueryConditionWhcb queryConditionWhcb) {
+        String ksqj = queryConditionWhcb.getStartdate().substring(0,7);
+        String jsqj = queryConditionWhcb.getEnddate().substring(0,7);
+        ResultWhcb resultWhcb = new ResultWhcb();
         Map<String, Integer> kucunMap = new HashMap<>();
         List<Item> itemList = null;
         Integer zxscs = 0;
@@ -34,8 +34,8 @@ public class ItemServiceImpl implements ItemService {
         NumberFormat nf = NumberFormat.getPercentInstance();
         nf.setMinimumFractionDigits(2);
         try {
-            itemList = itemMapper.queryItemList(whcbQueryCondition);
-            List<Item> kucunItemList= itemMapper.queryKucun(whcbQueryCondition);
+            itemList = itemMapper.queryItemList(queryConditionWhcb);
+            List<Item> kucunItemList= itemMapper.queryKucun(queryConditionWhcb);
             for (Item item : kucunItemList) {
                 String qckcKey = item.getShum() + "-" + item.getGjdj() + "-" + item.getTsfljc() + "-" + item.getKjqj() + "-qckc";
                 String qmkcKey = item.getShum() + "-" + item.getGjdj() + "-" + item.getTsfljc() + "-" + item.getKjqj() + "-qmkc";
@@ -79,12 +79,12 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        whcbResult.setItemList(itemList);
-        whcbResult.setZxscs(zxscs);
-        whcbResult.setZkczzl(zkczzl);
-        whcbResult.setZqckc(zqckc);
-        whcbResult.setZqmkc(zqmkc);
-        return whcbResult;
+        resultWhcb.setItemList(itemList);
+        resultWhcb.setZxscs(zxscs);
+        resultWhcb.setZkczzl(zkczzl);
+        resultWhcb.setZqckc(zqckc);
+        resultWhcb.setZqmkc(zqmkc);
+        return resultWhcb;
     }
 
 }

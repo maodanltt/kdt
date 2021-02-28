@@ -1,9 +1,9 @@
 package com.tywh.kdt.report.service;
 
-import com.tywh.kdt.report.pojo.WhcbQueryCondition;
-import com.tywh.kdt.report.pojo.WhcbResult;
+import com.tywh.kdt.report.pojo.QueryConditionWhcb;
+import com.tywh.kdt.report.pojo.ResultWhcb;
 
 public interface ItemService {
 
-    WhcbResult queryItem(WhcbQueryCondition whcbQueryCondition);
+    ResultWhcb queryItem(QueryConditionWhcb queryConditionWhcb);
 }

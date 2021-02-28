@@ -2,7 +2,7 @@ package com.tywh.kdt.report.pojo;
 
 import java.util.List;
 
-public class WhcbResult {
+public class ResultWhcb {
 
     private List<Item> itemList;
     private Integer zxscs;

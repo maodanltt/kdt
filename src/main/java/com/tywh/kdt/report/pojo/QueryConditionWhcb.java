@@ -3,7 +3,7 @@ package com.tywh.kdt.report.pojo;
 import java.util.Arrays;
 import java.util.List;
 
-public class WhcbQueryCondition {
+public class QueryConditionWhcb {
 
     private String bjbmmc;
 

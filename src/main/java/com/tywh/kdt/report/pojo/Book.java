@@ -7,7 +7,7 @@ public class Book {
     private String bmmc;
     private String tsfljc;
     private String zbh;
-    private double dj;
+    private double gjdj;
 
     public String getSxh() {
         return sxh;
@@ -49,11 +49,11 @@ public class Book {
         this.zbh = zbh;
     }
 
-    public double getDj() {
-        return dj;
+    public double getGjdj() {
+        return gjdj;
     }
 
-    public void setDj(double dj) {
-        this.dj = dj;
+    public void setGjdj(double gjdj) {
+        this.gjdj = gjdj;
     }
 }
