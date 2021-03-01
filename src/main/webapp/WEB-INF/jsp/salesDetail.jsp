@@ -7,55 +7,20 @@
 <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
 <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/query.js"></script>
 <script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
 <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
 	$(function () {
+		var shumdata = {"list":[{'name':'百'},{'name':'百年'},{'name':'百年方'},{'name':'百年方成'},{'name':'三国'},{'name':'三国演义'}]};
+		$("#shum").keyup(function() {
+			keyupcallback(this,$("#shumtip"),shumdata)
+		});
 
-		var data = {"shumList":[{'shum':'百'},{'shum':'百年'},{'shum':'百年方'},{'shum':'百年方成'}]};
-		$("#shum").keyup(function () {
-			if ($("#shum").val() == '') {
-				$("#shumtip").css("display","none");
-				return;
-			}
-
-			var newData = "{'list':[";
-			$.each(data.shumList,function (i,n) {
-				if ((n.shum).indexOf($("#shum").val()) != -1 ){
-					if (i < data.shumList.length -1) {
-						newData += "{'shum':'" + n.shum +"'},";
-					} else {
-						newData += "{'shum':'" + n.shum +"'}";
-					}
-				}
-			})
-			newData += "]}";
-			window.eval("var newDataJson = " + newData);
-			var html = "";
-			$.each(newDataJson.list,function(i, n) {
-
-				html += '<div onmouseover="changeBackColor_over(this)" onmouseout="changeBackColor_out(this)" onclick="clicked(this)">'
-						+ n.shum + '</div>';
-			})
-			$("#shumtip").html(html);
-			$("#shumtip").css("display","block")
-		})
 	})
 
-	function changeBackColor_over(divDomObject) {
-		$(divDomObject).css("background-color","#CCCCCC");
-	}
-
-	function changeBackColor_out(divDomObject) {
-		$(divDomObject).css("background-color","");
-	}
-
-	function clicked(divDomObject) {
-		$("#shum").val(divDomObject.innerHTML);
-		$("#shumtip").css("display","none");
-	}
 </script>
 </head>
 <body>
