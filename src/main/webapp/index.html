@@ -1,61 +1,17 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 
-<link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
+<link href="js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link href="js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
-<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
-<script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="/js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
 
 <script type="text/javascript">
-	$(function () {
-
-		var data = {"shumList":[{'shum':'百'},{'shum':'百年'},{'shum':'百年方'},{'shum':'百年方成'}]};
-		$("#shum").keyup(function () {
-			if ($("#shum").val() == '') {
-				$("#shumtip").css("display","none");
-				return;
-			}
-
-			var newData = "{'list':[";
-			$.each(data.shumList,function (i,n) {
-				if ((n.shum).indexOf($("#shum").val()) != -1 ){
-					if (i < data.shumList.length -1) {
-						newData += "{'shum':'" + n.shum +"'},";
-					} else {
-						newData += "{'shum':'" + n.shum +"'}";
-					}
-				}
-			})
-			newData += "]}";
-			window.eval("var newDataJson = " + newData);
-			var html = "";
-			$.each(newDataJson.list,function(i, n) {
-
-				html += '<div onmouseover="changeBackColor_over(this)" onmouseout="changeBackColor_out(this)" onclick="clicked(this)">'
-						+ n.shum + '</div>';
-			})
-			$("#shumtip").html(html);
-			$("#shumtip").css("display","block")
-		})
-	})
-
-	function changeBackColor_over(divDomObject) {
-		$(divDomObject).css("background-color","#CCCCCC");
-	}
-
-	function changeBackColor_out(divDomObject) {
-		$(divDomObject).css("background-color","");
-	}
-
-	function clicked(divDomObject) {
-		$("#shum").val(divDomObject.innerHTML);
-		$("#shumtip").css("display","none");
-	}
 </script>
 </head>
 <body>
@@ -67,26 +23,27 @@
 					<div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon" style="color: blue">客户名称</div>
-				      <input class="form-control" type="text" name="khmc" id="khmc">
+				      <input class="form-control" type="search" results="s">
 				    </div>
 				  </div>&nbsp;&nbsp;&nbsp;
 
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">图书分类</div>
-							<input class="form-control" type="text" name="tsfljc" id="tsfljc">
+							<input class="form-control" type="text">
 						</div>
 					</div>&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<div class="input-group">
-							<div class="input-group-addon" style="color: blue">自&nbsp;&nbsp;编&nbsp;&nbsp;号</div>
-							<input class="form-control" type="text" name="zbh" id="zbh">
+							<div class="input-group-addon" style="color: blue">自&nbsp;&nbsp;编&nbsp;&nbsp;码</div>
+							<input class="form-control" type="text">
 						</div>
 					</div>&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue;">销售部门</div>
-							<select class="form-control" name="xsbmmc" id="xsbmmc">
+							<!--				      <input class="form-control" type="text">-->
+							<select class="form-control">
 								<option value="chengjiao">成教营销中心</option>
 								<option value="wenhua">文化出版事业部</option>
 							</select>
@@ -96,7 +53,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">编辑部门</div>
-							<select class="form-control" name="bjbmmc" id="bjbmmc">
+							<select class="form-control">
 								<option value="yibian">第一编辑部</option>
 								<option value="erbian">第二编辑部</option>
 								<option value="sanbian">第三编辑部</option>
@@ -109,7 +66,7 @@
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">单据类型</div>
-							<select class="form-control" name="djlx" id="djlx">
+							<select class="form-control">
 								<option value="批发">批发</option>
 								<option value="赠送">赠送</option>
 								<option value="退货">退货</option>
@@ -118,38 +75,37 @@
 					</div>
 					<br><br>
 					<div class="form-group">
-						<div class="input-group" style="position: relative;">
+						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">书&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</div>
-							<input class="form-control" type="text" name="shum" id="shum">
-							<div id="shumtip" style="background-color:white; border: 1px solid cadetblue;width:100%;top: 34px;left:0;display:none;position: absolute;z-index: 100"></div>
+							<input class="form-control" type="text">
 						</div>
 					</div>&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">大区经理</div>
-							<input class="form-control" type="text" name="dqjl" id="dqjl">
+							<input class="form-control" type="text">
 						</div>
 					</div>&nbsp;&nbsp;&nbsp;
 					<div class="form-group">
 						<div class="input-group">
 							<div class="input-group-addon" style="color: blue">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区</div>
-							<input class="form-control" type="text" name="dq" id="dq">
+							<input class="form-control" type="text">
 						</div>
 					</div>&nbsp;&nbsp;&nbsp;
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon" style="color: blue">开始日期</div>
-					  <input class="form-control" type="date" id="startTime" name="startTime"/>
+					  <input class="form-control" type="date" id="startTime" />
 				    </div>
 				  </div>
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon" style="color: blue">结束日期</div>
-					  <input class="form-control" type="date" id="endTime" name="endTime">
+					  <input class="form-control" type="date" id="endTime">
 				    </div>
 				  </div>&nbsp;&nbsp;&nbsp;
 				  
-				  <button type="button" class="btn btn-default" style="color: blue">查询</button>
+				  <button type="submit" class="btn btn-default" style="color: blue">查询</button>
 				  
 				</form>
 			</div>
