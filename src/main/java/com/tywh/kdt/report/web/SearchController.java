@@ -21,11 +21,11 @@ public class SearchController {
 
     @RequestMapping("/queryKhmcList")
     @ResponseBody
-    public Map<String, List<Search>> queryKhmcList(HttpServletRequest request, String khmc) throws Exception {
+    public Map<String, List<Search>> queryKhmcList(HttpServletRequest request) throws Exception {
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> khmcList = (List<Search>) request.getSession(true).getAttribute("khmcList");
         if (khmcList == null) {
-            khmcList = searchService.queryKhmcList(khmc);
+            khmcList = searchService.queryKhmcList();
             request.getSession(false).setAttribute("khmcList",khmcList);
         }
         retmap.put("list", khmcList);
@@ -34,11 +34,11 @@ public class SearchController {
 
     @RequestMapping("/queryTsfljcList")
     @ResponseBody
-    public Map<String, List<Search>> queryTsfljcList(HttpServletRequest request, String tsfljc) throws Exception {
+    public Map<String, List<Search>> queryTsfljcList(HttpServletRequest request) throws Exception {
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> tsfljcList = (List<Search>) request.getSession(true).getAttribute("tsfljcList");
         if (tsfljcList == null) {
-            tsfljcList = searchService.queryTsfljcList(tsfljc);
+            tsfljcList = searchService.queryTsfljcList();
             request.getSession(false).setAttribute("tsfljcList",tsfljcList);
         }
         retmap.put("list", tsfljcList);
@@ -47,11 +47,11 @@ public class SearchController {
 
     @RequestMapping("/queryShumList")
     @ResponseBody
-    public Map<String, List<Search>> queryShumList(HttpServletRequest request, String shum) throws Exception {
+    public Map<String, List<Search>> queryShumList(HttpServletRequest request) throws Exception {
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> shumList = (List<Search>) request.getSession(true).getAttribute("shumList");
         if (shumList == null) {
-            shumList = searchService.queryShumList(shum);
+            shumList = searchService.queryShumList();
             request.getSession(false).setAttribute("shumList",shumList);
         }
         retmap.put("list", shumList);
@@ -60,11 +60,11 @@ public class SearchController {
 
     @RequestMapping("/queryDqjlList")
     @ResponseBody
-    public Map<String, List<Search>> queryDqjlList(HttpServletRequest request, String dqjl) throws Exception {
+    public Map<String, List<Search>> queryDqjlList(HttpServletRequest request) throws Exception {
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> dqjlList = (List<Search>) request.getSession(true).getAttribute("dqjlList");
         if (dqjlList == null) {
-            dqjlList = searchService.queryDqjlList(dqjl);
+            dqjlList = searchService.queryDqjlList();
             request.getSession(true).setAttribute("dqjlList",dqjlList);
         }
         retmap.put("list", dqjlList);
@@ -73,11 +73,11 @@ public class SearchController {
 
     @RequestMapping("/queryDqList")
     @ResponseBody
-    public Map<String, List<Search>> queryDqList(HttpServletRequest request, String dq) throws Exception {
+    public Map<String, List<Search>> queryDqList(HttpServletRequest request) throws Exception {
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> dqList = (List<Search>) request.getSession(false).getAttribute("dqList");
         if (dqList == null) {
-            dqList = searchService.queryDqList(dq);
+            dqList = searchService.queryDqList();
             request.getSession(true).setAttribute("dqList",dqList);
         }
         retmap.put("list", dqList);

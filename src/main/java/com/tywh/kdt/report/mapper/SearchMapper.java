@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface SearchMapper {
-    List<Search> queryKhmcList(Map<String, String> conditionMap);
+    List<Search> queryKhmcList(Map<String, String> conditionMap) throws Exception;
 
     List<Search> queryTsfljcList(Map<String, String> conditionMap) throws Exception;
 
@@ -14,5 +14,5 @@ public interface SearchMapper {
 
     List<Search> queryDqjlList(Map<String, String> conditionMap) throws Exception;
 
-    List<Search> queryDqList(Map<String, String> conditionMap) throws Exception;
+    List<Search> queryDqList() throws Exception;
 }

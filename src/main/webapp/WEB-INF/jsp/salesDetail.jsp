@@ -97,21 +97,30 @@
     <div class="btn-toolbar" role="toolbar" style="height: 80px; padding: 0 20px">
         <form role="form" style="position: relative; top: 8%; left: 5px;font-size: small">
             <div class="row">
-                <div class="form-group col-xs-6">
+                <div class="form-group col-xs-4">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">客户名称</div>
                         <input class="form-control" type="text" name="khmc" id="khmc">
+                        <div id="khmctip" class="input-tips"></div>
                     </div>
-                    <div id="khmctip" class="input-tips"></div>
                 </div>
-                <div class="form-group col-xs-6">
+
+                <div class="form-group col-xs-5">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">
-                            书&nbsp;&nbsp;&nbsp;名
+                            书名
                         </div>
                         <input class="form-control" type="text" name="shum" id="shum">
+                        <div id="shumtip" class="input-tips"></div>
                     </div>
-                    <div id="shumtip" class="input-tips"></div>
+                </div>
+
+                <div class="form-group col-xs-3">
+                    <div class="input-group" style="position: relative;">
+                        <div class="input-group-addon" style="color: blue">图书分类</div>
+                        <input class="form-control" type="text" name="tsfljc" id="tsfljc">
+                        <div id="tsfljctip" class="input-tips"></div>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -121,16 +130,7 @@
                         <input class="form-control" type="text" name="zbh" id="zbh">
                     </div>
                 </div>
-                <div class="form-group col-xs-3 col-md-2">
-                    <div class="input-group">
-                        <div class="input-group-addon" style="color: blue;">销售部门</div>
-                        <select class="form-control" name="xsbmmc" id="xsbmmc">
-                            <option value="chengjiao">成教营销中心</option>
-                            <option value="wenhua">文化出版事业部</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-xs-3 col-md-2">
+                <div class="form-group col-xs-3 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">编辑部门</div>
                         <select class="form-control" name="bjbmmc" id="bjbmmc">
@@ -138,8 +138,7 @@
                             <option value="erbian">第二编辑部</option>
                             <option value="sanbian">第三编辑部</option>
                             <option value="sibian">第四编辑部</option>
-                            <option value="wenhua">文化出版事业部</option>
-                            <option value="hezuo">合作初版编辑部</option>
+                            <option value="hezuo">合作出版编辑部</option>
                         </select>
                     </div>
                 </div>
@@ -153,20 +152,18 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group col-xs-3 col-md-2">
-                    <div class="input-group" style="position: relative;">
-                        <div class="input-group-addon" style="color: blue">图书分类</div>
-                        <input class="form-control" type="text" name="tsfljc" id="tsfljc">
-                        <div id="tsfljctip"
-                             class="input-tips"></div>
-                    </div>
-                </div>
+<%--                <div class="form-group col-xs-3 col-md-2">--%>
+<%--                    <div class="input-group" style="position: relative;">--%>
+<%--                        <div class="input-group-addon" style="color: blue">图书分类</div>--%>
+<%--                        <input class="form-control" type="text" name="tsfljc" id="tsfljc">--%>
+<%--                        <div id="tsfljctip" class="input-tips"></div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
                 <div class="form-group col-xs-3 col-md-2">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">大区经理</div>
                         <input class="form-control" type="text" name="dqjl" id="dqjl">
-                        <div id="dqjltip"
-                             class="input-tips"></div>
+                        <div id="dqjltip" class="input-tips"></div>
                     </div>
                 </div>
                 <div class="form-group col-xs-3 col-md-2">
@@ -175,8 +172,7 @@
                             地&nbsp;&nbsp;区
                         </div>
                         <input class="form-control" type="text" name="dq" id="dq">
-                        <div id="dqtip"
-                             class="input-tips"></div>
+                        <div id="dqtip" class="input-tips"></div>
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-md-3">
@@ -199,21 +195,15 @@
     </div>
     <hr>
 
-    <div style="position: relative;top: 20px; font-size: x-small">
+    <div style="position: relative;top: 20px; font-size: small">
         <table class="table table-hover">
             <thead>
             <tr style="color: blue; font-size: small">
                 <td>序</td>
                 <td>发货单号</td>
-                <td>发货状态</td>
                 <td>客户名称</td>
-                <td>销售部门</td>
-                <td>单据类型</td>
                 <td>制单日期</td>
-                <td>书序号</td>
                 <td>书名</td>
-                <td>编辑部门</td>
-                <td>图书分类</td>
                 <td>自编码</td>
                 <td>定价</td>
                 <td>册数</td>
@@ -228,17 +218,11 @@
             <tr class="active" style="font-size: small">
                 <td>1</td>
                 <td>TH2021000000215</td>
-                <td>待发</td>
                 <td>北京美如林文化发展有限公司</td>
-                <td>成教营销中心</td>
-                <td>退货</td>
                 <td>2021-03-01</td>
-                <td>20200808</td>
                 <td><a style="color: blue; cursor: pointer;" onclick="window.location.href='detail.html';">高等教育自学考试考纲解读与全真模拟演练：高等数学（一）</a>
                 </td>
-                <td>第二编辑部</td>
-                <td>考试类-自考考纲公课</td>
-                <td>20171010112F1705</td>
+                <td>F1705</td>
                 <td>28.00</td>
                 <td>100</td>
                 <td>100</td>
