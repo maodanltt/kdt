@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tywh.kdt.report.mapper.SearchMapper">
+    <select id="queryKhmcList" resultType="search">
+        select mc as name from khkview
+        <where>
+            bmmc = #{bmmc} and tybz = #{tybz}
+            <if test="khmc != null and khmc != ''">
+                and khmc like '%' + #{khmc} + '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="queryTsfljcList" resultType="search">
+        select jc as name from TsflkView
+        <where>
+            jc not like '%' + #{cg} + '%' and jc not like '%' + #{zx} + '%'
+            and jc not like '%' + #{wh} + '%' and sjdm &lt;&gt; #{sjdm}
+            <if test="tsfljc != null and tsfljc != ''">
+                and tsfljc like '%' + #{tsfljc} + '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="queryShumList" resultType="search">
+        select shum as name from fxsgkview
+        <where>
+--             sxh not like '%W%' and tsfljc not like '%中学%' and bmmc not like '%出版中心%' and bmmc not like '%文化%'
+            sxh not like '%' + #{sxh} + '%' and tsfljc not like '%' + #{tsfljc} + '%'
+            and bmmc &lt;&gt; #{cbzx} and bmmc &lt;&gt; #{whcb}
+            <if test="shum != null and shum != ''">
+                and shum like '%' + #{shum} + '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="queryDqjlList" resultType="search">
+        select REPLACE(mc,'-CJ1', '') name from xsflk
+        <where>
+            sjdm = #{sjdm}
+            <if test="dqjl != null and dqjl != ''">
+                and jc like '%' + #{dqjl} + '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="queryDqList" resultType="search">
+        select jc as name from khdqk
+        <where>
+            <if test="dq != null and dq != ''">
+                and jc like '%' + #{dq} + '%'
+            </if>
+        </where>
+    </select>
+</mapper>

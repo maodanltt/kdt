@@ -1,6 +1,6 @@
 package com.tywh.kdt.report.web;
 
-import com.tywh.kdt.report.pojo.Book;
+import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,22 +19,68 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping("/queryBookList")
+    @RequestMapping("/queryKhmcList")
     @ResponseBody
-    public Map<String,List<String>> queryBookList(HttpServletRequest request,String shum) throws Exception{
-        Map<String,List<String>> retmap = new HashMap();
-        List<String> shumList = new ArrayList<>();
-        List<Book> bookList = (List<Book>) request.getSession(false).getServletContext().getAttribute("bookList");
-        if (bookList == null) {
-            bookList = searchService.queryBookList(shum);
-            request.getSession(false).getServletContext().setAttribute("bookList",bookList);
+    public Map<String, List<Search>> queryKhmcList(HttpServletRequest request, String khmc) throws Exception {
+        Map<String, List<Search>> retmap = new HashMap();
+        List<Search> khmcList = (List<Search>) request.getSession(true).getAttribute("khmcList");
+        if (khmcList == null) {
+            khmcList = searchService.queryKhmcList(khmc);
+            request.getSession(false).setAttribute("khmcList",khmcList);
         }
-        for (Book b : bookList) {
-            if (b.getShum().contains(shum)) {
-                shumList.add(b.getShum());
-            }
+        retmap.put("list", khmcList);
+        return retmap;
+    }
+
+    @RequestMapping("/queryTsfljcList")
+    @ResponseBody
+    public Map<String, List<Search>> queryTsfljcList(HttpServletRequest request, String tsfljc) throws Exception {
+        Map<String, List<Search>> retmap = new HashMap();
+        List<Search> tsfljcList = (List<Search>) request.getSession(true).getAttribute("tsfljcList");
+        if (tsfljcList == null) {
+            tsfljcList = searchService.queryTsfljcList(tsfljc);
+            request.getSession(false).setAttribute("tsfljcList",tsfljcList);
         }
-        retmap.put("shumList",shumList);
+        retmap.put("list", tsfljcList);
+        return retmap;
+    }
+
+    @RequestMapping("/queryShumList")
+    @ResponseBody
+    public Map<String, List<Search>> queryShumList(HttpServletRequest request, String shum) throws Exception {
+        Map<String, List<Search>> retmap = new HashMap();
+        List<Search> shumList = (List<Search>) request.getSession(true).getAttribute("shumList");
+        if (shumList == null) {
+            shumList = searchService.queryShumList(shum);
+            request.getSession(false).setAttribute("shumList",shumList);
+        }
+        retmap.put("list", shumList);
+        return retmap;
+    }
+
+    @RequestMapping("/queryDqjlList")
+    @ResponseBody
+    public Map<String, List<Search>> queryDqjlList(HttpServletRequest request, String dqjl) throws Exception {
+        Map<String, List<Search>> retmap = new HashMap();
+        List<Search> dqjlList = (List<Search>) request.getSession(true).getAttribute("dqjlList");
+        if (dqjlList == null) {
+            dqjlList = searchService.queryDqjlList(dqjl);
+            request.getSession(true).setAttribute("dqjlList",dqjlList);
+        }
+        retmap.put("list", dqjlList);
+        return retmap;
+    }
+
+    @RequestMapping("/queryDqList")
+    @ResponseBody
+    public Map<String, List<Search>> queryDqList(HttpServletRequest request, String dq) throws Exception {
+        Map<String, List<Search>> retmap = new HashMap();
+        List<Search> dqList = (List<Search>) request.getSession(false).getAttribute("dqList");
+        if (dqList == null) {
+            dqList = searchService.queryDqList(dq);
+            request.getSession(true).setAttribute("dqList",dqList);
+        }
+        retmap.put("list", dqList);
         return retmap;
     }
 }
