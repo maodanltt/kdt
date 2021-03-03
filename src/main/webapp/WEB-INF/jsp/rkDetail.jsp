@@ -1,4 +1,9 @@
+<%@ page import="com.tywh.kdt.report.pojo.RkDetail" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    List<RkDetail> resultList = (List<RkDetail>) request.getAttribute("resultList");
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -44,13 +49,19 @@
                     </tr>
                 </thead>
                 <tbody id="itemtbody">
-                    <tr class="active" style="color: blue; font-size: small">
-                        <td>1</td>
-                        <td>CGRK20210000007</td>
-                        <td>2021-03-01</td>
-                        <td>河南天一文化传播股份有限公司</td>
-                        <td>35</td>
-                    </tr>
+                <%
+                    for (int i=0; i<resultList.size(); i++) {
+                %>
+                <tr class="active" style="font-size: small">
+                    <td><%=(i+1)%></td>
+                    <td><%=resultList.get(i).getRkdbh()%></td>
+                    <td><%=resultList.get(i).getTxrq()%></td>
+                    <td><%=resultList.get(i).getGysmc()%></td>
+                    <td><%=resultList.get(i).getCs()%></td>
+                </tr>
+                <%
+                    }
+                %>
                     <tr class="active" style="color: blue; font-size: small">
                         <td colspan="4" align="center">汇总</td>
                         <td>35</td>

@@ -30,6 +30,7 @@
     <select id="queryRkDetailList" resultType="rkDetail">
         select rkdbh,txrq,sxh,cs,gysmc from (select rkdbh,CONVERT(varchar(100), txrq, 23) txrq, sxh,cs,gysmc
         from RkmxView union select rkdbh,CONVERT(varchar(100), txrq, 23) txrq, sxh,cs,gysmc  from RkmxnView) rkmxjl
+        order by txrq
     </select>
 
     <select id="queryKucunList" resultType="inventory">

@@ -104,12 +104,12 @@
                     success: function (data) {
                         var tbodyHtml = "";
                         $.each(data.salesDetailList,function (i,n) {
-                            tbodyHtml += '<tr class="active" style="font-size: small">';
+                            tbodyHtml += '<tr class="active" style="font-size: xx-small">';
                             tbodyHtml += '<td>' + (i+1) + '</td>';
                             tbodyHtml += '<td>' + n.fhdbh + '</td>';
                             tbodyHtml += '<td>' + n.khmc + '</td>';
                             tbodyHtml += '<td>' + n.txrq + '</td>';
-                            tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin()">' + n.shum + '</a></td>';
+                            tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + n.sxh + ')">' + n.shum + '</a></td>';
                             tbodyHtml += '<td>' + n.zbh + '</td>';
                             tbodyHtml += '<td>' + n.dj + '</td>';
                             tbodyHtml += '<td>' + n.cs + '</td>';
@@ -180,7 +180,7 @@
             <div class="row">
                 <div class="form-group col-xs-3 col-md-2">
                     <div class="input-group" style="position: relative;">
-                        <div class="input-group-addon" style="color: blue">自&nbsp;编&nbsp;号</div>
+                        <div class="input-group-addon" style="color: blue">印次</div>
                         <input class="form-control" type="text" name="zbh" id="zbh">
                     </div>
                 </div>
@@ -245,13 +245,13 @@
     <div style="position: relative;top: 20px; font-size: small">
         <table class="table table-hover">
             <thead>
-            <tr style="color: blue; font-size: small">
+            <tr style="color: blue; font-size: xx-small">
                 <td>序</td>
                 <td>发货单号</td>
                 <td>客户名称</td>
                 <td>制单日期</td>
                 <td>书名</td>
-                <td>自编码</td>
+                <td>印次</td>
                 <td>定价</td>
                 <td>册数</td>
                 <td>码洋</td>

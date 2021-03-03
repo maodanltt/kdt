@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,7 +87,22 @@ public class SearchController {
     }
 
     @RequestMapping("/queryRkDetailList")
-    public List<RkDetail> queryRkDetailList(HttpServletRequest request) throws Exception {
-        return null;
+    public String queryRkDetailList(HttpServletRequest request, String sxh) throws Exception {
+        List<RkDetail> rkDetailList = (List<RkDetail>) request.getSession(false).getAttribute("rkDetailList");
+        if (rkDetailList == null) {
+            rkDetailList = searchService.queryRkDetailList();
+            request.getSession(false).setAttribute("rkDetailList",rkDetailList);
+        }
+
+        List<RkDetail> resultList = new ArrayList<>();
+        for (RkDetail rkDetail : rkDetailList) {
+            if (rkDetail.getSxh().equals(sxh)) {
+                resultList.add(rkDetail);
+            }
+        }
+        request.setAttribute("resultList", resultList);
+        return "rkDetail";
     }
+
+
 }

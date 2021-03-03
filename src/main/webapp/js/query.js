@@ -43,7 +43,8 @@
         $(dom2).css("display","none");
     }
 
-    function openwin() {
-        window.open ("/report/toRkDetail.do", "newwindow", "height=600, width=800,top=300,left=1000,right=30; toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no") //写成一行
+    function openwin(sxh) {
+    alert(123);
+        window.open ("/search/queryRkDetailList.do?sxh=" + sxh, "newwindow", "height=600, width=800,top=300,left=1000,right=30; toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no") //写成一行
     }
 

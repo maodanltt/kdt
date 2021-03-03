@@ -20,11 +20,6 @@ public class SalesDetailController {
         return "salesDetail";
     }
 
-    @RequestMapping("/toRkDetail")
-    public String toRkDetail() {
-        return "rkDetail";
-    }
-
     @RequestMapping("/querySalesDetailList")
     @ResponseBody
     public Result querySalesDetailList(QueryCondition queryCondition) throws Exception{
