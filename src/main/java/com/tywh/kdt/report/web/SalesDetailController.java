@@ -15,9 +15,14 @@ public class SalesDetailController {
     @Autowired
     private SalesDetailService salesDetailService;
 
-    @RequestMapping("/salesDetail")
+    @RequestMapping("/toSalesDetail")
     public String toSalesDetail() {
         return "salesDetail";
+    }
+
+    @RequestMapping("/toRkDetail")
+    public String toRkDetail() {
+        return "rkDetail";
     }
 
     @RequestMapping("/querySalesDetailList")

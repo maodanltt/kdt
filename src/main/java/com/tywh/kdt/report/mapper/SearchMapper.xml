@@ -26,4 +26,13 @@
     <select id="queryDqList" resultType="search">
         select jc as name from khdqk
     </select>
+
+    <select id="queryRkDetailList" resultType="rkDetail">
+        select rkdbh,txrq,sxh,cs,gysmc from (select rkdbh,CONVERT(varchar(100), txrq, 23) txrq, sxh,cs,gysmc
+        from RkmxView union select rkdbh,CONVERT(varchar(100), txrq, 23) txrq, sxh,cs,gysmc  from RkmxnView) rkmxjl
+    </select>
+
+    <select id="queryKucunList" resultType="inventory">
+        select sxh,sum(qmkc) qmkc from kucunView where kwbh = #{kwbh} group by sxh,shum,bmmc
+    </select>
 </mapper>

@@ -8,5 +8,7 @@ import java.util.List;
 public interface SalesDetailMapper {
 
     List<SalesDetail> querySalesDetailList(QueryCondition queryCondition) throws Exception;
+
+
     
 }

@@ -1,5 +1,6 @@
 package com.tywh.kdt.report.web;
 
+import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,5 +83,10 @@ public class SearchController {
         }
         retmap.put("list", dqList);
         return retmap;
+    }
+
+    @RequestMapping("/queryRkDetailList")
+    public List<RkDetail> queryRkDetailList(HttpServletRequest request) throws Exception {
+        return null;
     }
 }

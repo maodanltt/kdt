@@ -1,6 +1,8 @@
 package com.tywh.kdt.report.service.impl;
 
 import com.tywh.kdt.report.mapper.SearchMapper;
+import com.tywh.kdt.report.pojo.Inventory;
+import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +56,18 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Search> queryDqList() throws Exception {
         return searchMapper.queryDqList();
+    }
+
+    @Override
+    public List<RkDetail> queryRkDetailList() throws Exception {
+        return searchMapper.queryRkDetailList();
+    }
+
+    @Override
+    public List<Inventory> queryKucunList() throws Exception {
+        Map<String, String> conditionMap = new HashMap<>();
+        conditionMap.put("kwbh","00HG");
+        return searchMapper.queryKucunList(conditionMap);
     }
 
 }

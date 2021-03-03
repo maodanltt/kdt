@@ -17,19 +17,11 @@ public class SalesDetail {
     private String kwbh;
     private Integer cs;
     private double my;
+    private double zk;
     private double sy;
     private String xsflmc;
-    private String flmc;
-    private String dqjc;
-    private Integer currentInventory;
-
-    public Integer getCurrentInventory() {
-        return currentInventory;
-    }
-
-    public void setCurrentInventory(Integer currentInventory) {
-        this.currentInventory = currentInventory;
-    }
+    private String dqjl;
+    private String dq;
 
     public String getFhdbh() {
         return fhdbh;
@@ -151,6 +143,14 @@ public class SalesDetail {
         this.my = my;
     }
 
+    public double getZk() {
+        return zk;
+    }
+
+    public void setZk(double zk) {
+        this.zk = zk;
+    }
+
     public double getSy() {
         return sy;
     }
@@ -167,20 +167,19 @@ public class SalesDetail {
         this.xsflmc = xsflmc;
     }
 
-    public String getFlmc() {
-        return flmc;
+    public String getDqjl() {
+        return dqjl;
     }
 
-    public void setFlmc(String flmc) {
-        this.flmc = flmc;
+    public void setDqjl(String dqjl) {
+        this.dqjl = dqjl;
     }
 
-    public String getDqjc() {
-        return dqjc;
+    public String getDq() {
+        return dq;
     }
 
-    public void setDqjc(String dqjc) {
-        this.dqjc = dqjc;
+    public void setDq(String dq) {
+        this.dq = dq;
     }
-
 }

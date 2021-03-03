@@ -18,6 +18,16 @@ public class SalesDetailServiceImpl implements SalesDetailService {
     @Override
     public Result getSalesDetailList(QueryCondition queryCondition) throws Exception{
         List<SalesDetail> salesDetailList = salesDetailMapper.querySalesDetailList(queryCondition);
+        for (SalesDetail salesDetail : salesDetailList) {
+            if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() != null) {
+                salesDetail.setDqjl(salesDetail.getXsflmc().split("-")[0]);
+            }  else if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() == null && salesDetail.getDq() == "样书") {
+                salesDetail.setDqjl("未知");
+            } else if (salesDetail.getDq() == null) {
+                salesDetail.setDq("未知");
+                salesDetail.setDqjl("未知");
+            }
+        }
         Result result = new Result();
         result.setSalesDetailList(salesDetailList);
         return result;

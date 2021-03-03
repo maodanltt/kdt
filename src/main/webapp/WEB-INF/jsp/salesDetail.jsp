@@ -72,6 +72,60 @@
                 }
             })
 
+            $("#search").click(function () {
+                if ($.trim($("#startdate").val()) == '') {
+                    alert("开始日期必须输入");
+                    $("#startdate").focus();
+                    return false;
+                }
+
+                if ($.trim($("#startdate").val()) < '2020-01-01') {
+                    alert("可查询2020年之后的数据，请修改开始日期");
+                    $("#startdate").focus();
+                    return false;
+                }
+
+                $.ajax({
+                    url: "/report/querySalesDetailList.do",
+                    data: {
+                        "khmc": $.trim($("#khmc").val()),
+                        "shum": $.trim($("#shum").val()),
+                        "tsfljc": $.trim($("#tsfljc").val()),
+                        "zbh": $.trim($("#zbh").val()),
+                        "bmmc": $.trim($("#bmmc").val()),
+                        "djlx": $.trim($("#djlx").val()),
+                        "dqjl": $.trim($("#dqjl").val()),
+                        "dq": $.trim($("#dq").val()),
+                        "startdate": $.trim($("#startdate").val()),
+                        "enddate": $.trim($("#enddate").val()),
+                    },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        var tbodyHtml = "";
+                        $.each(data.salesDetailList,function (i,n) {
+                            tbodyHtml += '<tr class="active" style="font-size: small">';
+                            tbodyHtml += '<td>' + (i+1) + '</td>';
+                            tbodyHtml += '<td>' + n.fhdbh + '</td>';
+                            tbodyHtml += '<td>' + n.khmc + '</td>';
+                            tbodyHtml += '<td>' + n.txrq + '</td>';
+                            tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin()">' + n.shum + '</a></td>';
+                            tbodyHtml += '<td>' + n.zbh + '</td>';
+                            tbodyHtml += '<td>' + n.dj + '</td>';
+                            tbodyHtml += '<td>' + n.cs + '</td>';
+                            tbodyHtml += '<td>' + n.my + '</td>';
+                            tbodyHtml += '<td>' + n.zk + '</td>';
+                            tbodyHtml += '<td>' + n.sy + '</td>';
+                            tbodyHtml += '<td>' + n.dqjl + '</td>';
+                            tbodyHtml += '<td>' + n.dq + '</td>';
+                            tbodyHtml += '</tr>';
+                        })
+                        $("#itemtbody").html(tbodyHtml);
+                    }
+                })
+
+            })
+
         })
 
     </script>
@@ -133,12 +187,12 @@
                 <div class="form-group col-xs-3 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">编辑部门</div>
-                        <select class="form-control" name="bjbmmc" id="bjbmmc">
-                            <option value="yibian">第一编辑部</option>
-                            <option value="erbian">第二编辑部</option>
-                            <option value="sanbian">第三编辑部</option>
-                            <option value="sibian">第四编辑部</option>
-                            <option value="hezuo">合作出版编辑部</option>
+                        <select class="form-control" name="bmmc" id="bmmc">
+                            <option value="第一编辑部">第一编辑部</option>
+                            <option value="第二编辑部">第二编辑部</option>
+                            <option value="第三编辑部">第三编辑部</option>
+                            <option value="第四编辑部">第四编辑部</option>
+                            <option value="合作出版编辑部">合作出版编辑部</option>
                         </select>
                     </div>
                 </div>
@@ -152,13 +206,6 @@
                         </select>
                     </div>
                 </div>
-<%--                <div class="form-group col-xs-3 col-md-2">--%>
-<%--                    <div class="input-group" style="position: relative;">--%>
-<%--                        <div class="input-group-addon" style="color: blue">图书分类</div>--%>
-<%--                        <input class="form-control" type="text" name="tsfljc" id="tsfljc">--%>
-<%--                        <div id="tsfljctip" class="input-tips"></div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
                 <div class="form-group col-xs-3 col-md-2">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">大区经理</div>
@@ -178,17 +225,17 @@
                 <div class="form-group col-xs-4 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">开始日期</div>
-                        <input class="form-control" type="date" id="startTime" name="startTime"/>
+                        <input class="form-control" type="date" id="startdate" name="startdate"/>
                     </div>
                 </div>
                 <div class="form-group col-xs-4 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">结束日期</div>
-                        <input class="form-control" type="date" id="endTime" name="endTime">
+                        <input class="form-control" type="date" id="enddate" name="enddate">
                     </div>
                 </div>
                 <div class="form-group col-xs-2">
-                    <button type="button" class="btn btn-default" style="color: blue"> 查 询</button>
+                    <button type="button" class="btn btn-default" style="color: blue" id="search"> 查 询</button>
                 </div>
             </div>
         </form>
@@ -214,24 +261,7 @@
                 <td>地区</td>
             </tr>
             </thead>
-            <tbody>
-            <tr class="active" style="font-size: small">
-                <td>1</td>
-                <td>TH2021000000215</td>
-                <td>北京美如林文化发展有限公司</td>
-                <td>2021-03-01</td>
-                <td><a style="color: blue; cursor: pointer;" onclick="window.location.href='detail.html';">高等教育自学考试考纲解读与全真模拟演练：高等数学（一）</a>
-                </td>
-                <td>F1705</td>
-                <td>28.00</td>
-                <td>100</td>
-                <td>100</td>
-                <td>0.25</td>
-                <td>25</td>
-                <td>张琳</td>
-                <td>北京</td>
-            </tr>
-            </tbody>
+            <tbody id="itemtbody"></tbody>
         </table>
     </div>
 

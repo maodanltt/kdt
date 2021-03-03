@@ -3,19 +3,16 @@ package com.tywh.kdt.report.pojo;
 public class QueryCondition {
 
     private String khmc;
-    private String xsbmmc;
-    private String djlx;
-    private String startDate; //必须输入
-    private String endDate;   //必须输入
-    private String sxh;
     private String shum;
-    private String bmmc;  //编辑部门名称
     private String tsfljc;
     private String zbh;
-    private String flmc;
-    private String dqjc;
-    private final String tsfljcRemove = "%联考%";
-    private final String scopeDate = "2020-01-01";
+    private String bmmc;  //编辑部门名称
+    private String djlx;
+    private String dqjl;
+    private String dq;
+    private String startdate; //必须输入
+    private String enddate;   //必须输入
+    private final String xsbmmc = "成教营销中心";
 
     public String getKhmc() {
         return khmc;
@@ -25,60 +22,12 @@ public class QueryCondition {
         this.khmc = khmc;
     }
 
-    public String getXsbmmc() {
-        return xsbmmc;
-    }
-
-    public void setXsbmmc(String xsbmmc) {
-        this.xsbmmc = xsbmmc;
-    }
-
-    public String getDjlx() {
-        return djlx;
-    }
-
-    public void setDjlx(String djlx) {
-        this.djlx = djlx;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getSxh() {
-        return sxh;
-    }
-
-    public void setSxh(String sxh) {
-        this.sxh = sxh;
-    }
-
     public String getShum() {
         return shum;
     }
 
     public void setShum(String shum) {
         this.shum = shum;
-    }
-
-    public String getBmmc() {
-        return bmmc;
-    }
-
-    public void setBmmc(String bmmc) {
-        this.bmmc = bmmc;
     }
 
     public String getTsfljc() {
@@ -97,29 +46,55 @@ public class QueryCondition {
         this.zbh = zbh;
     }
 
-    public String getFlmc() {
-        return flmc;
+    public String getBmmc() {
+        return bmmc;
     }
 
-    public void setFlmc(String flmc) {
-        this.flmc = flmc;
+    public void setBmmc(String bmmc) {
+        this.bmmc = bmmc;
     }
 
-    public String getDqjc() {
-        return dqjc;
+    public String getDjlx() {
+        return djlx;
     }
 
-    public void setDqjc(String dqjc) {
-        this.dqjc = dqjc;
+    public void setDjlx(String djlx) {
+        this.djlx = djlx;
     }
 
-    public String getTsfljcRemove() {
-        return tsfljcRemove;
+    public String getDqjl() {
+        return dqjl;
     }
 
-    public String getScopeDate() {
-        return scopeDate;
+    public void setDqjl(String dqjl) {
+        this.dqjl = dqjl;
     }
 
+    public String getDq() {
+        return dq;
+    }
 
+    public void setDq(String dq) {
+        this.dq = dq;
+    }
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
+    }
+
+    public String getXsbmmc() {
+        return xsbmmc;
+    }
 }

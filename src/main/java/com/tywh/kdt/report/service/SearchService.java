@@ -1,8 +1,11 @@
 package com.tywh.kdt.report.service;
 
+import com.tywh.kdt.report.pojo.Inventory;
+import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SearchService {
 
@@ -15,4 +18,8 @@ public interface SearchService {
     List<Search> queryDqjlList() throws Exception;
 
     List<Search> queryDqList() throws Exception;
+
+    List<RkDetail> queryRkDetailList() throws Exception;
+
+    List<Inventory> queryKucunList() throws Exception;
 }
