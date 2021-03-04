@@ -5,5 +5,7 @@ import com.tywh.kdt.report.pojo.Result;
 
 public interface SalesDetailService {
 
-    Result getSalesDetailList(QueryCondition queryCondition) throws Exception;
+    Result querySalesDetailList(QueryCondition queryCondition) throws Exception;
+
+    Integer queryTotalRecords(QueryCondition queryCondition) throws Exception;
 }

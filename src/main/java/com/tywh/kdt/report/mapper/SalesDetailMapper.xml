@@ -5,7 +5,47 @@
 <mapper namespace="com.tywh.kdt.report.mapper.SalesDetailMapper">
 
     <select id="querySalesDetailList" parameterType="queryCondition" resultType="salesDetail">
+		select t2.rowid,t2.fhdbh,t2.fhzt,t2.khmc,t2.xsbmmc,t2.djlx,t2.txrq,t2.sxh,t2.shum,t2.bmmc,
+		t2.tsfljc,t2.zbh,t2.dj,t2.kwbh,t2.cs,t2.my,t2.zk,t2.sy,t2.xsflmc,t2.dqjl,t2.dq from
+		(select ROW_NUMBER()  over(order by fhdbh desc) as rowid,fhdbh,fhzt,khmc,xsbmmc,djlx,txrq,
+		sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,dqjl,dq from (
         select fhdbh,fhzt,khmc,xsbmmc,djlx,txrq,sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,flmc as dqjl,dqjc as dq from (
+		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
+		sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,flmc,dqjc from xsmxview union
+		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
+		sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,flmc,dqjc from xsmxnview) xsmxjl
+		<where>
+			and xsbmmc = #{xsbmmc} and txrq >= #{startdate} and txrq &lt;= #{enddate}
+			<if test="khmc != null and khmc != ''">
+				and khmc = #{khmc}
+			</if>
+			<if test="shum != null and shum != ''">
+				and shum like '%' + #{shum} + '%'
+			</if>
+			<if test="tsfljc != null and tsfljc != ''">
+				and tsfljc = #{tsfljc}
+			</if>
+			<if test="zbh != null and zbh != ''">
+				and zbh like '%' + #{zbh} + '%'
+			</if>
+			<if test="bmmc != null and bmmc != ''">
+				and bmmc = #{bmmc}
+			</if>
+			<if test="djlx != null and djlx != ''">
+				and djlx = #{djlx}
+			</if>
+			<if test="dqjl != null and dqjl != ''">
+				and (flmc = #{dqjl} or xsflmc like '%' + #{dqjl} + '%' )
+			</if>
+			<if test="dq != null and dq != ''">
+				and dqjc = #{dq}
+			</if>
+		</where>
+		) t1) t2 where t2.rowid between #{startno} and #{endno}
+    </select>
+
+	<select id="queryTotalRecords" parameterType="queryCondition" resultType="int">
+		select count(*) total from (
 		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
 		sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,flmc,dqjc from xsmxview union
 		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
@@ -37,6 +77,6 @@
 				and dqjc = #{dq}
 			</if>
 		</where>
-    </select>
+	</select>
 
 </mapper>

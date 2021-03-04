@@ -7,31 +7,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
+    <script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
+    <script type="text/javascript" src="/js/query.js"></script>
     <link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
-    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
-    <script type="text/javascript" src="/js/query.js"></script>
     <script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript">
     </script>
+    <title>入库记录信息</title>
 </head>
 <body>
     <div font-size: small">
         <table>
             <tr style="font-size: medium">
                 <td>书    名 : </td>
-                <td>全国各类成人高等学校招生考试真题汇编及全真模拟：《英语（专科起点升本科）》</td>
+                <td><%=request.getParameter("shum")%></td>
             </tr>
             <tr style="font-size: medium">
                 <td>物 流 码 : </td>
-                <td>20200808</td>
+                <td><%=request.getParameter("sxh")%></td>
+            </tr>
+            <tr style="font-size: medium">
+                <td>自 编 码 : </td>
+                <td><%=request.getParameter("zbh")%></td>
             </tr>
             <tr style="font-size: medium">
                 <td>当前库存 : </td>
-                <td>3000</td>
+                <td><%=request.getAttribute("qmkc")%></td>
             </tr>
         </table>
     </div>
@@ -50,21 +54,24 @@
                 </thead>
                 <tbody id="itemtbody">
                 <%
-                    for (int i=0; i<resultList.size(); i++) {
+                    if (resultList != null) {
+                        for (int i=0; i<resultList.size(); i++) {
+
                 %>
-                <tr class="active" style="font-size: small">
-                    <td><%=(i+1)%></td>
-                    <td><%=resultList.get(i).getRkdbh()%></td>
-                    <td><%=resultList.get(i).getTxrq()%></td>
-                    <td><%=resultList.get(i).getGysmc()%></td>
-                    <td><%=resultList.get(i).getCs()%></td>
-                </tr>
+                    <tr class="active" style="font-size: small">
+                        <td><%=(i+1)%></td>
+                        <td><%=resultList.get(i).getRkdbh()%></td>
+                        <td><%=resultList.get(i).getTxrq()%></td>
+                        <td><%=resultList.get(i).getGysmc()%></td>
+                        <td><%=resultList.get(i).getCs()%></td>
+                    </tr>
                 <%
+                        }
                     }
                 %>
                     <tr class="active" style="color: blue; font-size: small">
                         <td colspan="4" align="center">汇总</td>
-                        <td>35</td>
+                        <td><%=request.getAttribute("rkzs")%></td>
                     </tr>
                 </tbody>
             </table>

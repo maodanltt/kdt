@@ -1,5 +1,6 @@
 package com.tywh.kdt.report.web;
 
+import com.tywh.kdt.report.pojo.Inventory;
 import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.service.SearchService;
@@ -24,6 +25,7 @@ public class SearchController {
     @RequestMapping("/queryKhmcList")
     @ResponseBody
     public Map<String, List<Search>> queryKhmcList(HttpServletRequest request) throws Exception {
+        System.out.println(request.getSession(false) + "-----------------------------------------");
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> khmcList = (List<Search>) request.getSession(true).getAttribute("khmcList");
         if (khmcList == null) {
@@ -37,6 +39,7 @@ public class SearchController {
     @RequestMapping("/queryTsfljcList")
     @ResponseBody
     public Map<String, List<Search>> queryTsfljcList(HttpServletRequest request) throws Exception {
+        System.out.println(request.getSession(false));
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> tsfljcList = (List<Search>) request.getSession(true).getAttribute("tsfljcList");
         if (tsfljcList == null) {
@@ -50,6 +53,7 @@ public class SearchController {
     @RequestMapping("/queryShumList")
     @ResponseBody
     public Map<String, List<Search>> queryShumList(HttpServletRequest request) throws Exception {
+        System.out.println(request.getSession(false));
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> shumList = (List<Search>) request.getSession(true).getAttribute("shumList");
         if (shumList == null) {
@@ -63,6 +67,7 @@ public class SearchController {
     @RequestMapping("/queryDqjlList")
     @ResponseBody
     public Map<String, List<Search>> queryDqjlList(HttpServletRequest request) throws Exception {
+        System.out.println(request.getSession(false));
         Map<String, List<Search>> retmap = new HashMap();
         List<Search> dqjlList = (List<Search>) request.getSession(true).getAttribute("dqjlList");
         if (dqjlList == null) {
@@ -95,11 +100,28 @@ public class SearchController {
         }
 
         List<RkDetail> resultList = new ArrayList<>();
-        for (RkDetail rkDetail : rkDetailList) {
-            if (rkDetail.getSxh().equals(sxh)) {
-                resultList.add(rkDetail);
+        Integer rkzs = 0;
+        if (rkDetailList != null) {
+            for (RkDetail rkDetail : rkDetailList) {
+                if (rkDetail.getSxh().equals(sxh)) {
+                    rkzs += rkDetail.getCs();
+                    resultList.add(rkDetail);
+                }
             }
         }
+
+
+        List<Inventory> kucunList = (List<Inventory>) request.getSession(false).getAttribute("kucunList");
+        if (kucunList == null) {
+            kucunList = searchService.queryKucunList();
+            request.getSession(false).setAttribute("kucunList",kucunList);
+        }
+        for (Inventory inventory : kucunList) {
+            if (inventory.getSxh().equals(sxh)) {
+                request.setAttribute("qmkc",inventory.getQmkc());
+            }
+        }
+        request.setAttribute("rkzs",rkzs);
         request.setAttribute("resultList", resultList);
         return "rkDetail";
     }

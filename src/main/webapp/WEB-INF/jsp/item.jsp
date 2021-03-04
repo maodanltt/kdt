@@ -3,7 +3,7 @@
 <head>
     <title>库存动销率</title>
 </head>
-<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
 <script type="text/javascript">
     $(function () {
         $("#search").click(function () {

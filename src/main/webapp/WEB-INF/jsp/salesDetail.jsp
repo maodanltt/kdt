@@ -2,17 +2,17 @@
 <html>
 <head>
     <meta charset="UTF-8">
-
-    <link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
-    <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css"
-          rel="stylesheet"/>
-
-    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
     <script type="text/javascript" src="/js/query.js"></script>
+    <link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
-    <script type="text/javascript"
-            src="/js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker-master/locale/bootstrap-datetimepicker.zh-CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="/js/bs_pagination/jquery.bs_pagination.min.css">
+    <script type="text/javascript" src="/js/bs_pagination/jquery.bs_pagination.min.js"></script>
+    <script type="text/javascript" src="/js/bs_pagination/en.js"></script>
+
 
     <script type="text/javascript">
         $(function () {
@@ -85,44 +85,8 @@
                     return false;
                 }
 
-                $.ajax({
-                    url: "/report/querySalesDetailList.do",
-                    data: {
-                        "khmc": $.trim($("#khmc").val()),
-                        "shum": $.trim($("#shum").val()),
-                        "tsfljc": $.trim($("#tsfljc").val()),
-                        "zbh": $.trim($("#zbh").val()),
-                        "bmmc": $.trim($("#bmmc").val()),
-                        "djlx": $.trim($("#djlx").val()),
-                        "dqjl": $.trim($("#dqjl").val()),
-                        "dq": $.trim($("#dq").val()),
-                        "startdate": $.trim($("#startdate").val()),
-                        "enddate": $.trim($("#enddate").val()),
-                    },
-                    type: "post",
-                    dataType: "json",
-                    success: function (data) {
-                        var tbodyHtml = "";
-                        $.each(data.salesDetailList,function (i,n) {
-                            tbodyHtml += '<tr class="active" style="font-size: xx-small">';
-                            tbodyHtml += '<td>' + (i+1) + '</td>';
-                            tbodyHtml += '<td>' + n.fhdbh + '</td>';
-                            tbodyHtml += '<td>' + n.khmc + '</td>';
-                            tbodyHtml += '<td>' + n.txrq + '</td>';
-                            tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + n.sxh + ')">' + n.shum + '</a></td>';
-                            tbodyHtml += '<td>' + n.zbh + '</td>';
-                            tbodyHtml += '<td>' + n.dj + '</td>';
-                            tbodyHtml += '<td>' + n.cs + '</td>';
-                            tbodyHtml += '<td>' + n.my + '</td>';
-                            tbodyHtml += '<td>' + n.zk + '</td>';
-                            tbodyHtml += '<td>' + n.sy + '</td>';
-                            tbodyHtml += '<td>' + n.dqjl + '</td>';
-                            tbodyHtml += '<td>' + n.dq + '</td>';
-                            tbodyHtml += '</tr>';
-                        })
-                        $("#itemtbody").html(tbodyHtml);
-                    }
-                })
+                // queryDataList(1,20);
+                queryDataList(1,20)
 
             })
 
@@ -265,39 +229,8 @@
         </table>
     </div>
 
-    <div style="height: 50px; margin-top:30px; text-align: right">
-        <div style="display: inline-block;margin: 20px 0; vertical-align: top">
-            <button type="button" class="btn btn-default" style="cursor: default;">共<b>50</b>条记录</button>
-        </div>
-        <div class="btn-group" style="display: inline-block;margin: 20px 0; vertical-align: top">
-            <button type="button" class="btn btn-default" style="cursor: default;">显示</button>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    10
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">20</a></li>
-                    <li><a href="#">30</a></li>
-                </ul>
-            </div>
-            <button type="button" class="btn btn-default" style="cursor: default;">条/页</button>
-        </div>
-        <div style="display: inline-block;margin-right: 15px">
-            <nav>
-                <ul class="pagination">
-                    <li class="disabled"><a href="#">首页</a></li>
-                    <li class="disabled"><a href="#">上一页</a></li>
-                    <li class="active" style="color: blue;"><a href="#">1</a></li>
-                    <li><a href="#" style="color: blue;">2</a></li>
-                    <li><a href="#" style="color: blue;">3</a></li>
-                    <li><a href="#" style="color: blue;">4</a></li>
-                    <li><a href="#" style="color: blue;">5</a></li>
-                    <li><a href="#">下一页</a></li>
-                    <li class="disabled"><a href="#">末页</a></li>
-                </ul>
-            </nav>
-        </div>
+    <div style="height: 50px; position: relative; top:30px">
+        <div id="activityPage"></div>
     </div>
 
 </div>

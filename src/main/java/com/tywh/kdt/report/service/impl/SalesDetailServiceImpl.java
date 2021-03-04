@@ -16,21 +16,32 @@ public class SalesDetailServiceImpl implements SalesDetailService {
     private SalesDetailMapper salesDetailMapper;
 
     @Override
-    public Result getSalesDetailList(QueryCondition queryCondition) throws Exception{
+    public Result querySalesDetailList(QueryCondition queryCondition) throws Exception{
         List<SalesDetail> salesDetailList = salesDetailMapper.querySalesDetailList(queryCondition);
-        for (SalesDetail salesDetail : salesDetailList) {
-            salesDetail.setZbh(salesDetail.getZbh().substring(salesDetail.getZbh().length() -4));
-            if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() != null) {
-                salesDetail.setDqjl(salesDetail.getXsflmc().split("-")[0]);
-            }  else if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() == null && salesDetail.getDq() == "样书") {
-                salesDetail.setDqjl("未知");
-            } else if (salesDetail.getDq() == null) {
-                salesDetail.setDq("未知");
-                salesDetail.setDqjl("未知");
+        if (salesDetailList != null) {
+            for (SalesDetail salesDetail : salesDetailList) {
+                salesDetail.setYc(salesDetail.getZbh().substring(salesDetail.getZbh().length() -4));
+                if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() != null) {
+                    salesDetail.setDqjl(salesDetail.getXsflmc().split("-")[0]);
+                }  else if (salesDetail.getDqjl() == null && salesDetail.getXsflmc() == null && salesDetail.getDq() == "样书") {
+                    salesDetail.setDqjl("未知");
+                } else if (salesDetail.getDq() == null) {
+                    salesDetail.setDq("未知");
+                    salesDetail.setDqjl("未知");
+                }
             }
         }
+
         Result result = new Result();
+        result.setTotal(queryTotalRecords(queryCondition));
         result.setSalesDetailList(salesDetailList);
         return result;
     }
+
+    @Override
+    public Integer queryTotalRecords(QueryCondition queryCondition) throws Exception {
+
+        return salesDetailMapper.queryTotalRecords(queryCondition);
+    }
+
 }

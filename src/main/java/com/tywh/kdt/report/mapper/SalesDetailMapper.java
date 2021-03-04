@@ -9,6 +9,6 @@ public interface SalesDetailMapper {
 
     List<SalesDetail> querySalesDetailList(QueryCondition queryCondition) throws Exception;
 
-
+    Integer queryTotalRecords(QueryCondition queryCondition) throws Exception;
     
 }

@@ -24,6 +24,6 @@ public class SalesDetailController {
     @ResponseBody
     public Result querySalesDetailList(QueryCondition queryCondition) throws Exception{
 
-        return salesDetailService.getSalesDetailList(queryCondition);
+        return salesDetailService.querySalesDetailList(queryCondition);
     }
 }

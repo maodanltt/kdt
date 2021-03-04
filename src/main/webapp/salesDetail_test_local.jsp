@@ -3,7 +3,7 @@
 <head>
     <title>销售明细查询</title>
 </head>
-<script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
 <script type="text/javascript">
     $(function () {
         var data = {"shumList":[{'shum':'百'},{'shum':'百年'},{'shum':'百年方'},{'shum':'百年方成'}]};

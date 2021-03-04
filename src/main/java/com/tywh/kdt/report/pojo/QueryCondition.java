@@ -1,7 +1,8 @@
 package com.tywh.kdt.report.pojo;
 
 public class QueryCondition {
-
+    private Integer pageNo;
+    private Integer pageSize;
     private String khmc;
     private String shum;
     private String tsfljc;
@@ -13,6 +14,24 @@ public class QueryCondition {
     private String startdate; //必须输入
     private String enddate;   //必须输入
     private final String xsbmmc = "成教营销中心";
+    private Integer startno;
+    private Integer endno;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getKhmc() {
         return khmc;
@@ -96,5 +115,13 @@ public class QueryCondition {
 
     public String getXsbmmc() {
         return xsbmmc;
+    }
+
+    public Integer getStartno() {
+        return pageNo * pageSize - pageSize + 1;
+    }
+
+    public Integer getEndno() {
+        return pageNo * pageSize;
     }
 }

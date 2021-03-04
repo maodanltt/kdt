@@ -22,6 +22,7 @@ public class SalesDetail {
     private String xsflmc;
     private String dqjl;
     private String dq;
+    private String yc;
 
     public String getFhdbh() {
         return fhdbh;
@@ -181,5 +182,13 @@ public class SalesDetail {
 
     public void setDq(String dq) {
         this.dq = dq;
+    }
+
+    public String getYc() {
+        return yc;
+    }
+
+    public void setYc(String yc) {
+        this.yc = yc;
     }
 }
