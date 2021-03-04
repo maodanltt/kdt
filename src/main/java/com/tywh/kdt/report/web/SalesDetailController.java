@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/report")
 public class SalesDetailController {
@@ -16,7 +18,9 @@ public class SalesDetailController {
     private SalesDetailService salesDetailService;
 
     @RequestMapping("/toSalesDetail")
-    public String toSalesDetail() {
+    public String toSalesDetail(HttpServletRequest request) {
+        //不从OA链接进去，session不为空， 在此显式声明获取一下试试后面能不能拿到同一个session
+        request.getSession(true);
         return "salesDetail";
     }
 
