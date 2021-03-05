@@ -20,7 +20,7 @@ public class SalesDetailController {
     @RequestMapping("/toSalesDetail")
     public String toSalesDetail(HttpServletRequest request) {
         //不从OA链接进去，session不为空， 在此显式声明获取一下试试后面能不能拿到同一个session
-        request.getSession(true);
+//        request.getSession(true);
         return "salesDetail";
     }
 

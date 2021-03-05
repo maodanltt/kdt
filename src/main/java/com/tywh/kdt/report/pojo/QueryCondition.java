@@ -124,4 +124,5 @@ public class QueryCondition {
     public Integer getEndno() {
         return pageNo * pageSize;
     }
+
 }

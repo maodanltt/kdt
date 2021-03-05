@@ -29,7 +29,7 @@
 				and zbh like '%' + #{zbh} + '%'
 			</if>
 			<if test="bmmc != null and bmmc != ''">
-				and bmmc = #{bmmc}
+				and bmmc like '%' + #{bmmc} + '%'
 			</if>
 			<if test="djlx != null and djlx != ''">
 				and djlx = #{djlx}
@@ -44,8 +44,8 @@
 		) t1) t2 where t2.rowid between #{startno} and #{endno}
     </select>
 
-	<select id="queryTotalRecords" parameterType="queryCondition" resultType="int">
-		select count(*) total from (
+	<select id="queryTotalRecords" parameterType="queryCondition" resultType="hashMap">
+		select sum(cs) zcs,sum(my) zmy,AVG(zk) pjzk,sum(sy) zsy,count(*) total  from (
 		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
 		sxh,shum,bmmc,tsfljc,zbh,dj,kwbh,cs,my,zk,sy,xsflmc,flmc,dqjc from xsmxview union
 		select fhdbh,fhzt,khmc,xsbmmc,djlx,CONVERT(varchar(100), txrq, 23) txrq,
@@ -62,10 +62,10 @@
 				and tsfljc = #{tsfljc}
 			</if>
 			<if test="zbh != null and zbh != ''">
-				and zbh = #{zbh}
+				and zbh like '%' + #{zbh} + '%'
 			</if>
 			<if test="bmmc != null and bmmc != ''">
-				and bmmc = #{bmmc}
+				and bmmc like '%' + #{bmmc} + '%'
 			</if>
 			<if test="djlx != null and djlx != ''">
 				and djlx = #{djlx}

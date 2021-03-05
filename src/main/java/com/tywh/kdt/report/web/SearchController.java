@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +26,9 @@ public class SearchController {
     @RequestMapping("/queryKhmcList")
     @ResponseBody
     public Map<String, List<Search>> queryKhmcList(HttpServletRequest request) throws Exception {
+        HttpSession session = request.getSession(false);
         Map<String, List<Search>> retmap = new HashMap();
-        List<Search> khmcList = (List<Search>) request.getSession(false).getAttribute("khmcList");
+        List<Search> khmcList = (List<Search>) session.getAttribute("khmcList");
         if (khmcList == null) {
             khmcList = searchService.queryKhmcList();
             request.getSession(false).setAttribute("khmcList",khmcList);

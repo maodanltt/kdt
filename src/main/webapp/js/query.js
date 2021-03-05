@@ -1,4 +1,14 @@
 
+    function nowDate() {
+        let nowDate = new Date()
+        let year = nowDate.getFullYear()
+        let month = nowDate.getMonth() + 1
+        let day = nowDate.getDate()
+        if (month < 10) month = '0' + month
+        if (day < 10) day = '0' + day
+        return year + '-' + month + '-' +day
+    }
+
     function keyupcallback(dom1,dom2,data) {
         if ($(dom1).val() == '') {
             $(dom2).css("display", "none");
@@ -67,6 +77,9 @@
             type: "post",
             dataType: "json",
             success: function (data) {
+                if (data.total == 0) {
+                    alert("未查询到数据,请修改查询条件!");
+                }
                 var tbodyHtml = "";
                 $.each(data.salesDetailList,function (i,n) {
                     tbodyHtml += '<tr class="active" style="font-size: xx-small">';

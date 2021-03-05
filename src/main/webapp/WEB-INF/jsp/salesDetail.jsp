@@ -85,6 +85,18 @@
                     return false;
                 }
 
+                if ($.trim($("#enddate").val()) == '') {
+                    alert("结束日期必须输入");
+                    $("#enddate").focus();
+                    return false;
+                }
+
+                if ($.trim($("#enddate").val()) > nowDate()) {
+                    alert("结束日期不能大于当前日期");
+                    $("#enddate").focus();
+                    return false;
+                }
+
                 // queryDataList(1,20);
                 queryDataList(1,20)
 
@@ -151,13 +163,7 @@
                 <div class="form-group col-xs-3 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">编辑部门</div>
-                        <select class="form-control" name="bmmc" id="bmmc">
-                            <option value="第一编辑部">第一编辑部</option>
-                            <option value="第二编辑部">第二编辑部</option>
-                            <option value="第三编辑部">第三编辑部</option>
-                            <option value="第四编辑部">第四编辑部</option>
-                            <option value="合作出版编辑部">合作出版编辑部</option>
-                        </select>
+                        <input class="form-control" type="text" name="bmmc" id="bmmc">
                     </div>
                 </div>
                 <div class="form-group col-xs-3 col-md-2">

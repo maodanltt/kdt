@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SalesDetailServiceImpl implements SalesDetailService {
@@ -33,13 +34,19 @@ public class SalesDetailServiceImpl implements SalesDetailService {
         }
 
         Result result = new Result();
-        result.setTotal(queryTotalRecords(queryCondition));
+        Map map = queryTotalRecords(queryCondition);
+        result.setTotal((Integer)map.get("total"));
+        result.setZcs((Integer) map.get("zcs"));
+        result.setZmy((Double) map.get("zmy"));
+        result.setPjzk((Double) map.get("pjzk"));
+        result.setZsy((Double) map.get("zsy"));
+
         result.setSalesDetailList(salesDetailList);
         return result;
     }
 
     @Override
-    public Integer queryTotalRecords(QueryCondition queryCondition) throws Exception {
+    public Map queryTotalRecords(QueryCondition queryCondition) throws Exception {
 
         return salesDetailMapper.queryTotalRecords(queryCondition);
     }
