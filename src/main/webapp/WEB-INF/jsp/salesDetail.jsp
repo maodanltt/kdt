@@ -232,6 +232,7 @@
             </tr>
             </thead>
             <tbody id="itemtbody"></tbody>
+            <tfoot id="itemtfoot"></tfoot>
         </table>
     </div>
 

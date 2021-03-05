@@ -8,7 +8,7 @@ public class Result {
 
     private List<SalesDetail> salesDetailList;
 
-    private Integer zcs;
+    private Integer zcs = 0;
 
     private double zmy;
 

@@ -36,10 +36,13 @@ public class SalesDetailServiceImpl implements SalesDetailService {
         Result result = new Result();
         Map map = queryTotalRecords(queryCondition);
         result.setTotal((Integer)map.get("total"));
-        result.setZcs((Integer) map.get("zcs"));
-        result.setZmy((Double) map.get("zmy"));
-        result.setPjzk((Double) map.get("pjzk"));
-        result.setZsy((Double) map.get("zsy"));
+        if ((Integer)map.get("total") > 0) {
+            result.setZcs(Integer.parseInt(map.get("zcs").toString()));
+            result.setZmy(Double.parseDouble(map.get("zmy").toString()));
+            result.setPjzk(Double.parseDouble(map.get("pjzk").toString()));
+            result.setZsy(Double.parseDouble(map.get("zsy").toString()));
+        }
+
 
         result.setSalesDetailList(salesDetailList);
         return result;

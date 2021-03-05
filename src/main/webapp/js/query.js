@@ -99,6 +99,17 @@
                     tbodyHtml += '</tr>';
                 })
                 $("#itemtbody").html(tbodyHtml);
+                var tfootHtml = '<tr class="active" style="font-size: small">';
+                tfootHtml += '<td colspan="6" align="center" style="color: blue">汇总</td>';
+                tfootHtml += '<td></td>';
+                tfootHtml += '<td>' + data.zcs + '</td>';
+                tfootHtml += '<td>' + data.zmy + '</td>';
+                tfootHtml += '<td></td>';
+                tfootHtml += '<td>' + data.zsy + '</td>';
+                tfootHtml += '<td></td>';
+                tfootHtml += '<td></td>';
+                tfootHtml += '</tr>';
+                $("#itemtfoot").html(tfootHtml);
                 var totalPages = data.total%pageSize == 0 ? data.total/pageSize : parseInt(data.total/pageSize) + 1;
                 $("#activityPage").bs_pagination({
                     currentPage: pageNo, // 页码
