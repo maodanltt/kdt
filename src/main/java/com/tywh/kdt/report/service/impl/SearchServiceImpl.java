@@ -4,6 +4,7 @@ import com.tywh.kdt.report.mapper.SearchMapper;
 import com.tywh.kdt.report.pojo.Inventory;
 import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
+import com.tywh.kdt.report.pojo.Yzd;
 import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +69,16 @@ public class SearchServiceImpl implements SearchService {
         Map<String, String> conditionMap = new HashMap<>();
         conditionMap.put("kwbh","00HG");
         return searchMapper.queryKucunList(conditionMap);
+    }
+
+    @Override
+    public List<Yzd> queryYzdList() throws Exception {
+        Map<String, String> conditionMap = new HashMap<>();
+        conditionMap.put("txrq","2020-01-01");
+        conditionMap.put("bzfs","送货");
+        conditionMap.put("tsfljc","中学");
+        List<Yzd> yzdList = searchMapper.queryYzdList(conditionMap);
+        return null;
     }
 
 }

@@ -36,4 +36,10 @@
     <select id="queryKucunList" resultType="inventory">
         select sxh,sum(qmkc) qmkc from kucunView where kwbh = #{kwbh} group by sxh,shum,bmmc
     </select>
+
+    <select id="">
+        select CONVERT(varchar(100), txrq, 23) txrq,CONVERT(varchar(100), ywrq, 23) ywrq ,bcys,
+        cycmc,sxh from perpby01..FykView where txrq > #{txrq} and bzfs = #{bzfs} and
+        tsfljc not like '%' + #{tsfljc} + '%'
+    </select>
 </mapper>
