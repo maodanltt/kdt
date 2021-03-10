@@ -29,11 +29,11 @@ public class TestWms {
         &sign=43A8D04D5A54AE182D144AFA1C7C4D96
          */
 
-        String time = "2021-03-0921:32:30";
+        String time = "2021-03-1017:01:05";
         StringBuilder url = new StringBuilder();
         url.append("https://wmsapi.wdtwms.com/wms_api/wdt_service.php?");
         url.append("method=WDT_WMS_SINGLEITEM_SYNCHRONIZE&");
-        url.append("timestamp=2021-03-09 21:32:30&");
+        url.append("timestamp=" + time + "&");
         url.append("format=xml&");
         url.append("appkey=wdt15996474952454&");
         url.append("sign_method=md5&");
@@ -66,7 +66,7 @@ public class TestWms {
     }
 
     private static void invokeInterface(String url) throws Exception{
-
+        System.out.println(url);
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(url);
 
