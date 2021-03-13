@@ -20,21 +20,7 @@ import java.util.List;
 
 public class TestWms {
     public static void main(String[] args) throws Exception {
-        /*
-        <add key="ownerCode" value="tianyiWMS" />
-        <add key="orderType" value="CGRK" />
-        <add key="warehouseCode" value="00HG" />
-        <add key="sid" value="tianyiWMS" />
-        <add key="appkey" value="wdt15996474952454" />
-        <add key="appsecret" value="312165b5977a9686efdc1411538ece69" />
-        <add key="sign_method" value="md5" />
-        <add key="format" value="xml" />
-        <add key="url" value="https://wmsapi.wdtwms.com/wms_api/wdt_service.php" />
 
-        https://wmsapi.wdtwms.com/wms_api/wdt_service.php?method=WDT_WMS_SINGLEITEM_SYNCHRONIZE&
-        timestamp=2021-03-0916:41:30&format=xml&appkey=wdt15996474952454&sign_method=md5&sid=tianyiWMS
-        &sign=43A8D04D5A54AE182D144AFA1C7C4D96
-         */
 
 //        String time = DateUtil.format(new Date());
 //        StringBuilder data = new StringBuilder();
