@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:httpclient.properties"/>
+    <context:annotation-config></context:annotation-config>
 
     <bean id="connectionManager" class="org.apache.http.impl.conn.PoolingHttpClientConnectionManager">
         <property name="maxTotal" value="${httclient.maxTotal}"/>
-        <property name="defaultMaxPerRoute" value="${httclient.defaultMaxPerRoute}"/>
+        <property name="defaultMaxPerRoute" value="${httpclient.defaultMaxPerRoute}"/>
     </bean>
 
     <bean id="httpClientBuilder" class="org.apache.http.impl.client.HttpClientBuilder">
@@ -20,10 +24,18 @@
         <property name="connectTimeout" value="${httpclient.connectTimeout}"/>
         <property name="connectionRequestTimeout" value="${httpclient.connectionRequestTimeout}"/>
         <property name="socketTimeout" value="${httpclient.socketTimeout}"/>
-        <property name="staleConnectionCheckEnabled" value="${httpclient.staleConnectionCheckEnabled}"/>
+<!--        <property name="staleConnectionCheckEnabled" value="${httpclient.staleConnectionCheckEnabled}"/>-->
     </bean>
 
     <bean id="requestConfig" class="org.apache.http.client.config.RequestConfig"
           factory-bean="requestConfigBuilder" factory-method="build">
+    </bean>
+
+
+    <bean class="com.tywh.kdt.api.httpclient.IdleConnectionEvictor">
+        <constructor-arg index="0" ref="connectionManager"/>
+    </bean>
+
+    <bean id="httpClientService" class="com.tywh.kdt.api.httpclient.HttpClientService">
     </bean>
 </beans>
