@@ -33,7 +33,6 @@ public class HttpClientService implements BeanFactoryAware {
     //因httpClient对象是多例，因此只能从工厂中拿，不能自动注入
     private BeanFactory beanFactory;
 
-
     //无参get请求
     public String doGet(String url) throws IOException {
         HttpGet httpGet = new HttpGet(url);

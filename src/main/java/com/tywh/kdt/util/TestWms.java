@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TestWms {
-    public static void main(String[] args) throws Exception {
+//    public static void main(String[] args) throws Exception {
 
 
 //        String time = DateUtil.format(new Date());
@@ -40,19 +40,19 @@ public class TestWms {
 //            e.printStackTrace();
 //        }
 
-        //post请求
-        String timestamp = DateUtil.format(new Date());
-        System.out.println(timestamp);
-        String body = "<request><actionType>update</actionType><warehouseCode>00HG</warehouseCode><item>" +
-                "<itemCode>19950025</itemCode><itemName>drmtest</itemName><barCode>19950025</barCode><itemType>ZC</itemType></item></request>";
-        try {
-            invokeHttpPost(timestamp, createSign(timestamp,body),body);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-    }
+//        //post请求
+//        String timestamp = DateUtil.format(new Date());
+//        System.out.println(timestamp);
+//        String body = "<request><actionType>update</actionType><warehouseCode>00HG</warehouseCode><item>" +
+//                "<itemCode>19950025</itemCode><itemName>drmtest</itemName><barCode>19950025</barCode><itemType>ZC</itemType></item></request>";
+//        try {
+//            invokeHttpPost(timestamp, createSign(timestamp,body),body);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
     //生成签名
     private static String createSign(String timestamp, String body) {

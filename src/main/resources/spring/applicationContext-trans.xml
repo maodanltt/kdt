@@ -23,6 +23,6 @@
     </tx:advice>
 
     <aop:config>
-        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.tywh.kdt.report.service.*.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.tywh.kdt.report.service.impl.*.*(..)) || execution(* com.tywh.kdt.api.service.impl.*.*(..))"/>
     </aop:config>
 </beans>

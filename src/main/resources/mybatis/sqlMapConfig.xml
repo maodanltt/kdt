@@ -4,9 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
+<!--        此种方式不行-->
+<!--        <package name="com.tywh.kdt.report.pojo;com.tywh.kdt.api.pojo"/>-->
         <package name="com.tywh.kdt.report.pojo"/>
+        <package name="com.tywh.kdt.api.pojo"/>
     </typeAliases>
     <mappers>
-        <package name="com.tywh.kdt.report.mapper"/>
+        <package name="com.tywh.kdt.report.mapper,com.tywh.kdt.api.mapper"/>
     </mappers>
 </configuration>

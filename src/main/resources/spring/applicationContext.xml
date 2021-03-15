@@ -5,7 +5,19 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:property-placeholder location="classpath:db.properties"/>
+<!--    <context:property-placeholder location="classpath:db.properties"/>-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="ignoreResourceNotFound" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:db.properties</value>
+                <value>classpath:httpclient.properties</value>
+                <value>classpath:wdt.properties</value>
+            </list>
+        </property>
+
+    </bean>
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>
@@ -24,7 +36,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 不用配置sqlSessionFactory,会自动找 -->
 <!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
-        <property name="basePackage" value="com.tywh.kdt.report.mapper"/>
+        <property name="basePackage" value="com.tywh.kdt.report.mapper,com.tywh.kdt.api.mapper"/>
     </bean>
 
 </beans>
