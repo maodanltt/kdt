@@ -21,37 +21,22 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Search> queryKhmcList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("bmmc","成教营销中心");
-        conditionMap.put("tybz","0");
-        return searchMapper.queryKhmcList(conditionMap);
+        return searchMapper.queryKhmcList();
     }
 
     @Override
     public List<Search> queryTsfljcList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("cg","采购");
-        conditionMap.put("zx","中学");
-        conditionMap.put("wh","文化");
-        conditionMap.put("sjdm","||");
-        return searchMapper.queryTsfljcList(conditionMap);
+        return searchMapper.queryTsfljcList();
     }
 
     @Override
     public List<Search> queryShumList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("sxh","W");
-        conditionMap.put("tsfljc","中学");
-        conditionMap.put("cbzx","出版中心");
-        conditionMap.put("whcb","文化出版编辑部");
-        return searchMapper.queryShumList(conditionMap);
+        return searchMapper.queryShumList();
     }
 
     @Override
     public List<Search> queryDqjlList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("sjdm","01");
-        return searchMapper.queryDqjlList(conditionMap);
+        return searchMapper.queryDqjlList();
     }
 
     @Override
@@ -66,9 +51,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Inventory> queryKucunList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("kwbh","00HG");
-        return searchMapper.queryKucunList(conditionMap);
+        return searchMapper.queryKucunList();
     }
 
     @Override
@@ -77,7 +60,7 @@ public class SearchServiceImpl implements SearchService {
         conditionMap.put("txrq","2020-01-01");
         conditionMap.put("bzfs","送货");
         conditionMap.put("tsfljc","中学");
-        List<Yzd> yzdList = searchMapper.queryYzdList(conditionMap);
+        List<Yzd> yzdList = searchMapper.queryYzdList();
         return null;
     }
 

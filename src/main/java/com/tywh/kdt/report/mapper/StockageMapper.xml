@@ -45,7 +45,22 @@
     <select id="queryTotalRecords" parameterType="queryConditionStockage" resultType="hashMap">
         select count(*) total from (
         select sxh,shum,tsfljc,bmmc,zbh,sum(qmkc) qmkc from kucunview
-        where kwbh = '00HG' and qmkc > 0 and sxh not like '%W%' group by sxh,shum,tsfljc,bmmc,zbh) kcjl
+        <where>
+            and kwbh = '00HG' and qmkc > 0 and sxh not like '%W%'
+            <if test="shum != null and shum != ''">
+                and shum like '%' + #{shum} + '%'
+            </if>
+            <if test="tsfljc != null and tsfljc != ''">
+                and tsfljc = #{tsfljc}
+            </if>
+            <if test="zbh != null and zbh != ''">
+                and zbh like '%' + #{zbh} + '%'
+            </if>
+            <if test="bmmc != null and bmmc != ''">
+                and bmmc like '%' + #{bmmc} + '%'
+            </if>
+        </where>
+        group by sxh,shum,tsfljc,bmmc,zbh) kcjl
     </select>
 
     <select id="queryRkDetailList" resultType="rkDetail">

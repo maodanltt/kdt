@@ -23,10 +23,8 @@ public class StockageServiceImpl implements StockageService {
     private StockageMapper stockageMapper;
 
     @Override
-    public List<Stockage> queryStorkageList(QueryConditionStockage queryConditionStockage) throws Exception {
+    public List<Stockage> queryStorkageList(QueryConditionStockage queryConditionStockage,Map<String, Integer> rkDetailMap,Map<String, Integer> pdDetailMap) throws Exception {
         List<Stockage> stockageList = stockageMapper.queryStorkageList(queryConditionStockage);
-        Map<String, Integer> rkDetailMap = queryRkDetailMap();
-        Map<String, Integer> pdDetailMap = queryPdDetailMap();
         for (Stockage stockage : stockageList) {
             if (stockage.getZbh() != null) {
                 stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -4));

@@ -42,7 +42,7 @@
             $("#search").click(function () {
                 // queryDataList(1,20);
                 queryDataList(1,20)
-                alert(aa);
+
 
             })
 

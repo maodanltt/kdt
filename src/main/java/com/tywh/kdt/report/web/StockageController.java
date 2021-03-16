@@ -29,14 +29,22 @@ public class StockageController {
 
     @RequestMapping("/stockage")
     @ResponseBody
-    public ResultStockage stockage() {
-        QueryConditionStockage queryConditionStockage = new QueryConditionStockage();
-        queryConditionStockage.setPageNo(1);
-        queryConditionStockage.setPageSize(20);
+    public ResultStockage stockage(HttpServletRequest request,QueryConditionStockage queryConditionStockage) {
+        Map<String, Integer> rkDetailMap = (Map<String, Integer>) request.getSession(false).getAttribute("rkDetailMap");
+        Map<String, Integer> pdDetailMap = (Map<String, Integer>) request.getSession(false).getAttribute("pdDetailMap");
         List<Stockage> stockageList = null;
         ResultStockage resultStockage = new ResultStockage();
         try {
-            stockageList = stockageService.queryStorkageList(queryConditionStockage);
+            if (rkDetailMap == null) {
+                rkDetailMap = stockageService.queryRkDetailMap();
+                request.getSession(false).setAttribute("rkDetailMap",rkDetailMap);
+            }
+
+            if (pdDetailMap == null) {
+                pdDetailMap = stockageService.queryPdDetailMap();
+                request.getSession(false).setAttribute("pdDetailMap",pdDetailMap);
+            }
+            stockageList = stockageService.queryStorkageList(queryConditionStockage,rkDetailMap,pdDetailMap);
             resultStockage.setStockageList(stockageList);
             Map map = stockageService.queryTotalRecords(queryConditionStockage);
             resultStockage.setTotal((Integer) map.get("total"));

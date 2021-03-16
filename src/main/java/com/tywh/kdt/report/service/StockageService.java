@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface StockageService {
 
-    List<Stockage> queryStorkageList(QueryConditionStockage queryConditionStockage) throws Exception;
+    List<Stockage> queryStorkageList(QueryConditionStockage queryConditionStockage,Map<String, Integer> rkDetailMap,Map<String, Integer> pdDetailMap) throws Exception;
 
     Map queryTotalRecords (QueryConditionStockage queryConditionStockage) throws Exception;
 

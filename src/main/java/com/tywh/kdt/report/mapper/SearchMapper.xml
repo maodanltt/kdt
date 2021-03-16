@@ -4,23 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tywh.kdt.report.mapper.SearchMapper">
     <select id="queryKhmcList" resultType="search">
-        select mc as name from khkview where bmmc = #{bmmc} and tybz = #{tybz}
+        select mc as name from khkview where bmmc = '成教营销中心' and tybz = '0'
     </select>
 
     <select id="queryTsfljcList" resultType="search">
-        select jc as name from TsflkView where jc not like '%' + #{cg} + '%'
-        and jc not like '%' + #{zx} + '%' and jc not like '%' + #{wh} + '%'
-        and sjdm &lt;&gt; #{sjdm}
+        select jc as name from TsflkView where jc not like '%采购%'
+        and sjdm &lt;&gt; '||'
     </select>
 
     <select id="queryShumList" resultType="search">
-        select distinct shum as name from fxsgkview where sxh not like '%' + #{sxh} + '%'
-        and tsfljc not like '%' + #{tsfljc} + '%' and bmmc &lt;&gt; #{cbzx}
-        and bmmc &lt;&gt; #{whcb}
+        select distinct shum as name from fxsgkview where sxh not like '%W%'
     </select>
 
     <select id="queryDqjlList" resultType="search">
-        select REPLACE(mc,'-CJ1', '') name from xsflk where sjdm = #{sjdm}
+        select REPLACE(mc,'-CJ1', '') name from xsflk where sjdm = '01'
     </select>
 
     <select id="queryDqList" resultType="search">
@@ -34,12 +31,12 @@
     </select>
 
     <select id="queryKucunList" resultType="inventory">
-        select sxh,sum(qmkc) qmkc from kucunView where kwbh = #{kwbh} group by sxh,shum,bmmc
+        select sxh,sum(qmkc) qmkc from kucunView where kwbh = '00HG' group by sxh,shum,bmmc
     </select>
 
-    <select id="">
-        select CONVERT(varchar(100), txrq, 23) txrq,CONVERT(varchar(100), ywrq, 23) ywrq ,bcys,
-        cycmc,sxh from perpby01..FykView where txrq > #{txrq} and bzfs = #{bzfs} and
-        tsfljc not like '%' + #{tsfljc} + '%'
-    </select>
+<!--    <select id="">-->
+<!--        select CONVERT(varchar(100), txrq, 23) txrq,CONVERT(varchar(100), ywrq, 23) ywrq ,bcys,-->
+<!--        cycmc,sxh from perpby01..FykView where txrq > #{txrq} and bzfs = #{bzfs} and-->
+<!--        tsfljc not like '%' + #{tsfljc} + '%'-->
+<!--    </select>-->
 </mapper>
