@@ -1,5 +1,6 @@
 package com.tywh.kdt.util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,4 +14,20 @@ public class DateUtil {
         String result = sdf.format(date);
         return result;
     }
+
+    public static Date format(String dateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = sdf.parse(dateStr);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+//    public static void main(String[] args) {
+//        Date date = format("2021-03-16");
+//        Date date1 = new Date();
+//    }
 }

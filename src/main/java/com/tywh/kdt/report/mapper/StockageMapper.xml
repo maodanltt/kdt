@@ -4,14 +4,33 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tywh.kdt.report.mapper.StockageMapper">
     <select id="queryStorkageList" parameterType="queryConditionStockage" resultType="stockage">
-        select sxh,shum,tsflmc,bmmc,zbh from kucunview
+        <!--        select sxh,shum,tsfljc,bmmc,zbh,sum(qmkc) qmkc from kucunview-->
+        <!--        <where>-->
+        <!--            and kwbh = #{kwbh} and qmkc > #{qmkcRemove} and sxh not like #{sxhRemove}-->
+        <!--            <if test="shum != null and shum != ''">-->
+        <!--                and shum like '%' + #{shum} + '%'-->
+        <!--            </if>-->
+        <!--            <if test="tsfljc != null and tsfljc != ''">-->
+        <!--                and tsfljc = #{tsfljc}-->
+        <!--            </if>-->
+        <!--            <if test="zbh != null and zbh != ''">-->
+        <!--                and zbh like '%' + #{zbh} + '%'-->
+        <!--            </if>-->
+        <!--            <if test="bmmc != null and bmmc != ''">-->
+        <!--                and bmmc like '%' + #{bmmc} + '%'-->
+        <!--            </if>-->
+        <!--        </where>-->
+        <!--        group by sxh,shum,tsflmc,bmmc,zbh-->
+        select t.rowid,t.sxh,t.shum,t.tsfljc,t.bmmc,t.zbh,t.qmkc from (select ROW_NUMBER()
+        over(order by sxh desc) as rowid,sxh,shum,tsfljc,bmmc,zbh,qmkc from
+        (select sxh,shum,tsfljc,bmmc,zbh,sum(qmkc) qmkc from kucunview
         <where>
-            and kwbh = #{kwbh} and qmkc > #{qmkcRemove} and sxh not like #{sxhRemove}
+            and kwbh = '00HG' and qmkc > 0 and sxh not like '%W%'
             <if test="shum != null and shum != ''">
                 and shum like '%' + #{shum} + '%'
             </if>
-            <if test="tsflmc != null and tsflmc != ''">
-                and tsflmc = #{tsflmc}
+            <if test="tsfljc != null and tsfljc != ''">
+                and tsfljc = #{tsfljc}
             </if>
             <if test="zbh != null and zbh != ''">
                 and zbh like '%' + #{zbh} + '%'
@@ -20,5 +39,29 @@
                 and bmmc like '%' + #{bmmc} + '%'
             </if>
         </where>
+        group by sxh,shum,tsfljc,bmmc,zbh) kcjl) t where t.rowid between #{startno} and #{endno}
     </select>
+
+    <select id="queryTotalRecords" parameterType="queryConditionStockage" resultType="hashMap">
+        select count(*) total from (
+        select sxh,shum,tsfljc,bmmc,zbh,sum(qmkc) qmkc from kucunview
+        where kwbh = '00HG' and qmkc > 0 and sxh not like '%W%' group by sxh,shum,tsfljc,bmmc,zbh) kcjl
+    </select>
+
+    <select id="queryRkDetailList" resultType="rkDetail">
+        select txrq,sxh,sum(cs) cs from (
+			select rkdbh,djlx, sxh,CONVERT(varchar(100), txrq, 23) txrq,cs,kwmc
+			from RkmxView union select rkdbh,djlx, sxh,CONVERT(varchar(100), txrq, 23) txrq,cs,kwmc
+			from RkmxnView
+		) rkmxjl where djlx = '产品入库' and kwmc not like '%退货%' and kwmc not like '%报废%' and kwmc not like '%出入%' and kwmc not like '%生产%'
+		group by txrq,sxh
+    </select>
+
+    <select id="queryPdDetailList" resultType="pdDetail">
+        select sxh,txrq,sum(cs) cs from (select djlx,CONVERT(varchar(100), txrq, 23) txrq,sxh,cs,kwmc from FxsmxView
+        union select djlx,CONVERT(varchar(100), txrq, 23) txrq,sxh,cs,kwmc from FxsmxnView ) pdjlb
+        where djlx = '盘点' and kwmc not like '%报废%' and kwmc not like '%退货%' and kwmc not like '%出入%' and kwmc not like '%生产%'
+        group by sxh,txrq
+    </select>
+
 </mapper>

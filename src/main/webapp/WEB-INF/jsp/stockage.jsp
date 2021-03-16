@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
-    <script type="text/javascript" src="/js/query.js"></script>
+    <script type="text/javascript" src="/js/querystockage.js"></script>
     <link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
@@ -16,17 +16,6 @@
 
     <script type="text/javascript">
         $(function () {
-
-            $.ajax({
-                url: "/search/queryKhmcList.do",
-                type: "get",
-                dataType: "json",
-                success: function (khmcdata) {
-                    $("#khmc").keyup(function () {
-                        keyupcallback(this, $("#khmctip")[0], khmcdata)
-                    });
-                }
-            })
 
             $.ajax({
                 url: "/search/queryTsfljcList.do",
@@ -50,55 +39,10 @@
                 }
             })
 
-            $.ajax({
-                url: "/search/queryDqjlList.do",
-                type: "get",
-                dataType: "json",
-                success: function (dqjldata) {
-                    $("#dqjl").keyup(function () {
-                        keyupcallback(this, $("#dqjltip")[0], dqjldata)
-                    });
-                }
-            })
-
-            $.ajax({
-                url: "/search/queryDqList.do",
-                type: "get",
-                dataType: "json",
-                success: function (dqdata) {
-                    $("#dq").keyup(function () {
-                        keyupcallback(this, $("#dqtip")[0], dqdata)
-                    });
-                }
-            })
-
             $("#search").click(function () {
-                if ($.trim($("#startdate").val()) == '') {
-                    alert("开始日期必须输入");
-                    $("#startdate").focus();
-                    return false;
-                }
-
-                if ($.trim($("#startdate").val()) < '2020-01-01') {
-                    alert("可查询2020年之后的数据，请修改开始日期");
-                    $("#startdate").focus();
-                    return false;
-                }
-
-                if ($.trim($("#enddate").val()) == '') {
-                    alert("结束日期必须输入");
-                    $("#enddate").focus();
-                    return false;
-                }
-
-                if ($.trim($("#enddate").val()) > nowDate()) {
-                    alert("结束日期不能大于当前日期");
-                    $("#enddate").focus();
-                    return false;
-                }
-
                 // queryDataList(1,20);
                 queryDataList(1,20)
+                alert(aa);
 
             })
 
@@ -158,13 +102,6 @@
                         <input class="form-control" type="text" name="bmmc" id="bmmc">
                     </div>
                 </div>
-                <div class="form-group col-xs-3 col-md-2">
-                    <div class="input-group" style="position: relative;">
-                        <div class="input-group-addon" style="color: blue">大区经理</div>
-                        <input class="form-control" type="text" name="dqjl" id="dqjl">
-                        <div id="dqjltip" class="input-tips"></div>
-                    </div>
-                </div>
                 <div class="form-group col-xs-2">
                     <button type="button" class="btn btn-default" style="color: blue" id="search"> 查 询</button>
                 </div>
@@ -179,9 +116,9 @@
             <tr style="color: blue; font-size: xx-small">
                 <td>序</td>
                 <td>书名</td>
-                <td>印次</td>
                 <td>图书分类</td>
                 <td>编辑部</td>
+                <td>印次</td>
                 <td>当前库存</td>
                 <td>0-30天</td>
                 <td>31-60天</td>
@@ -192,8 +129,7 @@
                 <td>3年以上</td>
             </tr>
             </thead>
-            <tbody id="staockagebody"></tbody>
-            <tfoot id="staockagefoot"></tfoot>
+            <tbody id="stockagebody"></tbody>
         </table>
     </div>
 

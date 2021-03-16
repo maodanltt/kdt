@@ -1,7 +1,8 @@
 package com.tywh.kdt.report.pojo;
 
 public class QueryConditionStockage {
-
+    private Integer pageNo;
+    private Integer pageSize;
     private String shum;
     private String tsfljc;
     private String zbh;
@@ -9,6 +10,24 @@ public class QueryConditionStockage {
     private final String  kwbh = "00HG";
     private final String sxhRemove = "W%";
     private final Integer qmkcRemove = 0;
+    private Integer startno;
+    private Integer endno;
+
+    public Integer getPageNo() {
+        return pageNo;
+    }
+
+    public void setPageNo(Integer pageNo) {
+        this.pageNo = pageNo;
+    }
+
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public String getShum() {
         return shum;
@@ -52,5 +71,13 @@ public class QueryConditionStockage {
 
     public Integer getQmkcRemove() {
         return qmkcRemove;
+    }
+
+    public Integer getStartno() {
+        return pageNo * pageSize - pageSize + 1;
+    }
+
+    public Integer getEndno() {
+        return pageNo * pageSize;
     }
 }

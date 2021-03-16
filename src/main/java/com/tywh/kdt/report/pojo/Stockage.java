@@ -6,11 +6,13 @@ public class Stockage {
 
     private String shum;
 
-    private String tsflmc;
+    private String tsfljc;
 
     private String bmmc;
 
     private Integer qmkc;
+
+    private String zbh;
 
     private String yc;
 
@@ -44,12 +46,12 @@ public class Stockage {
         this.shum = shum;
     }
 
-    public String getTsflmc() {
-        return tsflmc;
+    public String getTsfljc() {
+        return tsfljc;
     }
 
-    public void setTsflmc(String tsflmc) {
-        this.tsflmc = tsflmc;
+    public void setTsfljc(String tsfljc) {
+        this.tsfljc = tsfljc;
     }
 
     public String getBmmc() {
@@ -66,6 +68,14 @@ public class Stockage {
 
     public void setQmkc(Integer qmkc) {
         this.qmkc = qmkc;
+    }
+
+    public String getZbh() {
+        return zbh;
+    }
+
+    public void setZbh(String zbh) {
+        this.zbh = zbh;
     }
 
     public String getYc() {

@@ -43,7 +43,6 @@ public class SalesDetailServiceImpl implements SalesDetailService {
             result.setZsy(Double.parseDouble(map.get("zsy").toString()));
         }
 
-
         result.setSalesDetailList(salesDetailList);
         return result;
     }
