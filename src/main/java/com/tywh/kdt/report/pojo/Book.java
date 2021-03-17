@@ -1,8 +1,12 @@
 package com.tywh.kdt.report.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 public class Book {
 
+    @ExcelProperty(value = "书序号",index = 0)
     private String sxh;
+    @ExcelProperty(value = "书名",index = 1)
     private String shum;
     private String bmmc;
     private String tsfljc;

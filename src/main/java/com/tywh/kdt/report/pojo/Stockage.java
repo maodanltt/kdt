@@ -1,12 +1,9 @@
 package com.tywh.kdt.report.pojo;
 
-import com.alibaba.excel.annotation.ExcelProperty;
-
 public class Stockage {
 
     private String sxh;
 
-    @ExcelProperty(value = "书名",index = 0)
     private String shum;
 
     private String tsfljc;
