@@ -1,34 +1,37 @@
 package com.tywh.kdt.report.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 public class Stockage {
 
     private String sxh;
 
+    @ExcelProperty(value = "书名",index = 0)
     private String shum;
 
     private String tsfljc;
 
     private String bmmc;
 
-    private Integer qmkc;
+    private Integer qmkc = 0;
 
     private String zbh;
 
     private String yc;
 
-    private Integer term1;
+    private Integer term1 = 0;
 
-    private Integer term2;
+    private Integer term2 = 0;
 
-    private Integer term3;
+    private Integer term3 = 0;
 
-    private Integer term4;
+    private Integer term4 = 0;
 
-    private Integer term5;
+    private Integer term5 = 0;
 
-    private Integer term6;
+    private Integer term6 = 0;
 
-    private Integer term7;
+    private Integer term7 = 0;
 
     public String getSxh() {
         return sxh;
