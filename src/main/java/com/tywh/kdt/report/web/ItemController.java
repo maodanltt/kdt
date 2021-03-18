@@ -70,13 +70,11 @@ public class ItemController {
             ResultWhcb resultWhcb = itemService.queryItem(queryConditionWhcb);
             List<Item> itemList = resultWhcb.getItemList();
             String str = DateUtil.format(new Date()).replace(" ", "-").replace(":", "");
-            String fileName = "C:\\Users\\Administrator\\Desktop\\库存周转率报表" + str + ".xlsx";
+            String fileName = "库存周转率报表" + str + ".xlsx";
             response.setContentType("application/vnd.ms-excel; charset=utf-8");
             response.setCharacterEncoding("utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" +  URLEncoder.encode(fileName,"utf-8"));
             EasyExcel.write(response.getOutputStream(), Item.class).sheet("库存周转率报表").doWrite(itemList);
-//            response.reset();
-            System.out.println("导出成功");
         } catch (Exception e) {
             e.printStackTrace();
         }

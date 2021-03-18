@@ -65,11 +65,10 @@ public class StockageController {
         try {
             exportList = stockageService.queryAll(queryConditionStockage,rkDetailMap,pdDetailMap);
             String str = DateUtil.format(new Date()).replace(" ","-").replace(":","");
-            String fileName = "C:\\Users\\Administrator\\Desktop\\库龄分析报表" + str + ".xlsx";
+            String fileName = "库龄分析报表" + str + ".xlsx";
             response.setContentType("application/vnd.ms-excel; charset=utf-8");
             response.setCharacterEncoding("utf-8");
             response.setHeader("Content-Disposition", "attachment;filename=" +  URLEncoder.encode(fileName,"utf-8"));
-            System.out.println("导出成功");
             EasyExcel.write(response.getOutputStream(),Stockage.class).sheet("库龄分析报表").doWrite(exportList);
         } catch (Exception e) {
             e.printStackTrace();

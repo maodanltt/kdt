@@ -46,10 +46,6 @@
 
             })
 
-            $("#export").click(function () {
-
-            })
-
         })
 
     </script>

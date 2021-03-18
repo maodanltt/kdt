@@ -3,35 +3,48 @@ package com.tywh.kdt.report.pojo;
 import com.alibaba.excel.annotation.ExcelIgnore;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.alibaba.excel.annotation.write.style.ContentFontStyle;
+import com.alibaba.excel.annotation.write.style.HeadFontStyle;
+import com.alibaba.excel.annotation.write.style.HeadRowHeight;
 
+@HeadRowHeight(25)
+@HeadFontStyle(bold = false)
 public class Item {
     /*
     shum, tsfljc, gjdj, bmmc, xscs, zxscs, qckc, qmkc, xscs / ((qckc + qmkc) / 2)) AS spzzl,
                 xscs / zxscs) AS dpdxl
      */
 
-    @ColumnWidth(18)
+
+    @ColumnWidth(50)
     @ExcelProperty(value = "书名",index = 0)
     private String shum;
 
+    @ColumnWidth(20)
     @ExcelProperty(value = "图书分类简称",index = 1)
     private String tsfljc;
 
+    @ColumnWidth(7)
     @ExcelProperty(value = "定价",index = 2)
     private double gjdj;
 
+    @ColumnWidth(12)
     @ExcelProperty(value = "期初库存",index = 3)
     private Integer qckc;
 
+    @ColumnWidth(12)
     @ExcelProperty(value = "期末库存",index = 4)
     private Integer qmkc;
 
+    @ColumnWidth(12)
     @ExcelProperty(value = "销售册数",index = 5)
     private Integer xscs;
 
+    @ColumnWidth(13)
     @ExcelProperty(value = "库存周转率",index = 6)
     private String kczzl;
 
+    @ColumnWidth(13)
     @ExcelProperty(value = "库存动销率",index = 7)
     private String kcdxl;
 
