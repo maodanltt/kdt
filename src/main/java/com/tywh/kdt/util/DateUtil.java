@@ -15,6 +15,12 @@ public class DateUtil {
         return result;
     }
 
+    public static String format(Date date, String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        String result = sdf.format(date);
+        return result;
+    }
+
     public static Date format(String dateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {

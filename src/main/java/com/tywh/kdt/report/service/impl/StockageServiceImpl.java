@@ -26,7 +26,7 @@ public class StockageServiceImpl implements StockageService {
     public List<Stockage> queryStorkageList(QueryConditionStockage queryConditionStockage,Map<String, Integer> rkDetailMap,Map<String, Integer> pdDetailMap) throws Exception {
         List<Stockage> stockageList = stockageMapper.queryStorkageList(queryConditionStockage);
         for (Stockage stockage : stockageList) {
-            if (stockage.getZbh() != null) {
+            if (stockage.getZbh() != null && stockage.getZbh().length() >= 12) {
                 stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -4));
             } else {
                 stockage.setZbh("");
@@ -91,6 +91,20 @@ public class StockageServiceImpl implements StockageService {
             pdDetailMap.put(pdDetail.getKey(), pdDetail.getCs());
         }
         return pdDetailMap;
+    }
+
+    @Override
+    public List<Stockage> queryAll(QueryConditionStockage queryConditionStockage,Map<String, Integer> rkDetailMap,Map<String, Integer> pdDetailMap) throws Exception {
+        List<Stockage> list = stockageMapper.queryAll(queryConditionStockage);
+        for (Stockage stockage : list) {
+            if (stockage.getZbh() != null && stockage.getZbh().length() >= 12) {
+                stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -4));
+            } else {
+                stockage.setZbh("");
+            }
+            computeStockAge(stockage,1,rkDetailMap,pdDetailMap);
+        }
+        return list;
     }
 
     //计算库龄 count=1为当前周期

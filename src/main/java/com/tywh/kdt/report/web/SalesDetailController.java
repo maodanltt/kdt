@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/report")
+@RequestMapping("/report/salesdetail")
 public class SalesDetailController {
 
     @Autowired
     private SalesDetailService salesDetailService;
 
-    @RequestMapping("/toSalesDetail")
+    @RequestMapping("/page")
     public String toSalesDetail(HttpServletRequest request) {
         //不从OA链接进去，session不为空， 在此显式声明获取一下试试后面能不能拿到同一个session
 //        request.getSession(true);
         return "salesDetail";
     }
 
-    @RequestMapping("/querySalesDetailList")
+    @RequestMapping("/list")
     @ResponseBody
     public Result querySalesDetailList(QueryCondition queryCondition) throws Exception{
 

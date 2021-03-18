@@ -46,6 +46,10 @@
 
             })
 
+            $("#export").click(function () {
+
+            })
+
         })
 
     </script>
@@ -69,7 +73,7 @@
 <div style="position: relative; height: 100%;">
 
     <div class="btn-toolbar" role="toolbar" style="height: 80px; padding: 0 20px">
-        <form role="form" style="position: relative; top: 8%; left: 5px;font-size: small">
+        <form role="form" action="/report/stockage/export.do" method="post" style="position: relative; top: 8%; left: 5px;font-size: small" id="queryForm" target="iframe">
             <div class="row">
                 <div class="form-group col-xs-5">
                     <div class="input-group" style="position: relative;">
@@ -105,8 +109,13 @@
                 <div class="form-group col-xs-2">
                     <button type="button" class="btn btn-default" style="color: blue" id="search"> 查 询</button>
                 </div>
+
+                <div class="form-group col-xs-2">
+                    <button type="submit" class="btn btn-default" style="color: blue" id="export"> 导 出</button>
+                </div>
             </div>
         </form>
+        <iframe id="iframe" name="iframe" style="display:none;"></iframe>
     </div>
     <hr>
 

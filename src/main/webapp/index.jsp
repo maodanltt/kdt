@@ -4,6 +4,6 @@
     <title>index</title>
   </head>
   <body>
-      <a href="/item/toQueryItem.do">库存周转率查询</a>
+      <a href="/report/item/page.do">库存周转率查询</a>
   </body>
 </html>

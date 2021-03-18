@@ -59,7 +59,7 @@
 
     function queryDataList(pageNo, pageSize) {
         $.ajax({
-            url: "/report/querySalesDetailList.do",
+            url: "/report/salesdetail/list.do",
             data: {
                 "pageNo" :pageNo,
                 "pageSize" : pageSize,

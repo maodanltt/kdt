@@ -17,4 +17,6 @@ public interface StockageMapper {
 
     Map queryTotalRecords (QueryConditionStockage queryConditionStockage) throws Exception;
 
+    List<Stockage> queryAll(QueryConditionStockage queryConditionStockage) throws Exception;
+
 }

@@ -1,33 +1,49 @@
 package com.tywh.kdt.report.pojo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
+
 public class Stockage {
 
+    @ExcelProperty(value = "书序号",index = 0)
     private String sxh;
 
+    @ExcelProperty(value = "书名",index = 1)
     private String shum;
 
+    @ExcelProperty(value = "图书分类简称",index = 2)
     private String tsfljc;
 
+    @ExcelProperty(value = "编辑部门名称",index = 3)
     private String bmmc;
 
-    private Integer qmkc = 0;
-
-    private String zbh;
-
+    @ExcelProperty(value = "印次",index = 4)
     private String yc;
 
+    @ExcelProperty(value = "自编号",index = 5)
+    private String zbh;
+
+    @ExcelProperty(value = "当前库存",index = 6)
+    private Integer qmkc = 0;
+
+    @ExcelProperty(value = "0-30天",index = 7)
     private Integer term1 = 0;
 
+    @ExcelProperty(value = "31-60天",index = 8)
     private Integer term2 = 0;
 
+    @ExcelProperty(value = "61-180天",index = 9)
     private Integer term3 = 0;
 
+    @ExcelProperty(value = "181-365天",index = 10)
     private Integer term4 = 0;
 
+    @ExcelProperty(value = "1-2年",index = 11)
     private Integer term5 = 0;
 
+    @ExcelProperty(value = "2-3年",index = 12)
     private Integer term6 = 0;
 
+    @ExcelProperty(value = "3年以上",index = 13)
     private Integer term7 = 0;
 
     public String getSxh() {

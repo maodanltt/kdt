@@ -18,7 +18,7 @@
                 return false;
             }
             $.ajax({
-                url : "/item/queryItemList.do",
+                url : "/report/item/list.do",
                 data : {
                     "bjbmmc" : $.trim($("#bjbmmc").val()),
                     "tsfljc" : $.trim($("#tsfljc").val()),
@@ -58,6 +58,24 @@
                     $("#itemtfoot").html(tfootHtml);
                 }
             })
+
+            $("#export").click(function () {
+                $.ajax({
+                    url: "/report/item/export.do",
+                    data: {
+                        "bjbmmc" : $.trim($("#bjbmmc").val()),
+                        "tsfljc" : $.trim($("#tsfljc").val()),
+                        "xsbmmc" : $.trim($("#xsbmmc").val()),
+                        "startdate" : $.trim($("#startdate").val()),
+                        "enddate" : $.trim($("#enddate").val()),
+                    },
+                    type: "post",
+                    dataType: "json",
+                    success: function (data) {
+                        alert(data.message);
+                    }
+                })
+            })
         })
     })
 
@@ -70,7 +88,8 @@
     销售部门名称：<input type="text" name="xsbmmc" id="xsbmmc" >&nbsp;&nbsp;&nbsp;
        开始月份：<input type="month" name="startdate" id="startdate" >&nbsp;&nbsp;&nbsp;
        结束月份：<input type="month" name="enddate" id="enddate" > &nbsp;&nbsp;&nbsp;
-    <input type="button" value="查询" id="search">
+    <input type="button" value="查询" id="search">&nbsp;&nbsp;&nbsp;
+    <input type="button" value="导出" id="export">
     <hr color="black">
 </div>
 <div>

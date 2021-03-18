@@ -9,7 +9,6 @@
 
     <select id="queryTsfljcList" resultType="search">
         select jc as name from TsflkView where jc not like '%采购%'
-        and sjdm &lt;&gt; '||'
     </select>
 
     <select id="queryShumList" resultType="search">
