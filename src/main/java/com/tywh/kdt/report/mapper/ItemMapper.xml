@@ -11,24 +11,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         shrq,khbh,fhzt,xsbmmc from xsdview union select fhdbh,convert(varchar(7),dateadd(month,0,shrq),120)
         shrq,khbh,fhzt,xsbmmc from xsdnview) xsd
         <where>
-            <foreach collection="fhzts" item="fhzt" open="fhzt in (" close=")" separator=",">
-            #{fhzt}
-            </foreach>
+            and fhzt in ('待发','已发')
             and  shrq >= #{startdate} and shrq &lt;= #{enddate}
             <if test="xsbmmc != null and xsbmmc != ''">
                 and xsbmmc like '%' + #{xsbmmc} + '%'
             </if>
-            and khbh &lt;> #{khbhRemove}) group by shum,dj,tsfljc) b on a.shum = b.shum and a.tsfljc = b.tsfljc
-            and a.gjdj = b.dj where sxh not like #{sxhRemove}
-            <foreach collection="tsfljcRemove" item="tsflmc" open="and" close="" separator="and">
-                a.tsfljc not like #{tsflmc}
-            </foreach>
+            and khbh &lt;> '2000000747') group by shum,dj,tsfljc) b on a.shum = b.shum and a.tsfljc = b.tsfljc
+            and a.gjdj = b.dj where sxh not like 'W%'
+            and a.tsfljc not like '%联考%' and a.tsfljc not like '日历%' and a.tsfljc not like '赠品%' and a.tsfljc not like '宣传品%'
             <if test="bjbmmc != null and bjbmmc != ''">
                 and bmmc like '%' + #{bjbmmc} + '%'
             </if>
-            <if test="tsfljc != null and tsfljc != ''">
-                and a.tsfljc like '%' + #{tsfljc} + '%'
-            </if>
+<!--            <if test="tsfljc != null and tsfljc != ''">-->
+<!--                and a.tsfljc like '%' + #{tsfljc} + '%'-->
+<!--            </if>-->
         </where>
             group by a.shum,a.gjdj, a.tsfljc,b.xscs order by b.xscs desc
     </select>
@@ -38,11 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM kcknView union select shum,tsfljc,dj,qckc,qmkc,convert(varchar(7),dateadd(month,0,getdate()),120)
         kjqj,sxh,kwbh from KucunView) t1
         <where>
-            KWBH = #{kwbh} AND kjqj >= #{kjqj}
-            <foreach collection="tsfljcRemove" item="tsflmc" open="and" close="" separator="and">
-                tsfljc not like #{tsflmc}
-            </foreach>
-            and sxh not like #{sxhRemove} group by shum,tsfljc,dj,kjqj
+            and kwbh = '00HG' AND kjqj >= '2020-01'
+            and tsfljc not like '%联考%' and tsfljc not like '日历%' and tsfljc not like '赠品%' and tsfljc not like '宣传品%'
+            and sxh not like 'W%' group by shum,tsfljc,dj,kjqj
         </where>
     </select>
 

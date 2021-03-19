@@ -29,7 +29,7 @@ public class StockageServiceImpl implements StockageService {
             if (stockage.getZbh() != null && stockage.getZbh().length() >= 12) {
                 stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -4));
             } else {
-                stockage.setZbh("");
+                stockage.setYc("");
             }
             computeStockAge(stockage,1,rkDetailMap,pdDetailMap);
         }
@@ -62,7 +62,13 @@ public class StockageServiceImpl implements StockageService {
             } else if (differenceDays >= 1096) {
                 rkDetail.setLabel("term7");
             }
-            rkDetailMap.put(rkDetail.getKey(), rkDetail.getCs());
+            if (!rkDetailMap.containsKey(rkDetail.getKey())) {
+                rkDetailMap.put(rkDetail.getKey(),rkDetail.getCs());
+            } else {
+                Integer oldValue = rkDetailMap.get(rkDetail.getKey());
+                Integer newValue = oldValue + rkDetail.getCs();
+                rkDetailMap.put(rkDetail.getKey(),newValue);
+            }
         }
         return rkDetailMap;
     }
@@ -87,6 +93,14 @@ public class StockageServiceImpl implements StockageService {
                 pdDetail.setLabel("term6");
             } else if (differenceDays >= 1096) {
                 pdDetail.setLabel("term7");
+            }
+
+            if (!pdDetailMap.containsKey(pdDetail.getKey())) {
+                pdDetailMap.put(pdDetail.getKey(),pdDetail.getCs());
+            } else {
+                Integer oldValue = pdDetailMap.get(pdDetail.getKey());
+                Integer newValue = oldValue + pdDetail.getCs();
+                pdDetailMap.put(pdDetail.getKey(),newValue);
             }
             pdDetailMap.put(pdDetail.getKey(), pdDetail.getCs());
         }

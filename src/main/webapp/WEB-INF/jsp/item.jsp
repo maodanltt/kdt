@@ -15,6 +15,11 @@
 
     <script type="text/javascript">
         $(function () {
+
+            $("#export").click(function () {
+                $("#queryForm").submit();
+            })
+
             $("#search").click(function () {
                 if ($.trim($("#startdate").val()) == '') {
                     alert("开始月份必须输入");
@@ -77,7 +82,7 @@
 <div style="position: relative; height: 100%;">
 
     <div class="btn-toolbar" role="toolbar" style="height: 80px; padding: 0 20px">
-        <form role="form" action="/report/item/export.do" method="post" style="position: relative; top: 8%; left: 5px;font-size: small" id="queryForm" target="iframe">
+        <form role="form" action="/report/item/export.do" method="post" style="position: relative; top: 8%; left: 5px;font-size: medium" id="queryForm" target="iframe">
             <div class="row">
                 <div class="form-group col-xs-3">
                     <div class="input-group" style="position: relative;">
@@ -113,7 +118,7 @@
                 </div>
 
                 <div class="form-group col-xs-2">
-                    <button type="submit" class="btn btn-default" style="color: blue" id="export"> 导出Excel</button>
+                    <button type="button" class="btn btn-default" style="color: blue" id="export"> 导出Excel</button>
                 </div>
             </div>
         </form>
@@ -124,7 +129,7 @@
         总销售册数：<span id="zxscsspan"></span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 总库存周转率：<span id="zkczzlspan"></span>
     </div>
 
-    <div style="position: relative;top: 20px; font-size: small">
+    <div style="position: relative;top: 20px; font-size: medium">
         <table class="table table-hover">
             <thead>
             <tr style="color: blue; font-size: xx-small">

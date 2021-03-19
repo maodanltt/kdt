@@ -40,7 +40,7 @@ public class ItemController {
         QueryConditionWhcb queryConditionWhcb = new QueryConditionWhcb();
         queryConditionWhcb.setBjbmmc(bjbmmc);
         queryConditionWhcb.setXsbmmc(xsbmmc);
-        queryConditionWhcb.setTsfljc(tsfljc);
+//        queryConditionWhcb.setTsfljc(tsfljc);
         queryConditionWhcb.setStartdate(startdate);
         queryConditionWhcb.setEnddate(enddate);
         //查询条件带回前端页面
@@ -62,7 +62,7 @@ public class ItemController {
         QueryConditionWhcb queryConditionWhcb = new QueryConditionWhcb();
         queryConditionWhcb.setBjbmmc(bjbmmc);
         queryConditionWhcb.setXsbmmc(xsbmmc);
-        queryConditionWhcb.setTsfljc(tsfljc);
+//        queryConditionWhcb.setTsfljc(tsfljc);
         queryConditionWhcb.setStartdate(startdate);
         queryConditionWhcb.setEnddate(enddate);
         //调用service处理

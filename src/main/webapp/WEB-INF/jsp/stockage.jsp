@@ -39,6 +39,10 @@
                 }
             })
 
+            $("#export").click(function () {
+                $("#queryForm").submit();
+            })
+
             $("#search").click(function () {
                 // queryDataList(1,20);
                 queryDataList(1,20)
@@ -107,7 +111,7 @@
                 </div>
 
                 <div class="form-group col-xs-2">
-                    <button type="submit" class="btn btn-default" style="color: blue" id="export"> 导 出</button>
+                    <button type="button" class="btn btn-default" style="color: blue" id="export"> 导出Excel</button>
                 </div>
             </div>
         </form>
