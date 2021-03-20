@@ -3,6 +3,7 @@ package com.tywh.kdt.report.web;
 import com.tywh.kdt.report.pojo.Inventory;
 import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
+import com.tywh.kdt.report.pojo.Yzd;
 import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -90,37 +91,53 @@ public class SearchController {
     }
 
     @RequestMapping("/queryRkDetailList")
-    public String queryRkDetailList(HttpServletRequest request, String sxh) throws Exception {
-        List<RkDetail> rkDetailList = (List<RkDetail>) request.getSession(false).getAttribute("rkDetailList");
-        if (rkDetailList == null) {
-            rkDetailList = searchService.queryRkDetailList();
-            request.getSession(false).setAttribute("rkDetailList",rkDetailList);
+    public String queryRkDetailList(HttpServletRequest request, String sxh,String shum) throws Exception {
+//        List<RkDetail> rkDetailList = (List<RkDetail>) request.getSession(false).getAttribute("rkDetailList");
+//        if (rkDetailList == null) {
+//            rkDetailList = searchService.queryRkDetailList();
+//            request.getSession(false).setAttribute("rkDetailList",rkDetailList);
+//        }
+//
+//        List<RkDetail> resultList = new ArrayList<>();
+//        Integer rkzs = 0;
+//        if (rkDetailList != null) {
+//            for (RkDetail rkDetail : rkDetailList) {
+//                if (rkDetail.getSxh().equals(sxh)) {
+//                    rkzs += rkDetail.getCs();
+//                    resultList.add(rkDetail);
+//                }
+//            }
+//        }
+
+        List<Yzd> yzdList =(List<Yzd>) request.getSession(false).getAttribute("yzdList");
+        if (yzdList == null) {
+            yzdList = searchService.queryYzdList();
+            request.getSession(false).setAttribute("yzdList",yzdList);
         }
 
-        List<RkDetail> resultList = new ArrayList<>();
-        Integer rkzs = 0;
-        if (rkDetailList != null) {
-            for (RkDetail rkDetail : rkDetailList) {
-                if (rkDetail.getSxh().equals(sxh)) {
-                    rkzs += rkDetail.getCs();
-                    resultList.add(rkDetail);
+        List<Yzd> reslutYzdList = new ArrayList<>();
+        if (yzdList != null) {
+            for (Yzd yzd : yzdList) {
+                if (yzd.getShum().equals(shum)) {
+                    reslutYzdList.add(yzd);
                 }
             }
         }
 
 
-        List<Inventory> kucunList = (List<Inventory>) request.getSession(false).getAttribute("kucunList");
-        if (kucunList == null) {
-            kucunList = searchService.queryKucunList();
-            request.getSession(false).setAttribute("kucunList",kucunList);
-        }
-        for (Inventory inventory : kucunList) {
-            if (inventory.getSxh().equals(sxh)) {
-                request.setAttribute("qmkc",inventory.getQmkc());
-            }
-        }
-        request.setAttribute("rkzs",rkzs);
-        request.setAttribute("resultList", resultList);
+//        List<Inventory> kucunList = (List<Inventory>) request.getSession(false).getAttribute("kucunList");
+//        if (kucunList == null) {
+//            kucunList = searchService.queryKucunList();
+//            request.getSession(false).setAttribute("kucunList",kucunList);
+//        }
+//        for (Inventory inventory : kucunList) {
+//            if (inventory.getSxh().equals(sxh)) {
+//                request.setAttribute("qmkc",inventory.getQmkc());
+//            }
+//        }
+//        request.setAttribute("rkzs",rkzs);
+//        request.setAttribute("resultList", resultList);
+        request.setAttribute("reslutYzdList",reslutYzdList);
         return "rkDetail";
     }
 

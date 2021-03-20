@@ -112,9 +112,9 @@ public class StockageServiceImpl implements StockageService {
         List<Stockage> list = stockageMapper.queryAll(queryConditionStockage);
         for (Stockage stockage : list) {
             if (stockage.getZbh() != null && stockage.getZbh().length() >= 12) {
-                stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -4));
+                stockage.setYc(stockage.getZbh().substring(stockage.getZbh().length() -5));
             } else {
-                stockage.setZbh("");
+                stockage.setYc("");
             }
             computeStockAge(stockage,1,rkDetailMap,pdDetailMap);
         }

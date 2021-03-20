@@ -90,6 +90,7 @@
                     tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + '\'' + n.sxh + '\'' + ',' + '\'' + n.shum + '\'' + ',' + '\'' + n.zbh + '\'' + ')">' + n.shum + '</a></td>';
                     tbodyHtml += '<td>' + n.yc + '</td>';
                     tbodyHtml += '<td>' + n.dj + '</td>';
+                    tbodyHtml += '<td>' + n.qmkc + '</td>';
                     tbodyHtml += '<td>' + n.cs + '</td>';
                     tbodyHtml += '<td>' + n.my + '</td>';
                     tbodyHtml += '<td>' + n.zk + '</td>';
@@ -100,7 +101,7 @@
                 })
                 $("#itemtbody").html(tbodyHtml);
                 var tfootHtml = '<tr class="active" style="font-size: small">';
-                tfootHtml += '<td colspan="6" align="center" style="color: blue">汇总</td>';
+                tfootHtml += '<td colspan="7" align="center" style="color: blue">汇总</td>';
                 tfootHtml += '<td></td>';
                 tfootHtml += '<td>' + data.zcs + '</td>';
                 tfootHtml += '<td>' + data.zmy + '</td>';

@@ -30,12 +30,17 @@
     </select>
 
     <select id="queryKucunList" resultType="inventory">
-        select sxh,sum(qmkc) qmkc from kucunView where kwbh = '00HG' group by sxh,shum,bmmc
+        select sxh,sum(qmkc) qmkc from kucunView where kwbh = '00HG' group by sxh,shum
     </select>
 
-<!--    <select id="">-->
-<!--        select CONVERT(varchar(100), txrq, 23) txrq,CONVERT(varchar(100), ywrq, 23) ywrq ,bcys,-->
-<!--        cycmc,sxh from perpby01..FykView where txrq > #{txrq} and bzfs = #{bzfs} and-->
-<!--        tsfljc not like '%' + #{tsfljc} + '%'-->
-<!--    </select>-->
+    <select id="queryYzdList" resultType="yzd">
+        select CONVERT(varchar(100), a.txrq, 23) txrq,CONVERT(varchar(100), a.ywrq, 23) ywrq ,a.bcys bcys,a.shum shum,a.zbh zbh,
+        a.cycjc cycjc,a.sxh sxh,a.fydh fydh,b.yscs yscs from perpby01..FykView a left join (select sxh,bz as fydh,sum(cs) yscs from (
+        select rkdbh,djlx,txrq,sxh,kwbh,cs,bz from rkmxview union select rkdbh,djlx,txrq,sxh,kwbh,cs,bz from rkmxnview) rkmxjl where
+        txrq >= '2021-02-01' and djlx = '产品入库' and bz like '202%' and len(bz) = 9
+        group by sxh,bz) b on a.sxh = b.sxh and a.fydh = b.fydh
+        where txrq > '2021-02-01' and bzfs = '送货' and (yscs is null or yscs &lt; bcys)
+    </select>
+
+
 </mapper>

@@ -9,6 +9,7 @@ import com.tywh.kdt.report.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +44,11 @@ public class SearchServiceImpl implements SearchService {
     public List<Search> queryDqList() throws Exception {
         return searchMapper.queryDqList();
     }
-
-    @Override
-    public List<RkDetail> queryRkDetailList() throws Exception {
-        return searchMapper.queryRkDetailList();
-    }
+//
+//    @Override
+//    public List<RkDetail> queryRkDetailList() throws Exception {
+//        return searchMapper.queryRkDetailList();
+//    }
 
     @Override
     public List<Inventory> queryKucunList() throws Exception {
@@ -56,12 +57,24 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Yzd> queryYzdList() throws Exception {
-        Map<String, String> conditionMap = new HashMap<>();
-        conditionMap.put("txrq","2020-01-01");
-        conditionMap.put("bzfs","送货");
-        conditionMap.put("tsfljc","中学");
         List<Yzd> yzdList = searchMapper.queryYzdList();
-        return null;
+        List<Yzd> newYzdList = new ArrayList<>();
+        for (Yzd yzd : yzdList) {
+
+            if (yzd.getZbh() != null && yzd.getZbh().length() >= 12) {
+                yzd.setYc(yzd.getZbh().substring(yzd.getZbh().length() -5));
+            } else {
+                yzd.setYc("");
+            }
+
+            if (yzd.getYscs() == null || yzd.getYscs() == 0) {
+                yzd.setYscs(0);
+                newYzdList.add(yzd);
+            } else if (yzd.getYscs() != null && yzd.getYscs() > 0 && (yzd.getYscs().doubleValue() / yzd.getBcys().doubleValue()) < 0.9) {
+                newYzdList.add(yzd);
+            }
+        }
+        return newYzdList;
     }
 
 }

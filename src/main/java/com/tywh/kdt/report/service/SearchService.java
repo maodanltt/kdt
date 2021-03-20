@@ -20,9 +20,10 @@ public interface SearchService {
 
     List<Search> queryDqList() throws Exception;
 
-    List<RkDetail> queryRkDetailList() throws Exception;
+//    List<RkDetail> queryRkDetailList() throws Exception;
 
     List<Inventory> queryKucunList() throws Exception;
 
     List<Yzd> queryYzdList() throws Exception;
+
 }

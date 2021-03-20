@@ -5,6 +5,7 @@ import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.pojo.Yzd;
 import java.util.List;
+import java.util.Map;
 
 public interface SearchMapper {
     List<Search> queryKhmcList() throws Exception;
@@ -17,10 +18,11 @@ public interface SearchMapper {
 
     List<Search> queryDqList() throws Exception;
 
-    List<RkDetail> queryRkDetailList() throws Exception;
+//    List<RkDetail> queryRkDetailList() throws Exception;
 
     List<Inventory>  queryKucunList() throws Exception;
 
     List<Yzd> queryYzdList() throws Exception;
+
 
 }

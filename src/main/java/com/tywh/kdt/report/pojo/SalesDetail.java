@@ -23,6 +23,7 @@ public class SalesDetail {
     private String dqjl;
     private String dq;
     private String yc;
+    private Integer qmkc;
 
     public String getFhdbh() {
         return fhdbh;
@@ -190,5 +191,13 @@ public class SalesDetail {
 
     public void setYc(String yc) {
         this.yc = yc;
+    }
+
+    public Integer getQmkc() {
+        return qmkc;
+    }
+
+    public void setQmkc(Integer qmkc) {
+        this.qmkc = qmkc;
     }
 }

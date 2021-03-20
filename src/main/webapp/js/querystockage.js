@@ -80,8 +80,8 @@
                     tbodyHtml += '<td>' + (i+1) + '</td>';
                     tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + '\'' + n.sxh + '\'' + ',' + '\'' + n.shum + '\'' + ',' + '\'' + n.zbh + '\'' + ')">' + n.shum + '</a></td>';
                     tbodyHtml += '<td>' + n.tsfljc + '</td>';
-                    tbodyHtml += '<td>' + n.bmmc + '</td>';
                     tbodyHtml += '<td>' + n.yc + '</td>';
+                    tbodyHtml += '<td>' + n.bmmc + '</td>';
                     tbodyHtml += '<td>' + n.qmkc + '</td>';
                     tbodyHtml += '<td>' + n.term1 + '</td>';
                     tbodyHtml += '<td>' + n.term2 + '</td>';

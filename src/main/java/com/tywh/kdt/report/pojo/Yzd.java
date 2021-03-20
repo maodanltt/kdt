@@ -7,9 +7,12 @@ public class Yzd {
     private String ywrq;
     private Integer bcys;
     private Integer yscs; //已收货册数
-    private String cycmc;
+    private String cycjc;
     private String sxh;
-
+    private String shum;
+    private String fydh;
+    private String zbh;
+    private String yc;
     public String getTxrq() {
         return txrq;
     }
@@ -42,12 +45,12 @@ public class Yzd {
         this.yscs = yscs;
     }
 
-    public String getCycmc() {
-        return cycmc;
+    public String getCycjc() {
+        return cycjc;
     }
 
-    public void setCycmc(String cycmc) {
-        this.cycmc = cycmc;
+    public void setCycjc(String cycjc) {
+        this.cycjc = cycjc;
     }
 
     public String getSxh() {
@@ -56,5 +59,37 @@ public class Yzd {
 
     public void setSxh(String sxh) {
         this.sxh = sxh;
+    }
+
+    public String getFydh() {
+        return fydh;
+    }
+
+    public void setFydh(String fydh) {
+        this.fydh = fydh;
+    }
+
+    public String getShum() {
+        return shum;
+    }
+
+    public void setShum(String shum) {
+        this.shum = shum;
+    }
+
+    public String getZbh() {
+        return zbh;
+    }
+
+    public void setZbh(String zbh) {
+        this.zbh = zbh;
+    }
+
+    public String getYc() {
+        return yc;
+    }
+
+    public void setYc(String yc) {
+        this.yc = yc;
     }
 }
