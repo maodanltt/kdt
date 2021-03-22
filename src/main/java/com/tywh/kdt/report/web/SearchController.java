@@ -1,6 +1,6 @@
 package com.tywh.kdt.report.web;
 
-import com.tywh.kdt.report.pojo.Inventory;
+import com.tywh.kdt.report.pojo.Book;
 import com.tywh.kdt.report.pojo.RkDetail;
 import com.tywh.kdt.report.pojo.Search;
 import com.tywh.kdt.report.pojo.Yzd;
@@ -91,39 +91,38 @@ public class SearchController {
     }
 
     @RequestMapping("/queryRkDetailList")
-    public String queryRkDetailList(HttpServletRequest request, String sxh,String shum) throws Exception {
-//        List<RkDetail> rkDetailList = (List<RkDetail>) request.getSession(false).getAttribute("rkDetailList");
-//        if (rkDetailList == null) {
-//            rkDetailList = searchService.queryRkDetailList();
-//            request.getSession(false).setAttribute("rkDetailList",rkDetailList);
-//        }
-//
-//        List<RkDetail> resultList = new ArrayList<>();
-//        Integer rkzs = 0;
-//        if (rkDetailList != null) {
-//            for (RkDetail rkDetail : rkDetailList) {
-//                if (rkDetail.getSxh().equals(sxh)) {
-//                    rkzs += rkDetail.getCs();
-//                    resultList.add(rkDetail);
-//                }
-//            }
-//        }
-
-        List<Yzd> yzdList =(List<Yzd>) request.getSession(false).getAttribute("yzdList");
-        if (yzdList == null) {
-            yzdList = searchService.queryYzdList();
-            request.getSession(false).setAttribute("yzdList",yzdList);
+    public String queryRkDetailList(HttpServletRequest request, String sxh) throws Exception {
+        List<RkDetail> rkDetailList = (List<RkDetail>) request.getSession(false).getAttribute("rkDetailList");
+        if (rkDetailList == null) {
+            rkDetailList = searchService.queryRkDetailList();
+            request.getSession(false).setAttribute("rkDetailList",rkDetailList);
         }
 
-        List<Yzd> reslutYzdList = new ArrayList<>();
-        if (yzdList != null) {
-            for (Yzd yzd : yzdList) {
-                if (yzd.getShum().equals(shum)) {
-                    reslutYzdList.add(yzd);
-                }
+        List<Book> bookList =(List<Book>) request.getSession(false).getAttribute("bookList");
+        if (bookList == null) {
+            bookList = searchService.queryBookList();
+            request.getSession(false).setAttribute("bookList",bookList);
+        }
+
+        String shum = null;
+        String zbh = null;
+        for (Book book : bookList) {
+            if (sxh.equals(book.getSxh())) {
+                shum = book.getShum();
+                zbh = book.getZbh();
             }
         }
 
+        List<RkDetail> resultList = new ArrayList<>();
+        Integer rkzs = 0;
+        if (rkDetailList != null) {
+            for (RkDetail rkDetail : rkDetailList) {
+                if (rkDetail.getSxh().equals(sxh)) {
+                    rkzs += rkDetail.getCs();
+                    resultList.add(rkDetail);
+                }
+            }
+        }
 
 //        List<Inventory> kucunList = (List<Inventory>) request.getSession(false).getAttribute("kucunList");
 //        if (kucunList == null) {
@@ -135,10 +134,51 @@ public class SearchController {
 //                request.setAttribute("qmkc",inventory.getQmkc());
 //            }
 //        }
-//        request.setAttribute("rkzs",rkzs);
-//        request.setAttribute("resultList", resultList);
+        request.setAttribute("shum",shum);
+        request.setAttribute("zbh",zbh);
+        request.setAttribute("rkzs",rkzs);
+        request.setAttribute("resultList", resultList);
+
+        return "rkdetail";
+    }
+
+    @RequestMapping("/queryYzdList")
+    public String queryYzdList(HttpServletRequest request, String sxh) throws Exception {
+
+        List<Yzd> yzdList =(List<Yzd>) request.getSession(false).getAttribute("yzdList");
+        if (yzdList == null) {
+            yzdList = searchService.queryYzdList();
+            request.getSession(false).setAttribute("yzdList",yzdList);
+        }
+
+        List<Book> bookList =(List<Book>) request.getSession(false).getAttribute("bookList");
+        if (bookList == null) {
+            bookList = searchService.queryBookList();
+            request.getSession(false).setAttribute("bookList",bookList);
+        }
+
+        String shum = null;
+        String zbh = null;
+        for (Book book : bookList) {
+            if (sxh.equals(book.getSxh())) {
+                shum = book.getShum();
+                zbh = book.getZbh();
+            }
+        }
+
+        List<Yzd> reslutYzdList = new ArrayList<>();
+        if (yzdList != null) {
+            for (Yzd yzd : yzdList) {
+                if (yzd.getShum().equals(shum)) {
+                    reslutYzdList.add(yzd);
+                }
+            }
+        }
+
+        request.setAttribute("shum",shum);
+        request.setAttribute("zbh",zbh);
         request.setAttribute("reslutYzdList",reslutYzdList);
-        return "rkDetail";
+        return "yzddetail";
     }
 
 

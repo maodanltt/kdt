@@ -53,8 +53,8 @@
         $(dom2).css("display","none");
     }
 
-    function openwin(sxh,shum,zbh) {
-        window.open ("/search/queryRkDetailList.do?sxh=" + sxh + "&shum=" + shum + "&zbh=" + zbh, "newwindow", "height=600, width=800,top=300,left=1000,right=30; toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no") //写成一行
+    function openwin(sxh) {
+        window.open ("/search/queryYzdList.do?sxh=" + sxh, "newwindow", "height=600, width=800,top=300,left=1000,right=30; toolbar =no, menubar=no, scrollbars=no, resizable=no, location=no, status=no") //写成一行
     }
 
     function queryDataList(pageNo, pageSize) {
@@ -87,7 +87,7 @@
                     tbodyHtml += '<td>' + n.fhdbh + '</td>';
                     tbodyHtml += '<td>' + n.khmc + '</td>';
                     tbodyHtml += '<td>' + n.txrq + '</td>';
-                    tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + '\'' + n.sxh + '\'' + ',' + '\'' + n.shum + '\'' + ',' + '\'' + n.zbh + '\'' + ')">' + n.shum + '</a></td>';
+                    tbodyHtml += '<td><a style="color: blue; cursor: pointer;" onclick="openwin(' + '\'' + n.sxh + '\'' + ')">' + n.shum + '</a></td>';
                     tbodyHtml += '<td>' + n.yc + '</td>';
                     tbodyHtml += '<td>' + n.dj + '</td>';
                     tbodyHtml += '<td>' + n.qmkc + '</td>';

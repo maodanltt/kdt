@@ -17,6 +17,7 @@ public interface StockageMapper {
 
     Map queryTotalRecords (QueryConditionStockage queryConditionStockage) throws Exception;
 
+    //查询所有，导出excel
     List<Stockage> queryAll(QueryConditionStockage queryConditionStockage) throws Exception;
 
 }

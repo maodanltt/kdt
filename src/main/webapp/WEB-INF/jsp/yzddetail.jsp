@@ -3,7 +3,8 @@
 <%@ page import="com.tywh.kdt.report.pojo.Yzd" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-//    List<RkDetail> resultList = (List<RkDetail>) request.getAttribute("resultList");
+    String shum = (String) request.getAttribute("shum");
+    String zbh = (String) request.getAttribute("zbh");
     List<Yzd> reslutYzdList = (List<Yzd>) request.getAttribute("reslutYzdList");
 %>
 <html>
@@ -25,7 +26,7 @@
         <table>
             <tr style="font-size: medium">
                 <td>书    名 : </td>
-                <td><%=request.getParameter("shum")%></td>
+                <td><%=shum%></td>
             </tr>
             <tr style="font-size: medium">
                 <td>物 流 码 : </td>
@@ -33,12 +34,8 @@
             </tr>
             <tr style="font-size: medium">
                 <td>自 编 码 : </td>
-                <td><%=request.getParameter("zbh")%></td>
+                <td><%=zbh%></td>
             </tr>
-<%--            <tr style="font-size: medium">--%>
-<%--                <td>当前库存 : </td>--%>
-<%--                <td><%=request.getAttribute("qmkc")%></td>--%>
-<%--            </tr>--%>
         </table>
     </div>
     <hr>
@@ -83,43 +80,5 @@
             </table>
         </div>
     </div>
-
-<%--    <div style="position: relative; height: 100%;">--%>
-<%--        <div style="position: relative;top: 20px; font-size: small">--%>
-<%--            <table class="table table-hover">--%>
-<%--                <thead>--%>
-<%--                    <tr style="color: blue; font-size: small">--%>
-<%--                        <td>序</td>--%>
-<%--                        <td>入库单号</td>--%>
-<%--                        <td>入库日期</td>--%>
-<%--                        <td>供应商名称</td>--%>
-<%--                        <td>册数</td>--%>
-<%--                    </tr>--%>
-<%--                </thead>--%>
-<%--                <tbody id="itemtbody">--%>
-<%--                <%--%>
-<%--                    if (resultList != null) {--%>
-<%--                        for (int i=0; i<resultList.size(); i++) {--%>
-
-<%--                %>--%>
-<%--                    <tr class="active" style="font-size: small">--%>
-<%--                        <td><%=(i+1)%></td>--%>
-<%--                        <td><%=resultList.get(i).getRkdbh()%></td>--%>
-<%--                        <td><%=resultList.get(i).getTxrq()%></td>--%>
-<%--                        <td><%=resultList.get(i).getGysmc()%></td>--%>
-<%--                        <td><%=resultList.get(i).getCs()%></td>--%>
-<%--                    </tr>--%>
-<%--                <%--%>
-<%--                        }--%>
-<%--                    }--%>
-<%--                %>--%>
-<%--                    <tr class="active" style="color: blue; font-size: small">--%>
-<%--                        <td colspan="4" align="center">汇总</td>--%>
-<%--                        <td><%=request.getAttribute("rkzs")%></td>--%>
-<%--                    </tr>--%>
-<%--                </tbody>--%>
-<%--            </table>--%>
-<%--        </div>--%>
-<%--    </div>--%>
 </body>
 </html>

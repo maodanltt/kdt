@@ -42,5 +42,7 @@
         where txrq > '2021-02-01' and bzfs = '送货' and (yscs is null or yscs &lt; bcys)
     </select>
 
-
+    <select id="queryBookList" resultType="book">
+        select sxh,shum,zbh from fxsgk
+    </select>
 </mapper>
