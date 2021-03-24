@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TestExcel {
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //        String filename = "F:\\test\\shum.xlsx";
 //        List<Book> bookList = new ArrayList<>();
 //        Book b1 = new Book();
@@ -20,8 +20,8 @@ public class TestExcel {
 //        bookList.add(b1);
 //        bookList.add(b2);
 //        EasyExcel.write(filename,Book.class).sheet("图书列表").doWrite(bookList);
-        long differenceDays = DateDiffUtil.getDifferenceDays(DateUtil.format("2020-09-30"), new Date());
-        System.out.println(differenceDays);
-    }
+//        long differenceDays = DateDiffUtil.getDifferenceDays(DateUtil.format("2020-09-30"), new Date());
+//        System.out.println(differenceDays);
+//    }
 
 }
