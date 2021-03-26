@@ -1,4 +1,4 @@
-package com.tywh.kdt.util;
+package com.tywh.kdt.api.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;

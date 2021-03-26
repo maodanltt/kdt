@@ -1,4 +1,4 @@
-package com.tywh.kdt.util;
+package com.tywh.kdt.api.pojo;
 
 public class OrderLine {
 

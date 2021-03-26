@@ -1,16 +1,28 @@
-package com.tywh.kdt.util;
+package com.tywh.kdt.api.pojo;
 
-public class SenderInfo {
+public class ReceiverInfo {
 
-    private String name = "天一";
+    private String name;
 
-    private String mobile = "18625507383";
+    private String mobile;
 
-    private String province = "河南";
+    private String province;
 
-    private String city = "郑州";
+    private String city;
 
-    private String detailAddress = "天一文化仓库";
+    private String detailAddress;
+
+    public ReceiverInfo() {
+
+    }
+
+    public ReceiverInfo(String name, String mobile, String province, String city, String detailAddress) {
+        this.name = name;
+        this.mobile = mobile;
+        this.province = province;
+        this.city = city;
+        this.detailAddress = detailAddress;
+    }
 
     public String getName() {
         return name;

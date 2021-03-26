@@ -1,17 +1,17 @@
-package com.tywh.kdt.util;
+package com.tywh.kdt.api.pojo;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = {"deliveryOrderCode","ownerCode","orderType","warehouseCode","createTime","receiverInfo","senderInfo"})
+@XmlType(propOrder = {"deliveryOrderCode","ownerCode","orderType","warehouseCode","createTime","receiverInfo","senderInfo","remark"})
 @XmlRootElement(name = "deliveryOrder")
 public class DeliveryOrder {
 
     private String deliveryOrderCode;
 
-    private String ownerCode = "tianyiWMS";
+    private String ownerCode;
 
-    private String orderType = "DBCK";
+    private String orderType;
 
     private String warehouseCode;
 
@@ -20,6 +20,8 @@ public class DeliveryOrder {
     private ReceiverInfo receiverInfo;
 
     private SenderInfo senderInfo;
+
+    private String remark;
 
     public String getDeliveryOrderCode() {
         return deliveryOrderCode;
@@ -75,5 +77,13 @@ public class DeliveryOrder {
 
     public void setSenderInfo(SenderInfo senderInfo) {
         this.senderInfo = senderInfo;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

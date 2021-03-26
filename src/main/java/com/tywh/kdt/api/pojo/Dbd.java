@@ -6,8 +6,6 @@ public class Dbd {
 
     private String fhdbh;
     private String djkwbh;
-    private Date txrq;
-    private String fhzt;
     private String sxh;
     private String kwbh;
     private Integer cs;
@@ -27,22 +25,6 @@ public class Dbd {
 
     public void setDjkwbh(String djkwbh) {
         this.djkwbh = djkwbh;
-    }
-
-    public Date getTxrq() {
-        return txrq;
-    }
-
-    public void setTxrq(Date txrq) {
-        this.txrq = txrq;
-    }
-
-    public String getFhzt() {
-        return fhzt;
-    }
-
-    public void setFhzt(String fhzt) {
-        this.fhzt = fhzt;
     }
 
     public String getSxh() {

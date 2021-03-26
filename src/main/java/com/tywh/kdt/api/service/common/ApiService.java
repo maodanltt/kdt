@@ -28,7 +28,7 @@ public class ApiService {
     @Value("${wms.format}")
     private String format;
 
-    private String makeSign(String timestamp,String method, String xmlBody) {
+    private String makeSign(String timestamp,String method, String  xmlBody) {
         StringBuilder toMd5 = new StringBuilder();
         toMd5.append(appsecret);
         toMd5.append("appkey" + appkey);
