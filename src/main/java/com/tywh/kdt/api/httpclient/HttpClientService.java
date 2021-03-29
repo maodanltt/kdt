@@ -71,7 +71,8 @@ public class HttpClientService implements BeanFactoryAware {
             for (Map.Entry<String, String> entry : params.entrySet()) {
                 parameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
             }
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(parameters);
+            //防止post请求 中文乱码
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(parameters,"utf-8");
             httpPost.setEntity(formEntity);
         }
         try {
@@ -90,7 +91,7 @@ public class HttpClientService implements BeanFactoryAware {
         httpPost.setConfig(this.requestConfig);
         CloseableHttpResponse response = null;
         try {
-            httpPost.setEntity(new StringEntity(xmlBody));
+            httpPost.setEntity(new StringEntity(xmlBody,"utf-8"));
             response = this.getHttpClient().execute(httpPost);
             return new HttpClientResult(EntityUtils.toString(response.getEntity(), "utf-8"), response.getStatusLine().getStatusCode());
         } finally {
