@@ -3,19 +3,19 @@ package com.tywh.kdt.api.pojo;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder = {"deliveryOrderCode","ownerCode","orderType","warehouseCode","createTime","remark","receiverInfo","senderInfo"})
-@XmlRootElement(name = "deliveryOrder")
-public class DeliveryOrder {
+@XmlType(propOrder = {"entryOrderCode","ownerCode","orderType","orderCreateTime","warehouseCode","remark","receiverInfo","senderInfo"})
+@XmlRootElement(name = "entryOrder")
+public class EntryOrder {
 
-    private String deliveryOrderCode;
+    private String entryOrderCode;
 
     private String ownerCode;
+
+    private String orderCreateTime;
 
     private String orderType;
 
     private String warehouseCode;
-
-    private String createTime;
 
     private String remark;
 
@@ -23,12 +23,12 @@ public class DeliveryOrder {
 
     private SenderInfo senderInfo;
 
-    public String getDeliveryOrderCode() {
-        return deliveryOrderCode;
+    public String getEntryOrderCode() {
+        return entryOrderCode;
     }
 
-    public void setDeliveryOrderCode(String deliveryOrderCode) {
-        this.deliveryOrderCode = deliveryOrderCode;
+    public void setEntryOrderCode(String entryOrderCode) {
+        this.entryOrderCode = entryOrderCode;
     }
 
     public String getOwnerCode() {
@@ -47,20 +47,20 @@ public class DeliveryOrder {
         this.orderType = orderType;
     }
 
+    public String getOrderCreateTime() {
+        return orderCreateTime;
+    }
+
+    public void setOrderCreateTime(String orderCreateTime) {
+        this.orderCreateTime = orderCreateTime;
+    }
+
     public String getWarehouseCode() {
         return warehouseCode;
     }
 
     public void setWarehouseCode(String warehouseCode) {
         this.warehouseCode = warehouseCode;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
     }
 
     public String getRemark() {
@@ -86,5 +86,4 @@ public class DeliveryOrder {
     public void setSenderInfo(SenderInfo senderInfo) {
         this.senderInfo = senderInfo;
     }
-
 }

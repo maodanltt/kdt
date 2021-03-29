@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface DbdMapper {
 
-    List<Dbd> queryDbdList(String fhdbh) throws Exception;
+    List<Dbd> queryDbckList(String fhdbh) throws Exception;
+
+    List<Dbd> queryDbrkList(String fhdbh) throws Exception;
 }

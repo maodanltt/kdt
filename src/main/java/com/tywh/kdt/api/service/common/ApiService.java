@@ -28,6 +28,19 @@ public class ApiService {
     @Value("${wms.format}")
     private String format;
 
+    public String makeUrl(String method, String xmlBody ) {
+        String timestamp = DateUtil.format(new Date()).replace(" ","");
+        StringBuilder url = new StringBuilder(address);
+        url.append("method=" + method + "&");
+        url.append("sid=" + sid + "&");
+        url.append("timestamp=" + timestamp + "&");
+        url.append("format=" + format + "&");
+        url.append("appkey=" + appkey + "&");
+        url.append("sign_method=" + sign_method + "&");
+        url.append("sign=" + this.makeSign(timestamp,method,xmlBody));
+        return url.toString();
+    }
+
     private String makeSign(String timestamp,String method, String  xmlBody) {
         StringBuilder toMd5 = new StringBuilder();
         toMd5.append(appsecret);
@@ -41,18 +54,5 @@ public class ApiService {
         toMd5.append(appsecret);
         String sign = DigestUtils.md5DigestAsHex(toMd5.toString().getBytes()).toUpperCase();
         return sign;
-    }
-
-    public String makeUrl(String method, String xmlBody ) {
-        String timestamp = DateUtil.format(new Date()).replace(" ","");
-        StringBuilder url = new StringBuilder(address);
-        url.append("method=" + method + "&");
-        url.append("sid=" + sid + "&");
-        url.append("timestamp=" + timestamp + "&");
-        url.append("format=" + format + "&");
-        url.append("appkey=" + appkey + "&");
-        url.append("sign_method=" + sign_method + "&");
-        url.append("sign=" + this.makeSign(timestamp,method,xmlBody));
-        return url.toString();
     }
 }
