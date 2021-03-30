@@ -1,6 +1,7 @@
 package com.tywh.kdt.api.httpclient;
 
 import com.tywh.kdt.api.pojo.HttpClientResult;
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -16,7 +17,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -72,7 +75,7 @@ public class HttpClientService implements BeanFactoryAware {
                 parameters.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
             }
             //防止post请求 中文乱码
-            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(parameters,"utf-8");
+            UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(parameters);
             httpPost.setEntity(formEntity);
         }
         try {
@@ -88,10 +91,12 @@ public class HttpClientService implements BeanFactoryAware {
     //post请求， xml参数
     public HttpClientResult doPost(String url, String xmlBody) throws IOException {
         HttpPost httpPost = new HttpPost(url);
+        httpPost.addHeader("Content-Type", "application/xml");
         httpPost.setConfig(this.requestConfig);
         CloseableHttpResponse response = null;
         try {
-            httpPost.setEntity(new StringEntity(xmlBody,"utf-8"));
+            StringEntity stringEntity = new StringEntity(xmlBody,"utf-8");
+            httpPost.setEntity(stringEntity);
             response = this.getHttpClient().execute(httpPost);
             return new HttpClientResult(EntityUtils.toString(response.getEntity(), "utf-8"), response.getStatusLine().getStatusCode());
         } finally {

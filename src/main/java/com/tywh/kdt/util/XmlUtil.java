@@ -12,7 +12,6 @@ public class XmlUtil {
 
         // 利用jdk中自带的转换类实现
         JAXBContext context = JAXBContext.newInstance(obj.getClass());
-
         Marshaller marshaller = context.createMarshaller();
 
 //        // 格式化xml输出的格式

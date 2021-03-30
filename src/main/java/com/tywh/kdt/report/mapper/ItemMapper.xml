@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
             and khbh &lt;> '2000000747') group by shum,dj,tsfljc) b on a.shum = b.shum and a.tsfljc = b.tsfljc
             and a.gjdj = b.dj where sxh not like 'W%'
-            and a.tsfljc not like '%联考%' and a.tsfljc not like '日历%' and a.tsfljc not like '赠品%' and a.tsfljc not like '宣传品%'
+            and a.tsfljc not like '%联考%' and a.tsfljc not like '赠品%' and a.tsfljc not like '宣传品%'
             <if test="bjbmmc != null and bjbmmc != ''">
                 and bmmc like '%' + #{bjbmmc} + '%'
             </if>
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         kjqj,sxh,kwbh from KucunView) t1
         <where>
             and kwbh = '00HG' AND kjqj >= '2020-01'
-            and tsfljc not like '%联考%' and tsfljc not like '日历%' and tsfljc not like '赠品%' and tsfljc not like '宣传品%'
+            and tsfljc not like '%联考%' and tsfljc not like '赠品%' and tsfljc not like '宣传品%'
             and sxh not like 'W%' group by shum,tsfljc,dj,kjqj
         </where>
     </select>

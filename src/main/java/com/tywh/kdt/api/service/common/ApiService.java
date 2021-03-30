@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 @Service
@@ -41,7 +42,7 @@ public class ApiService {
         return url.toString();
     }
 
-    private String makeSign(String timestamp,String method, String  xmlBody) {
+    private String makeSign(String timestamp,String method, String xmlBody) {
         StringBuilder toMd5 = new StringBuilder();
         toMd5.append(appsecret);
         toMd5.append("appkey" + appkey);
@@ -52,7 +53,16 @@ public class ApiService {
         toMd5.append("timestamp" + timestamp);
         toMd5.append(xmlBody);
         toMd5.append(appsecret);
-        String sign = DigestUtils.md5DigestAsHex(toMd5.toString().getBytes()).toUpperCase();
+//        String sign = DigestUtils.md5DigestAsHex(toMd5.toString().getBytes()).toUpperCase();
+
+        byte[] bytes = null;
+        try {
+            bytes = toMd5.toString().getBytes("utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        String sign = DigestUtils.md5DigestAsHex(bytes).toUpperCase();
         return sign;
     }
 }

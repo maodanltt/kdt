@@ -41,6 +41,7 @@ public class DbdServiceImpl implements DbdService {
     @Value("${wms.ownerCode}")
     private String ownerCode;
 
+
     @Override
     public List<String> createDbckXmlBodyList(String fhdbh) throws Exception {
         List<Dbd> list = this.dbdMapper.queryDbckList(fhdbh);
