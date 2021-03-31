@@ -34,6 +34,7 @@ public class DbdController {
             List<String> dbckXmlList = dbdService.createDbckXmlBodyList(fhdbh);
             for (String dbckXmlStr : dbckXmlList) {
                 String xmlBody = dbckXmlStr.replace(" ","");
+                //单据中的日期 必须有空格
                 String dbckUrl = apiService.makeUrl(dbck_method, xmlBody);
                 HttpClientResult result = httpClientService.doPost(dbckUrl, dbckXmlStr);
                 System.out.println("调拨出库----------------------------------------------》");

@@ -6,6 +6,8 @@ public class Goods {
 
     private String shum;
 
+    private Integer mbcs;
+
     private String zbh;
 
     private String shuh;
@@ -26,6 +28,14 @@ public class Goods {
 
     public void setShum(String shum) {
         this.shum = shum;
+    }
+
+    public Integer getMbcs() {
+        return mbcs;
+    }
+
+    public void setMbcs(Integer mbcs) {
+        this.mbcs = mbcs;
     }
 
     public String getZbh() {

@@ -25,14 +25,29 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping("/updateGoods")
-    public void updateGoods() throws IOException {
+    @RequestMapping("/addGoods")
+    public void updateGoods(String sxh) throws IOException {
 
-        Goods goods = goodsService.queryGoodsBySxh("19950025");
+        Goods goods = goodsService.queryGoodsBySxh(sxh);
         String method = "WDT_WMS_SINGLEITEM_SYNCHRONIZE";
-        String xmlBody = "<request><actionType>update</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode><item>" +
-                "<itemCode>19950025</itemCode><itemName>drmtest03</itemName><barCode>19950025</barCode>" +
-                "<itemType>ZC</itemType><extendProps><goodsprop2>9787123456789</goodsprop2></extendProps></item></request>";
+        String xmlBody = "<request><actionType>add</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode>" +
+                "<item>" +
+                "<itemCode>" + sxh + "</itemCode>" +
+                "<itemName>" + goods.getShum().replace(" ","") + "</itemName>" +
+                "<skuProperty>" + goods.getZbh().replace(" ","") + "</skuProperty>" +
+                "<pcs>" + goods.getMbcs() + "</pcs>" +
+                "<tagPrice_x0020_>" + goods.getGjdj() + "</tagPrice_x0020_>" +
+                "<retailPrice>" + goods.getGjdj()  + "</retailPrice>" +
+                "<costPrice_x0020_>" + goods.getGjdj()  + "</costPrice_x0020_>" +
+                "<purchasePrice_x0020_>" + goods.getGjdj()  + "</purchasePrice_x0020_>" +
+                "<barCode>" + sxh + "</barCode>" +
+                "<itemType>ZC</itemType>" +
+                "<extendProps>" + "" +
+                "<spec_property>" + goods.getMbcs() + "</spec_property>" +
+                "<goodsprop2>wg</goodsprop2>" + "" +
+                "</extendProps>" + "" +
+                "</item>" +
+                "</request>";
         String url = apiService.makeUrl(method, xmlBody);
         HttpClientResult result = httpClientService.doPost(url, xmlBody);
         System.out.println(result.getStatusCode());

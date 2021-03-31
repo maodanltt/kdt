@@ -58,7 +58,7 @@ public class DbdServiceImpl implements DbdService {
             deliveryOrder.setWarehouseCode(key);
             deliveryOrder.setCreateTime(DateUtil.format(new Date()));
             deliveryOrder.setOwnerCode(ownerCode);
-            deliveryOrder.setRemark(entry.getValue().get(0).getBz());
+            deliveryOrder.setRemark(entry.getValue().get(0).getBz().replace("，",",").replace(" ",""));
 
             ReceiverInfo receiverInfo = new ReceiverInfo(name, mobile, province, city, detailAddress);
             deliveryOrder.setReceiverInfo(receiverInfo);
@@ -99,7 +99,7 @@ public class DbdServiceImpl implements DbdService {
 
         EntryOrder entryOrder = new EntryOrder();
         entryOrder.setEntryOrderCode(list.get(0).getFhdbh());
-        entryOrder.setRemark(list.get(0).getBz());
+        entryOrder.setRemark(list.get(0).getBz().replace("，",",").replace(" ",""));
         entryOrder.setOrderType(dbrkOrderType);
         entryOrder.setOrderCreateTime(DateUtil.format(new Date()));
         entryOrder.setOwnerCode(ownerCode);
