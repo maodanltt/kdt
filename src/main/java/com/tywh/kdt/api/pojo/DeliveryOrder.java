@@ -3,6 +3,10 @@ package com.tywh.kdt.api.pojo;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * 封装WMS出库单接口信息
+ */
+
 @XmlType(propOrder = {"deliveryOrderCode","ownerCode","orderType","warehouseCode","createTime","remark","receiverInfo","senderInfo"})
 @XmlRootElement(name = "deliveryOrder")
 public class DeliveryOrder {

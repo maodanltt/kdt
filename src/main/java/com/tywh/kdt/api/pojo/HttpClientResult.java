@@ -1,6 +1,8 @@
 package com.tywh.kdt.api.pojo;
 
-//httpClient post请求，响应体
+/**
+ * httpClient 请求响应体
+ */
 public class HttpClientResult {
 
     private String body;

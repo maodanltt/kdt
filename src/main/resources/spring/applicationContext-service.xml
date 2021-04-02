@@ -5,4 +5,20 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.tywh.kdt.report.service,com.tywh.kdt.api.service"/>
+
+    <bean id="senderInfo" class="com.tywh.kdt.api.pojo.SenderInfo">
+        <property name="name" value="${commonInfo.name}"/>
+        <property name="mobile" value="${commonInfo.mobile}"/>
+        <property name="province" value="${commonInfo.province}"/>
+        <property name="city" value="${commonInfo.city}"/>
+        <property name="detailAddress" value="${commonInfo.detailAddress}"/>
+    </bean>
+
+    <bean id="receiverInfo" class="com.tywh.kdt.api.pojo.ReceiverInfo">
+        <property name="name" value="${commonInfo.name}"/>
+        <property name="mobile" value="${commonInfo.mobile}"/>
+        <property name="province" value="${commonInfo.province}"/>
+        <property name="city" value="${commonInfo.city}"/>
+        <property name="detailAddress" value="${commonInfo.detailAddress}"/>
+    </bean>
 </beans>

@@ -1,7 +1,6 @@
 package com.tywh.kdt.api.httpclient;
 
 import com.tywh.kdt.api.pojo.HttpClientResult;
-import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -17,10 +16,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -89,13 +84,13 @@ public class HttpClientService implements BeanFactoryAware {
     }
 
     //post请求， xml参数
-    public HttpClientResult doPost(String url, String xmlBody) throws IOException {
+    public HttpClientResult doPost(String url, String xml) throws IOException {
         HttpPost httpPost = new HttpPost(url);
         httpPost.addHeader("Content-Type", "application/xml");
         httpPost.setConfig(this.requestConfig);
         CloseableHttpResponse response = null;
         try {
-            StringEntity stringEntity = new StringEntity(xmlBody,"utf-8");
+            StringEntity stringEntity = new StringEntity(xml,"utf-8");
             httpPost.setEntity(stringEntity);
             response = this.getHttpClient().execute(httpPost);
             return new HttpClientResult(EntityUtils.toString(response.getEntity(), "utf-8"), response.getStatusLine().getStatusCode());

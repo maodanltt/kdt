@@ -1,5 +1,8 @@
 package com.tywh.kdt.api.pojo;
 
+/**
+ * 封装WMS接口发出人公共信息
+ */
 public class SenderInfo {
 
     private String name;
@@ -11,17 +14,6 @@ public class SenderInfo {
     private String city;
 
     private String detailAddress;
-
-    public SenderInfo() {
-    }
-
-    public SenderInfo(String name, String mobile, String province, String city, String detailAddress) {
-        this.name = name;
-        this.mobile = mobile;
-        this.province = province;
-        this.city = city;
-        this.detailAddress = detailAddress;
-    }
 
     public String getName() {
         return name;

@@ -1,5 +1,8 @@
 package com.tywh.kdt.api.pojo;
 
+/**
+ * 封装WMS订单明细
+ */
 public class OrderLine {
 
     private Integer orderLineNo;

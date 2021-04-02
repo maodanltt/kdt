@@ -15,6 +15,12 @@ import java.util.*;
 public class DbdServiceImpl implements DbdService {
 
     @Autowired
+    private ReceiverInfo receiverInfo;
+
+    @Autowired
+    private SenderInfo senderInfo;
+
+    @Autowired
     private DbdMapper dbdMapper;
 
     @Value("${orderType.dbck}")
@@ -23,30 +29,15 @@ public class DbdServiceImpl implements DbdService {
     @Value("${orderType.dbrk}")
     private String dbrkOrderType;
 
-    @Value("${commonInfo.name}")
-    private String name;
-
-    @Value("${commonInfo.mobile}")
-    private String mobile;
-
-    @Value("${commonInfo.province}")
-    private String province;
-
-    @Value("${commonInfo.city}")
-    private String city;
-
-    @Value("${commonInfo.detailAddress}")
-    private String detailAddress;
-
     @Value("${wms.ownerCode}")
     private String ownerCode;
 
 
     @Override
-    public List<String> createDbckXmlBodyList(String fhdbh) throws Exception {
+    public List<String> createDbckXmlList(String fhdbh) throws Exception {
         List<Dbd> list = this.dbdMapper.queryDbckList(fhdbh);
         Map<String, List<Dbd>> map = this.queryDbckMap(list);
-        List<String> xmlBodyList = new ArrayList<>();
+        List<String> xmlList = new ArrayList<>();
 
         for (Map.Entry<String, List<Dbd>> entry : map.entrySet()) {
             String key = entry.getKey();
@@ -59,14 +50,10 @@ public class DbdServiceImpl implements DbdService {
             deliveryOrder.setCreateTime(DateUtil.format(new Date()));
             deliveryOrder.setOwnerCode(ownerCode);
             deliveryOrder.setRemark(entry.getValue().get(0).getBz().replace("，",",").replace(" ",""));
-
-            ReceiverInfo receiverInfo = new ReceiverInfo(name, mobile, province, city, detailAddress);
             deliveryOrder.setReceiverInfo(receiverInfo);
-            SenderInfo senderInfo = new SenderInfo(name, mobile, province, city, detailAddress);
             deliveryOrder.setSenderInfo(senderInfo);
             String deliveryOrderXml = XmlUtil.objToXml(deliveryOrder);
 
-            int orderLineNo = 1;
             OrderLines orderLines = new OrderLines();
             List<OrderLine> orderLineList = new ArrayList<>();
 
@@ -83,19 +70,16 @@ public class DbdServiceImpl implements DbdService {
             orderLines.setOrderLine(orderLineList);
             String orderLinesXml = XmlUtil.objToXml(orderLines);
 
-            String xmlBody = "<request>" + deliveryOrderXml + orderLinesXml + "</request>";
-            xmlBodyList.add(xmlBody);
+            String xml = "<request>" + deliveryOrderXml + orderLinesXml + "</request>";
+            xmlList.add(xml);
 
         }
-        return xmlBodyList;
+        return xmlList;
     }
 
     @Override
-    public String createDbrkXmlBody(String fhdbh) throws Exception {
+    public String createDbrkXml(String fhdbh) throws Exception {
         List<Dbd> list = this.dbdMapper.queryDbrkList(fhdbh);
-
-        ReceiverInfo receiverInfo = new ReceiverInfo(name, mobile, province, city, detailAddress);
-        SenderInfo senderInfo = new SenderInfo(name, mobile, province, city, detailAddress);
 
         EntryOrder entryOrder = new EntryOrder();
         entryOrder.setEntryOrderCode(list.get(0).getFhdbh());
@@ -123,8 +107,7 @@ public class DbdServiceImpl implements DbdService {
         }
         orderLines.setOrderLine(orderLineList);
         String orderLinesXml = XmlUtil.objToXml(orderLines);
-        String xmlBody = "<request>" + entryOrderXml + orderLinesXml + "</request>";
-        return xmlBody;
+        return "<request>" + entryOrderXml + orderLinesXml + "</request>";
     }
 
     //查询科迪通调拨单，按出库库位是否相同封装到MAP中

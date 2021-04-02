@@ -7,8 +7,8 @@ import java.util.Map;
 
 public interface DbdService {
 
-    List<String> createDbckXmlBodyList(String fhdbh) throws Exception;
+    List<String> createDbckXmlList(String fhdbh) throws Exception;
 
-    String createDbrkXmlBody(String fhdbh) throws Exception;
+    String createDbrkXml(String fhdbh) throws Exception;
 
 }

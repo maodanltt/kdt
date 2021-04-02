@@ -1,7 +1,8 @@
 package com.tywh.kdt.api.pojo;
 
-import java.util.Date;
-
+/**
+ * 封装科迪通数据库查询出的调拨单信息
+ */
 public class Dbd {
 
     private String fhdbh;

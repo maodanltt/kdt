@@ -25,12 +25,12 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping("/addGoods")
+    @RequestMapping("/add")
     public void updateGoods(String sxh) throws IOException {
 
         Goods goods = goodsService.queryGoodsBySxh(sxh);
         String method = "WDT_WMS_SINGLEITEM_SYNCHRONIZE";
-        String xmlBody = "<request><actionType>add</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode>" +
+        String xml = "<request><actionType>add</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode>" +
                 "<item>" +
                 "<itemCode>" + sxh + "</itemCode>" +
                 "<itemName>" + goods.getShum().replace(" ","") + "</itemName>" +
@@ -48,10 +48,10 @@ public class GoodsController {
                 "</extendProps>" + "" +
                 "</item>" +
                 "</request>";
-        String url = apiService.makeUrl(method, xmlBody);
-        HttpClientResult result = httpClientService.doPost(url, xmlBody);
-        System.out.println(result.getStatusCode());
-        System.out.println(result.getBody());
+        String url = apiService.makeUrl(method, xml);
+        HttpClientResult result = httpClientService.doPost(url, xml);
+//        System.out.println(result.getStatusCode());
+//        System.out.println(result.getBody());
     }
 
     @RequestMapping("/test")
