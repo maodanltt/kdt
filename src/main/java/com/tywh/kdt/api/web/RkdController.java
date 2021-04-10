@@ -33,23 +33,35 @@ public class RkdController {
     public void push() {
 
         String method = "WDT_WMS_ENTRYORDER_CREATE";
-        String dh = "RKTZ202104020002";
+        String dh = "RKTZ202104070010";
         String warehouseCode = "00TH";
-        List<Goods> list = Arrays.asList(new Goods("20170312",2),
-                new Goods("20170364",3),
-                new Goods("20170405",3),
-                new Goods("20192058",1),
-//                new Goods("20200775",31),
-//                new Goods("W0001142",31),
-//                new Goods("W0001143",31),
-                new Goods("20200775",1));
+        List<Goods> list = Arrays.asList(new Goods("A10067",1131)
+//                new Goods("20174286",659),
+//                new Goods("20174285",678),
+//                new Goods("20174284",657),
+//                new Goods("20173052",670),
+//                new Goods("20171894",1562),
+//                new Goods("20171675",2003),
+//                new Goods("20171286",6),
+//                new Goods("20202234",3),
+//                new Goods("20201968",12),
+//                new Goods("20201318",20),
+//                new Goods("20201299",11),
+//                new Goods("20200804",1),
+//                new Goods("20200802",1),
+//                new Goods("20200435",137),
+//                new Goods("20200433",30),
+//                new Goods("20200067",90),
+//                new Goods("20171286",4373)
+
+        );
 
         try {
             String xml = rkdService.createXml(dh,warehouseCode,list);
             String url = apiService.makeUrl(method, xml.replace(" ",""));
             HttpClientResult result = httpClientService.doPost(url, xml);
-//            System.out.println(result.getStatusCode());
-//            System.out.println(result.getBody());
+            System.out.println(result.getStatusCode());
+            System.out.println(result.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }

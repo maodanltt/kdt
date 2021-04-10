@@ -21,7 +21,7 @@ public class CancelController {
     private HttpClientService httpClientService;
 
     @RequestMapping("/cancel")
-    public void cancel(String orderCode, String warehouseCode) {
+    public void cancel(String orderCode, String warehouseCode, String orderType) {
 
         String method = "WDT_WMS_ORDER_CANCEL";
         StringBuilder builder = new StringBuilder();
@@ -32,15 +32,17 @@ public class CancelController {
         builder.append("<orderCode>");
         builder.append(orderCode);
         builder.append("</orderCode>");
-        builder.append("<orderType>JYCK</orderType>");
+        builder.append("<orderType>");
+        builder.append(orderType);
+        builder.append("</orderType>");
         builder.append("</request>");
         String xml = builder.toString();
         String url = apiService.makeUrl(method, xml);
         try {
             HttpClientResult result = httpClientService.doPost(url, xml);
-//            System.out.println("接口取消服务----------------------------------------------》");
-//            System.out.println(result.getStatusCode());
-//            System.out.println(result.getBody());
+            System.out.println("接口取消服务----------------------------------------------》");
+            System.out.println(result.getStatusCode());
+            System.out.println(result.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
