@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tywh.kdt.api.mapper.CgrkMapper">
+
+    <select id="queryCgrkList" parameterType="string" resultType="dbd">
+        select rkdbh fhdbh,sxh,sum(cs) cs,kwbh from rkmxview where rkdbh = #{rkdbh} and fhzt = '已发'
+        group by rkdbh,sxh,kwbh
+    </select>
+</mapper>

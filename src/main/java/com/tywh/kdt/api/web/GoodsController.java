@@ -26,9 +26,13 @@ public class GoodsController {
     private GoodsService goodsService;
 
     @RequestMapping("/add")
-    public void updateGoods(String sxh) throws IOException {
+    public void add(String sxh) throws IOException {
 
         Goods goods = goodsService.queryGoodsBySxh(sxh);
+        String shuh = "";
+        if (goods.getShuh().contains("ISBN") || goods.getShuh().contains("978")) {
+            shuh = goods.getShuh().replace("ISBN","").replace(" ","").replace("-","");
+        }
         String method = "WDT_WMS_SINGLEITEM_SYNCHRONIZE";
         String xml = "<request><actionType>add</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode>" +
                 "<item>" +
@@ -42,10 +46,43 @@ public class GoodsController {
                 "<purchasePrice_x0020_>" + goods.getGjdj()  + "</purchasePrice_x0020_>" +
                 "<barCode>" + sxh + "</barCode>" +
                 "<itemType>ZC</itemType>" +
-                "<extendProps>" + "" +
+                "<extendProps>" +
                 "<spec_property>" + goods.getMbcs() + "</spec_property>" +
-                "<goodsprop2>wg</goodsprop2>" + "" +
-                "</extendProps>" + "" +
+                "<goodsprop2>" + shuh + "</goodsprop2>" +
+                "</extendProps>" +
+                "</item>" +
+                "</request>";
+        String url = apiService.makeUrl(method, xml);
+        HttpClientResult result = httpClientService.doPost(url, xml);
+//        System.out.println(result.getStatusCode());
+//        System.out.println(result.getBody());
+    }
+
+    @RequestMapping("/update")
+    public void update(String sxh) throws IOException {
+
+        Goods goods = goodsService.queryGoodsBySxh(sxh);
+        String shuh = "";
+        if (goods.getShuh().contains("ISBN") || goods.getShuh().contains("978")) {
+            shuh = goods.getShuh().replace("ISBN","").replace(" ","").replace("-","");
+        }
+        String method = "WDT_WMS_SINGLEITEM_SYNCHRONIZE";
+        String xml = "<request><actionType>update</actionType><ownerCode>tianyiWMS</ownerCode><warehouseCode>00HG</warehouseCode>" +
+                "<item>" +
+                "<itemCode>" + sxh + "</itemCode>" +
+                "<itemName>" + goods.getShum().replace(" ","") + "</itemName>" +
+                "<skuProperty>" + goods.getZbh().replace(" ","") + "</skuProperty>" +
+                "<pcs>" + goods.getMbcs() + "</pcs>" +
+                "<tagPrice_x0020_>" + goods.getGjdj() + "</tagPrice_x0020_>" +
+                "<retailPrice>" + goods.getGjdj()  + "</retailPrice>" +
+                "<costPrice_x0020_>" + goods.getGjdj()  + "</costPrice_x0020_>" +
+                "<purchasePrice_x0020_>" + goods.getGjdj()  + "</purchasePrice_x0020_>" +
+                "<barCode>" + sxh + "</barCode>" +
+                "<itemType>ZC</itemType>" +
+                "<extendProps>" +
+                "<spec_property>" + goods.getMbcs() + "</spec_property>" +
+                "<goodsprop2>" + shuh + "</goodsprop2>" +
+                "</extendProps>" +
                 "</item>" +
                 "</request>";
         String url = apiService.makeUrl(method, xml);

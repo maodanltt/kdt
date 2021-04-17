@@ -40,9 +40,9 @@ public class CancelController {
         String url = apiService.makeUrl(method, xml);
         try {
             HttpClientResult result = httpClientService.doPost(url, xml);
-            System.out.println("接口取消服务----------------------------------------------》");
-            System.out.println(result.getStatusCode());
-            System.out.println(result.getBody());
+//            System.out.println("接口取消服务----------------------------------------------》");
+//            System.out.println(result.getStatusCode());
+//            System.out.println(result.getBody());
         } catch (Exception e) {
             e.printStackTrace();
         }
