@@ -33,13 +33,13 @@ public class RkdController {
     public void rktz() {
 
         String method = "WDT_WMS_ENTRYORDER_CREATE";
-        String dh = "CGRK20210000016";
-        String warehouseCode = "00BF";
-        List<Goods> list = Arrays.asList(new Goods("W0000771",300),
-                new Goods("W0000772",300),
-                new Goods("W0000773",300),
-                new Goods("W0000774",300),
-                new Goods("W0000775",300),
+        String dh = "PD2021000000005";
+        String warehouseCode = "00HG";
+        List<Goods> list = Arrays.asList(new Goods("20173264",9728)
+//                new Goods("W0000772",300),
+//                new Goods("W0000773",300),
+//                new Goods("W0000774",300),
+//                new Goods("W0000775",300),
 //                new Goods("20171894",1562),
 //                new Goods("20171675",2003),
 //                new Goods("20171286",6),
@@ -52,7 +52,7 @@ public class RkdController {
 //                new Goods("20200435",137),
 //                new Goods("20200433",30),
 //                new Goods("20200067",90),
-                new Goods("W0000776",300)
+//                new Goods("20202128",2)
 
         );
 
@@ -80,7 +80,7 @@ public class RkdController {
         try {
             String xml = rkdService.createCgrkXml(dh);
             String url = apiService.makeUrl(method, xml.replace(" ",""));
-//            HttpClientResult result = httpClientService.doPost(url, xml);
+            HttpClientResult result = httpClientService.doPost(url, xml);
 //            System.out.println(result.getStatusCode());
 //            System.out.println(result.getBody());
         } catch (Exception e) {
