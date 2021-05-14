@@ -49,6 +49,7 @@ public class GoodsController {
                 "<extendProps>" +
                 "<spec_property>" + goods.getMbcs() + "</spec_property>" +
                 "<goodsprop2>" + shuh + "</goodsprop2>" +
+                "<specprop2>" + shuh + "</specprop2>" +  //单品的自定义属性2
                 "</extendProps>" +
                 "</item>" +
                 "</request>";
@@ -82,13 +83,14 @@ public class GoodsController {
                 "<extendProps>" +
                 "<spec_property>" + goods.getMbcs() + "</spec_property>" +
                 "<goodsprop2>" + shuh + "</goodsprop2>" +
+                "<specprop2>" + shuh + "</specprop2>" +  //单品的自定义属性2
                 "</extendProps>" +
                 "</item>" +
                 "</request>";
         String url = apiService.makeUrl(method, xml);
         HttpClientResult result = httpClientService.doPost(url, xml);
-//        System.out.println(result.getStatusCode());
-//        System.out.println(result.getBody());
+        System.out.println(result.getStatusCode());
+        System.out.println(result.getBody());
     }
 
     @RequestMapping("/test")
