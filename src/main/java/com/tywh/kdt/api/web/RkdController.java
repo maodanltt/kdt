@@ -29,35 +29,15 @@ public class RkdController {
     @Autowired
     private RkdService rkdService;
 
-    @RequestMapping("/rktz")
-    public void rktz() {
+    @RequestMapping("/cytz")
+    public void rktz(String dh, String sxh, Integer cs,String warehouseCode) {
 
         String method = "WDT_WMS_ENTRYORDER_CREATE";
-        String dh = "PD2021000000005";
-        String warehouseCode = "00HG";
-        List<Goods> list = Arrays.asList(new Goods("20173264",9728)
-//                new Goods("W0000772",300),
-//                new Goods("W0000773",300),
-//                new Goods("W0000774",300),
-//                new Goods("W0000775",300),
-//                new Goods("20171894",1562),
-//                new Goods("20171675",2003),
-//                new Goods("20171286",6),
-//                new Goods("20202234",3),
-//                new Goods("20201968",12),
-//                new Goods("20201318",20),
-//                new Goods("20201299",11),
-//                new Goods("20200804",1),
-//                new Goods("20200802",1),
-//                new Goods("20200435",137),
-//                new Goods("20200433",30),
-//                new Goods("20200067",90),
-//                new Goods("20202128",2)
-
-        );
+        List<Goods> list = Arrays.asList(new Goods(sxh,cs));
 
         try {
-            String xml = rkdService.createXml(dh,warehouseCode,list);
+            String bz = "调整差异";
+            String xml = rkdService.createXml(dh,warehouseCode,list,bz);
             String url = apiService.makeUrl(method, xml.replace(" ",""));
             HttpClientResult result = httpClientService.doPost(url, xml);
 //            System.out.println(result.getStatusCode());
@@ -79,6 +59,22 @@ public class RkdController {
 
         try {
             String xml = rkdService.createCgrkXml(dh);
+            String url = apiService.makeUrl(method, xml.replace(" ",""));
+            HttpClientResult result = httpClientService.doPost(url, xml);
+//            System.out.println(result.getStatusCode());
+//            System.out.println(result.getBody());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/shrk")
+    public void shrk(String dh) {
+
+        String method = "WDT_WMS_ENTRYORDER_CREATE";
+
+        try {
+            String xml = rkdService.createShrkXml(dh);
             String url = apiService.makeUrl(method, xml.replace(" ",""));
             HttpClientResult result = httpClientService.doPost(url, xml);
 //            System.out.println(result.getStatusCode());

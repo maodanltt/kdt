@@ -1,6 +1,6 @@
 package com.tywh.kdt.api.service.impl;
 
-import com.tywh.kdt.api.mapper.CgrkMapper;
+import com.tywh.kdt.api.mapper.RkMapper;
 import com.tywh.kdt.api.pojo.*;
 import com.tywh.kdt.api.service.RkdService;
 import com.tywh.kdt.util.DateUtil;
@@ -27,14 +27,14 @@ public class RkdServiceImpl implements RkdService {
     private String ownerCode;
 
     @Autowired
-    private CgrkMapper cgrkMapper;
+    private RkMapper rkMapper;
 
     @Override
-    public String createXml(String dh,String warehouseCode,List<Goods> list) throws Exception {
+    public String createXml(String dh,String warehouseCode,List<Goods> list,String bz) throws Exception {
 
         EntryOrder entryOrder = new EntryOrder();
         entryOrder.setEntryOrderCode(dh);
-        entryOrder.setRemark("科迪通采购入库");
+        entryOrder.setRemark(bz);
         entryOrder.setOrderType(orderType);
         entryOrder.setOrderCreateTime(DateUtil.format(new Date()));
         entryOrder.setOwnerCode(ownerCode);
@@ -63,11 +63,44 @@ public class RkdServiceImpl implements RkdService {
 
     @Override
     public String createCgrkXml(String dh) throws Exception {
-        List<Dbd> cgrkList = cgrkMapper.queryCgrkList(dh);
+        List<Dbd> cgrkList = rkMapper.queryRkList(dh);
 
         EntryOrder entryOrder = new EntryOrder();
         entryOrder.setEntryOrderCode(dh);
         entryOrder.setRemark("科迪通采购入库");
+        entryOrder.setOrderType(orderType);
+        entryOrder.setOrderCreateTime(DateUtil.format(new Date()));
+        entryOrder.setOwnerCode(ownerCode);
+        entryOrder.setWarehouseCode(cgrkList.get(0).getKwbh());
+        entryOrder.setReceiverInfo(receiverInfo);
+        entryOrder.setSenderInfo(senderInfo);
+
+        String entryOrderXml = XmlUtil.objToXml(entryOrder);
+
+        OrderLines orderLines = new OrderLines();
+        List<OrderLine> orderLineList = new ArrayList<>();
+        int i = 1;
+        for (Dbd dbd : cgrkList) {
+            OrderLine orderLine = new OrderLine();
+            orderLine.setOwnerCode(ownerCode);
+            orderLine.setOrderLineNo(i);
+            orderLine.setItemCode(dbd.getSxh());
+            orderLine.setPlanQty(dbd.getCs());
+            orderLineList.add(orderLine);
+            i++;
+        }
+        orderLines.setOrderLine(orderLineList);
+        String orderLinesXml = XmlUtil.objToXml(orderLines);
+        return "<request>" + entryOrderXml + orderLinesXml + "</request>";
+    }
+
+    @Override
+    public String createShrkXml(String dh) throws Exception {
+        List<Dbd> cgrkList = rkMapper.queryRkList(dh);
+
+        EntryOrder entryOrder = new EntryOrder();
+        entryOrder.setEntryOrderCode(dh);
+        entryOrder.setRemark("科迪通损耗入库");
         entryOrder.setOrderType(orderType);
         entryOrder.setOrderCreateTime(DateUtil.format(new Date()));
         entryOrder.setOwnerCode(ownerCode);

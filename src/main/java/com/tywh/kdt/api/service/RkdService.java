@@ -13,7 +13,7 @@ public interface RkdService {
      * @return
      * @throws Exception
      */
-    String createXml(String dh, String warehouseCode, List<Goods> list) throws Exception;
+    String createXml(String dh, String warehouseCode, List<Goods> list,String bz) throws Exception;
 
     /**
      * 科迪通采购入库单
@@ -22,4 +22,12 @@ public interface RkdService {
      * @throws Exception
      */
     String createCgrkXml(String dh) throws Exception;
+
+    /**
+     * 科迪通损耗入库
+     * @param dh
+     * @return
+     * @throws Exception
+     */
+    String createShrkXml(String dh) throws Exception;
 }

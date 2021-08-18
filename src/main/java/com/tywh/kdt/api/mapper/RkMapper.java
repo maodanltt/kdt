@@ -4,7 +4,7 @@ import com.tywh.kdt.api.pojo.Dbd;
 
 import java.util.List;
 
-public interface CgrkMapper {
+public interface RkMapper {
 
-    List<Dbd> queryCgrkList(String dh) throws Exception;
+    List<Dbd> queryRkList(String dh) throws Exception;
 }
