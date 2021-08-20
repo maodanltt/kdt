@@ -8,6 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from candidate
     </select>
 
+    <insert id="add" parameterType="candidate">
+        insert into candidate(id,createdate,username,sitename,candidate,jobtitle,jobtype,mobile,communication,appointdate,
+        appointtime,onepattern,onepass,oneremark,secondpattern,secondpass,secondremark,offered,entry,remark)
+        values
+        (#{id},#{createdate},#{username},#{sitename},#{candidate},#{jobtitle},#{jobtype},#{mobile},#{communication},#{appointdate},
+         #{appointtime},#{onepattern},#{onepass},#{oneremark},#{secondpattern},#{secondpass},#{secondremark},#{offered},#{entry},#{remark})
+    </insert>
+
 </mapper>
 
 

@@ -8,5 +8,5 @@ public interface CandidateMapper {
 
     List<Candidate> queryCandidateList() throws Exception;
 
-
+    void add(Candidate candidate) throws Exception;
 }

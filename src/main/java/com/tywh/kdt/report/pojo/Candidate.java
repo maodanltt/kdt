@@ -10,22 +10,17 @@ public class Candidate {
     private String jobtitle;
     private String jobtype;
     private String mobile;
-    private String baseremark;
+    private String communication;
     private String appointdate;
     private String appointtime;
-    private Integer oneface;
-    private String oneofficer;
-    private Integer onevideo;
+    private Integer onepattern;
     private Integer onepass;
     private String oneremark;
-    private Integer secondface;
-    private String secondofficer;
-    private Integer secondvedio;
+    private Integer secondpattern;
     private Integer secondpass;
     private String secondremark;
     private Integer offered;
-    private String effdate;
-    private String reason;
+    private Integer entry;
     private String remark;
 
     public Integer getId() {
@@ -92,12 +87,12 @@ public class Candidate {
         this.mobile = mobile;
     }
 
-    public String getBaseremark() {
-        return baseremark;
+    public String getCommunication() {
+        return communication;
     }
 
-    public void setBaseremark(String baseremark) {
-        this.baseremark = baseremark;
+    public void setCommunication(String communication) {
+        this.communication = communication;
     }
 
     public String getAppointdate() {
@@ -116,28 +111,12 @@ public class Candidate {
         this.appointtime = appointtime;
     }
 
-    public Integer getOneface() {
-        return oneface;
+    public Integer getOnepattern() {
+        return onepattern;
     }
 
-    public void setOneface(Integer oneface) {
-        this.oneface = oneface;
-    }
-
-    public String getOneofficer() {
-        return oneofficer;
-    }
-
-    public void setOneofficer(String oneofficer) {
-        this.oneofficer = oneofficer;
-    }
-
-    public Integer getOnevideo() {
-        return onevideo;
-    }
-
-    public void setOnevideo(Integer onevideo) {
-        this.onevideo = onevideo;
+    public void setOnepattern(Integer onepattern) {
+        this.onepattern = onepattern;
     }
 
     public Integer getOnepass() {
@@ -156,28 +135,12 @@ public class Candidate {
         this.oneremark = oneremark;
     }
 
-    public Integer getSecondface() {
-        return secondface;
+    public Integer getSecondpattern() {
+        return secondpattern;
     }
 
-    public void setSecondface(Integer secondface) {
-        this.secondface = secondface;
-    }
-
-    public String getSecondofficer() {
-        return secondofficer;
-    }
-
-    public void setSecondofficer(String secondofficer) {
-        this.secondofficer = secondofficer;
-    }
-
-    public Integer getSecondvedio() {
-        return secondvedio;
-    }
-
-    public void setSecondvedio(Integer secondvedio) {
-        this.secondvedio = secondvedio;
+    public void setSecondpattern(Integer secondpattern) {
+        this.secondpattern = secondpattern;
     }
 
     public Integer getSecondpass() {
@@ -204,20 +167,12 @@ public class Candidate {
         this.offered = offered;
     }
 
-    public String getEffdate() {
-        return effdate;
+    public Integer getEntry() {
+        return entry;
     }
 
-    public void setEffdate(String effdate) {
-        this.effdate = effdate;
-    }
-
-    public String getReason() {
-        return reason;
-    }
-
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setEntry(Integer entry) {
+        this.entry = entry;
     }
 
     public String getRemark() {

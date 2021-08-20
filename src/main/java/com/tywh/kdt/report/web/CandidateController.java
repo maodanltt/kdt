@@ -5,9 +5,11 @@ import com.tywh.kdt.report.pojo.ResultCandidate;
 import com.tywh.kdt.report.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -31,5 +33,11 @@ public class CandidateController {
         ResultCandidate resultCandidate = new ResultCandidate();
         resultCandidate.setList(list);
         return resultCandidate;
+    }
+
+    @RequestMapping("/add")
+    public void add(@RequestBody Candidate candidate) throws Exception{
+
+        this.candidateService.add(candidate);
     }
 }
