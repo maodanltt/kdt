@@ -23,7 +23,7 @@ public class CandidateServiceImpl implements CandidateService {
 
     @Override
     public void add(Candidate candidate) throws Exception {
-        candidate.setId(2);
+        candidate.setId(null);
         candidate.setCreatedate(DateUtil.format(new Date(),"yyyy-MM-dd"));
         this.candidateMapper.add(candidate);
     }

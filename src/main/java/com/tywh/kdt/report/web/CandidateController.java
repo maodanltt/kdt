@@ -36,8 +36,8 @@ public class CandidateController {
     }
 
     @RequestMapping("/add")
-    public void add(@RequestBody Candidate candidate) throws Exception{
-
+    public void add(Candidate candidate) throws Exception{
+        String str = "test";
         this.candidateService.add(candidate);
     }
 }

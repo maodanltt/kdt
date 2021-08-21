@@ -20,23 +20,23 @@
                 $.ajax({
                     url : "/hr/candidate/add.do",
                     data : {
-                        "username" : $.trim($("#username").val()),
-                        "sitename" : $.trim($("#sitename").val()),
-                        "candidate" : $.trim($("#candidate").val()),
-                        "jobtitle" : $.trim($("#jobtitle").val()),
-                        "mobile" : $.trim($("#mobile").val()),
-                        "appointdate" : $.trim($("#appointdate").val()),
-                        "appointtime" : $.trim($("#appointtime").val()),
-                        "communication" : $.trim($("#communication").val()),
-                        "onepattern" : $.trim($("#onepattern").val()),
-                        "onepass" : $.trim($("#onepass").val()),
-                        "oneremark" : $.trim($("#oneremark").val()),
-                        "secondpattern" : $.trim($("#secondpattern").val()),
-                        "secondpass" : $.trim($("#secondpass").val()),
-                        "secondremark" : $.trim($("#secondremark").val()),
-                        "offerd" : $.trim($("#offerd").val()),
-                        "entry" : $.trim($("#entry").val()),
-                        "remark" : $.trim($("#remark").val()),
+                        "username" : $.trim($("#add-username").val()),
+                        "sitename" : $.trim($("#add-sitename").val()),
+                        "candidate" : $.trim($("#add-candidate").val()),
+                        "jobtitle" : $.trim($("#add-jobtitle").val()),
+                        "mobile" : $.trim($("#add-mobile").val()),
+                        "appointdate" : $.trim($("#add-appointdate").val()),
+                        "appointtime" : $.trim($("#add-appointtime").val()),
+                        "communication" : $.trim($("#add-communication").val()),
+                        "onepattern" : $.trim($("#add-onepattern").val()),
+                        "onepass" : $.trim($("#add-onepass").val()),
+                        "oneremark" : $.trim($("#add-oneremark").val()),
+                        "secondpattern" : $.trim($("#add-secondpattern").val()),
+                        "secondpass" : $.trim($("#add-secondpass").val()),
+                        "secondremark" : $.trim($("#add-secondremark").val()),
+                        "offerd" : $.trim($("#add-offerd").val()),
+                        "entry" : $.trim($("#add-entry").val()),
+                        "remark" : $.trim($("#add-remark").val()),
                     },
                     type : "post",
                     dataType : "json",
@@ -51,23 +51,23 @@
             })
 
             $("#search").click(function () {
-                if ($.trim($("#startdate").val()) == '') {
+                if ($.trim($("#query-startdate").val()) == '') {
                     alert("开始日期必须输入");
-                    $("#startdate").focus();
+                    $("#query-startdate").focus();
                     return false;
                 }
-                if ($.trim($("#enddate").val()) == '') {
+                if ($.trim($("#query-enddate").val()) == '') {
                     alert("结束日期必须输入");
-                    $("#enddate").focus();
+                    $("#query-enddate").focus();
                     return false;
                 }
                 $.ajax({
                     url : "/hr/candidate/list.do",
                     data : {
-                        "username" : $.trim($("#username").val()),
-                        "candidate" : $.trim($("#candidate").val()),
-                        "startdate" : $.trim($("#startdate").val()),
-                        "enddate" : $.trim($("#enddate").val()),
+                        "username" : $.trim($("#query-username").val()),
+                        "candidate" : $.trim($("#query-candidate").val()),
+                        "startdate" : $.trim($("#query-startdate").val()),
+                        "enddate" : $.trim($("#query-enddate").val()),
                     },
                     type : "post",
                     dataType : "json",
@@ -84,6 +84,15 @@
                             tbodyHtml += '<td>' + item.mobile +'</td>';
                             tbodyHtml += '<td>' + item.appointdate +'</td>';
                             tbodyHtml += '<td>' + item.appointtime +'</td>';
+                            tbodyHtml += '<td>' + item.onepattern +'</td>';
+                            tbodyHtml += '<td>' + item.onepass +'</td>';
+                            tbodyHtml += '<td>' + item.oneremark +'</td>';
+                            tbodyHtml += '<td>' + item.secondpattern +'</td>';
+                            tbodyHtml += '<td>' + item.secondpass +'</td>';
+                            tbodyHtml += '<td>' + item.secondremark +'</td>';
+                            tbodyHtml += '<td>' + item.offered +'</td>';
+                            tbodyHtml += '<td>' + item.entry +'</td>';
+                            tbodyHtml += '<td>' + item.remark +'</td>';
                             tbodyHtml += '</tr>';
 
                         })
@@ -122,7 +131,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">登记人<span style="font-size: 10px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="username" style="font-size: 10px">
+                            <select class="form-control" id="add-username" style="font-size: 10px">
                                 <option></option>
                                 <option value="左传茹">左传茹</option>
                                 <option value="张翠环">张翠环</option>
@@ -131,7 +140,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">来源<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="sitename" style="font-size: 10px">
+                            <select class="form-control" id="add-sitename" style="font-size: 10px">
                                 <option></option>
                                 <option value="智联">智联</option>
                                 <option value="boss">boss</option>
@@ -145,30 +154,30 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">姓名<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" name="candidate" style="font-size: 10px">
+                            <input type="text" class="form-control" id="add-candidate" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">岗位<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" name="jobtitle" style="font-size: 10px">
+                            <input type="text" class="form-control" id="add-jobtitle" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">电话<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" name="mobile" style="font-size: 10px">
+                            <input type="text" class="form-control" id="add-mobile" style="font-size: 10px">
                         </div>
 
                         <label class="col-sm-1 control-label" style="font-size: 10px">预约日期</label>
                         <div class="col-sm-10" style="width: 150px;">
-                            <input type="date" class="form-control" name="appointdate" style="font-size: 10px">
+                            <input type="date" class="form-control" id="add-appointdate" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">时间</label>
                         <div class="col-sm-10" style="width: 150px;">
-                            <input type="time" class="form-control" name="appointtime" style="font-size: 10px">
+                            <input type="time" class="form-control" id="add-appointtime" style="font-size: 10px">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">沟通情况</label>
                         <div class="col-sm-10" style="width: 90%;">
-                            <textarea class="form-control" rows="3" name="communication" style="font-size: 10px"></textarea>
+                            <textarea class="form-control" rows="3" id="add-communication" style="font-size: 10px"></textarea>
                         </div>
                     </div>
 
@@ -176,7 +185,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="onepattern" style="font-size: 10px">
+                            <select class="form-control" id="add-onepattern" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">视频</option>
                                 <option value="1">面谈</option>
@@ -184,7 +193,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="onepass" style="font-size: 10px">
+                            <select class="form-control" id="add-onepass" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -194,14 +203,14 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
                         <div class="col-sm-10" style="width: 90%;">
-                            <textarea class="form-control" rows="3" name="oneremark" style="font-size: 10px"></textarea>
+                            <textarea class="form-control" rows="3" id="add-oneremark" style="font-size: 10px"></textarea>
                         </div>
                     </div>
                     <h5 class="modal-title" id="myModalLabel4" style="font-size: 15px; color: blue">复试情况</h5><hr>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="secondpattern" style="font-size: 10px">
+                            <select class="form-control" id="add-secondpattern" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">视频</option>
                                 <option value="1">面谈</option>
@@ -209,7 +218,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="secondpass" style="font-size: 10px">
+                            <select class="form-control" id="add-secondpass" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -219,7 +228,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
                         <div class="col-sm-10" style="width: 90%;">
-                            <textarea class="form-control" rows="3" name="secondremark" style="font-size: 10px"></textarea>
+                            <textarea class="form-control" rows="3" id="add-secondremark" style="font-size: 10px"></textarea>
                         </div>
                     </div>
 
@@ -227,7 +236,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">发放offer</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="offered" style="font-size: 10px">
+                            <select class="form-control" id="add-offered" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -236,7 +245,7 @@
 
                         <label class="col-sm-1 control-label" style="font-size: 10px">入职报到</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" name="entry" style="font-size: 10px">
+                            <select class="form-control" id="add-entry" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -246,7 +255,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
                         <div class="col-sm-10" style="width: 90%;">
-                            <textarea class="form-control" rows="3" name="remark" style="font-size: 10px"></textarea>
+                            <textarea class="form-control" rows="3" id="add-remark" style="font-size: 10px"></textarea>
                         </div>
                     </div>
                 </form>
@@ -268,21 +277,21 @@
                         <div class="input-group-addon" style="color: blue">
                             登记人
                         </div>
-                        <input class="form-control" type="text" name="username" id="username">
+                        <input class="form-control" type="text" id="query-username">
                     </div>
                 </div>
 
                 <div class="form-group col-xs-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">应聘人姓名</div>
-                        <input class="form-control" type="text" name="candidate" id="candidate">
+                        <input class="form-control" type="text" id="query-candidate">
                     </div>
                 </div>
 
                 <div class="form-group col-xs-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">岗位分类</div>
-                        <input class="form-control" type="text" name="jobtype" id="jobtype">
+                        <input class="form-control" type="text" id="query-jobtype">
                     </div>
                 </div>
             </div>
@@ -290,13 +299,13 @@
                 <div class="form-group col-xs-3 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">开始日期</div>
-                        <input class="form-control" type="date" name="startdate" id="startdate">
+                        <input class="form-control" type="date" id="query-startdate">
                     </div>
                 </div>
                 <div class="form-group col-xs-3 col-md-3">
                     <div class="input-group" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">结束日期</div>
-                        <input class="form-control" type="date" name="enddate" id="enddate">
+                        <input class="form-control" type="date" id="query-enddate">
                     </div>
                 </div>
                 <div class="form-group col-xs-1">
@@ -327,16 +336,14 @@
                 <td>电话</td>
                 <td>预约日期</td>
                 <td>预约时间</td>
-                <td>到面</td>
-                <td>视频</td>
-                <td>面试官</td>
+                <td>形式</td>
                 <td>通过</td>
-                <td>视频</td>
-                <td>面试官</td>
+                <td>备注</td>
+                <td>形式</td>
                 <td>通过</td>
+                <td>备注</td>
                 <td>愿意入职</td>
-                <td>报道时间</td>
-                <td>原因</td>
+                <td>入职报到</td>
                 <td>备注</td>
             </tr>
             </thead>

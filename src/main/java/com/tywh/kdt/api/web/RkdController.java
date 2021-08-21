@@ -47,6 +47,29 @@ public class RkdController {
         }
     }
 
+
+    @RequestMapping("/cytzlist")
+    public void rktzlist() {
+
+        String method = "WDT_WMS_ENTRYORDER_CREATE";
+        List<Goods> list = Arrays.asList(
+                new Goods("20170000",0)
+
+        );
+
+        try {
+            String dh = "";
+            String warehouseCode = "";
+            String bz = "调整差异";
+            String xml = rkdService.createXml(dh,warehouseCode,list,bz);
+            String url = apiService.makeUrl(method, xml.replace(" ",""));
+            HttpClientResult result = httpClientService.doPost(url, xml);
+//            System.out.println(result.getStatusCode());
+//            System.out.println(result.getBody());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 处理科迪通采购入库单
      * @param dh
