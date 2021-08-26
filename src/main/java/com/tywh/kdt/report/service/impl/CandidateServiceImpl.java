@@ -27,4 +27,14 @@ public class CandidateServiceImpl implements CandidateService {
         candidate.setCreatedate(DateUtil.format(new Date(),"yyyy-MM-dd"));
         this.candidateMapper.add(candidate);
     }
+
+    @Override
+    public Candidate queryById(Integer id) {
+        return this.candidateMapper.queryById(id);
+    }
+
+    @Override
+    public void update(Candidate candidate) {
+        this.candidateMapper.update(candidate);
+    }
 }

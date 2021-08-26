@@ -9,4 +9,8 @@ public interface CandidateService {
     List<Candidate> queryCandidateList() throws Exception;
 
     void add(Candidate candidate) throws Exception;
+
+    Candidate queryById(Integer id);
+
+    void update(Candidate candidate);
 }

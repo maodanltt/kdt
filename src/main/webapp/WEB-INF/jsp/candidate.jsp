@@ -15,41 +15,6 @@
 
     <script type="text/javascript">
         $(function () {
-
-            $("#save").click(function () {
-                $.ajax({
-                    url : "/hr/candidate/add.do",
-                    data : {
-                        "username" : $.trim($("#add-username").val()),
-                        "sitename" : $.trim($("#add-sitename").val()),
-                        "candidate" : $.trim($("#add-candidate").val()),
-                        "jobtitle" : $.trim($("#add-jobtitle").val()),
-                        "mobile" : $.trim($("#add-mobile").val()),
-                        "appointdate" : $.trim($("#add-appointdate").val()),
-                        "appointtime" : $.trim($("#add-appointtime").val()),
-                        "communication" : $.trim($("#add-communication").val()),
-                        "onepattern" : $.trim($("#add-onepattern").val()),
-                        "onepass" : $.trim($("#add-onepass").val()),
-                        "oneremark" : $.trim($("#add-oneremark").val()),
-                        "secondpattern" : $.trim($("#add-secondpattern").val()),
-                        "secondpass" : $.trim($("#add-secondpass").val()),
-                        "secondremark" : $.trim($("#add-secondremark").val()),
-                        "offerd" : $.trim($("#add-offerd").val()),
-                        "entry" : $.trim($("#add-entry").val()),
-                        "remark" : $.trim($("#add-remark").val()),
-                    },
-                    type : "post",
-                    dataType : "json",
-                    success : function() {
-                        alert("添加成功")
-                    }
-                })
-            })
-
-            $("#export").click(function () {
-                $("#queryForm").submit();
-            })
-
             $("#search").click(function () {
                 if ($.trim($("#query-startdate").val()) == '') {
                     alert("开始日期必须输入");
@@ -74,7 +39,8 @@
                     success : function(data) {
                         var tbodyHtml = "";
                         $.each(data.list,function(i,item) {
-                            tbodyHtml += '<tr class="active" style="font-size: xx-small">';
+                            tbodyHtml += '<tr style="font-size: xx-small">';
+                            tbodyHtml += '<td><input type="checkbox" name="xz" value="' + (item.id) + '"></td>';
                             tbodyHtml += '<td>' + (i + 1) +'</td>';
                             tbodyHtml += '<td>' + item.createdate +'</td>';
                             tbodyHtml += '<td>' + item.username +'</td>';
@@ -84,6 +50,7 @@
                             tbodyHtml += '<td>' + item.mobile +'</td>';
                             tbodyHtml += '<td>' + item.appointdate +'</td>';
                             tbodyHtml += '<td>' + item.appointtime +'</td>';
+                            tbodyHtml += '<td>' + item.communication +'</td>';
                             tbodyHtml += '<td>' + item.onepattern +'</td>';
                             tbodyHtml += '<td>' + item.onepass +'</td>';
                             tbodyHtml += '<td>' + item.oneremark +'</td>';
@@ -110,12 +77,115 @@
                 })
 
             })
+
+            $("#addConfirm").click(function () {
+                $.ajax({
+                    url : "/hr/candidate/add.do",
+                    data : {
+                        "username" : $.trim($("#add-username").val()),
+                        "sitename" : $.trim($("#add-sitename").val()),
+                        "candidate" : $.trim($("#add-candidate").val()),
+                        "jobtitle" : $.trim($("#add-jobtitle").val()),
+                        "mobile" : $.trim($("#add-mobile").val()),
+                        "appointdate" : $.trim($("#add-appointdate").val()),
+                        "appointtime" : $.trim($("#add-appointtime").val()),
+                        "communication" : $.trim($("#add-communication").val()),
+                        "onepattern" : $.trim($("#add-onepattern").val()),
+                        "onepass" : $.trim($("#add-onepass").val()),
+                        "oneremark" : $.trim($("#add-oneremark").val()),
+                        "secondpattern" : $.trim($("#add-secondpattern").val()),
+                        "secondpass" : $.trim($("#add-secondpass").val()),
+                        "secondremark" : $.trim($("#add-secondremark").val()),
+                        "offered" : $.trim($("#add-offered").val()),
+                        "entry" : $.trim($("#add-entry").val()),
+                        "remark" : $.trim($("#add-remark").val()),
+                    },
+                    type : "post",
+                    dataType : "json",
+                    success : function() {
+                        alert("添加成功")
+                    }
+                })
+            })
+
+            $("#update").click(function () {
+                var $xz = $("input[name=xz]:checked");
+                if($xz.length == 0) {
+                    alert("请选择需要修改的记录");
+                } else if($xz.length>1){
+                    alert("只能选择一条记录进行修改");
+                } else{
+                    var id = $xz.val();
+                    $.ajax({
+                        url : "/hr/candidate/queryById.do",
+                        data : {
+                            "id" : id
+                        },
+                        type : "get",
+                        dataType : "json",
+                        success : function (data) {
+                            $("#update-id").val(data.id);
+                            $("#update-username").val(data.username);
+                            $("#update-sitename").val(data.sitename);
+                            $("#update-candidate").val(data.candidate);
+                            $("#update-jobtitle").val(data.jobtitle);
+                            $("#update-mobile").val(data.mobile);
+                            $("#update-appointdate").val(data.appointdate);
+                            $("#update-appointtime").val(data.appointtime);
+                            $("#update-communication").val(data.communication);
+                            $("#update-onepattern").val(data.onepattern);
+                            $("#update-onepass").val(data.onepass);
+                            $("#update-oneremark").val(data.oneremark);
+                            $("#update-secondpattern").val(data.secondpattern);
+                            $("#update-secondpass").val(data.secondpass);
+                            $("#update-secondremark").val(data.secondremark);
+                            $("#update-offered").val(data.offered);
+                            $("#update-entry").val(data.entry);
+                            $("#update-remark").val(data.remark);
+                            //所有的值都填写好之后，打开修改操作的模态窗口
+                            $("#updateModal").modal("show");
+                        }
+                    })
+                }
+            })
+
+            $("#updateConfirm").click(function () {
+                $.ajax({
+                    url : "/hr/candidate/update.do",
+                    data : {
+                        "id" : $.trim($("#update-id").val()),
+                        "username" : $.trim($("#update-username").val()),
+                        "sitename" : $.trim($("#update-sitename").val()),
+                        "candidate" : $.trim($("#update-candidate").val()),
+                        "jobtitle" : $.trim($("#update-jobtitle").val()),
+                        "mobile" : $.trim($("#update-mobile").val()),
+                        "appointdate" : $.trim($("#update-appointdate").val()),
+                        "appointtime" : $.trim($("#update-appointtime").val()),
+                        "communication" : $.trim($("#update-communication").val()),
+                        "onepattern" : $.trim($("#update-onepattern").val()),
+                        "onepass" : $.trim($("#update-onepass").val()),
+                        "oneremark" : $.trim($("#update-oneremark").val()),
+                        "secondpattern" : $.trim($("#update-secondpattern").val()),
+                        "secondpass" : $.trim($("#update-secondpass").val()),
+                        "secondremark" : $.trim($("#update-secondremark").val()),
+                        "offered" : $.trim($("#update-offered").val()),
+                        "entry" : $.trim($("#update-entry").val()),
+                        "remark" : $.trim($("#update-remark").val()),
+                    },
+                    type : "post",
+                    dataType : "json",
+                    success : function() {
+                        alert("修改成功")
+                    }
+                })
+            })
+
         })
 
     </script>
 </head>
 <body>
-<!-- 创建市场活动的模态窗口 -->
+<!-- 创建模态窗口 -->
 <div class="modal fade" id="addModal" role="dialog">
     <div class="modal-dialog" role="document" style="width: 85%;">
         <div class="modal-content">
@@ -123,7 +193,7 @@
                 <button type="button" class="close" data-dismiss="modal">
                     <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title" id="myModalLabel1" style="color: blue">新增应聘人员</h4>
+                <h4 class="modal-title" style="color: blue">新增应聘人员</h4>
             </div>
             <div class="modal-body">
 
@@ -131,7 +201,7 @@
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">登记人<span style="font-size: 10px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-username" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-username" style="font-size: 10px">
                                 <option></option>
                                 <option value="左传茹">左传茹</option>
                                 <option value="张翠环">张翠环</option>
@@ -140,7 +210,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">来源<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-sitename" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-sitename" style="font-size: 10px">
                                 <option></option>
                                 <option value="智联">智联</option>
                                 <option value="boss">boss</option>
@@ -150,28 +220,28 @@
                             </select>
                         </div>
                     </div>
-                    <h5 class="modal-title" id="myModalLabel2" style="font-size: 15px; color: blue">应聘人员基本信息</h5><hr>
+                    <h5 class="modal-title" style="font-size: 15px; color: blue">应聘人员基本信息</h5><hr>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">姓名<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" id="add-candidate" style="font-size: 10px">
+                            <input type="text" class="form-control input-sm" id="add-candidate" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">岗位<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" id="add-jobtitle" style="font-size: 10px">
+                            <input type="text" class="form-control input-sm" id="add-jobtitle" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">电话<span style="font-size: 15px; color: red;">*</span></label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <input type="text" class="form-control" id="add-mobile" style="font-size: 10px">
+                            <input type="text" class="form-control input-sm" id="add-mobile" style="font-size: 10px">
                         </div>
 
                         <label class="col-sm-1 control-label" style="font-size: 10px">预约日期</label>
                         <div class="col-sm-10" style="width: 150px;">
-                            <input type="date" class="form-control" id="add-appointdate" style="font-size: 10px">
+                            <input type="date" class="form-control input-sm" id="add-appointdate" style="font-size: 10px">
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">时间</label>
                         <div class="col-sm-10" style="width: 150px;">
-                            <input type="time" class="form-control" id="add-appointtime" style="font-size: 10px">
+                            <input type="time" class="form-control input-sm" id="add-appointtime" style="font-size: 10px">
                         </div>
                     </div>
                     <div class="form-group">
@@ -181,11 +251,11 @@
                         </div>
                     </div>
 
-                    <h5 class="modal-title" id="myModalLabel3" style="font-size: 15px;color: blue">初试情况</h5><hr>
+                    <h5 class="modal-title" style="font-size: 15px;color: blue">初试情况</h5><hr>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-onepattern" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-onepattern" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">视频</option>
                                 <option value="1">面谈</option>
@@ -193,7 +263,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-onepass" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-onepass" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -206,11 +276,11 @@
                             <textarea class="form-control" rows="3" id="add-oneremark" style="font-size: 10px"></textarea>
                         </div>
                     </div>
-                    <h5 class="modal-title" id="myModalLabel4" style="font-size: 15px; color: blue">复试情况</h5><hr>
+                    <h5 class="modal-title" style="font-size: 15px; color: blue">复试情况</h5><hr>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-secondpattern" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-secondpattern" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">视频</option>
                                 <option value="1">面谈</option>
@@ -218,7 +288,7 @@
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-secondpass" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-secondpass" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -232,11 +302,11 @@
                         </div>
                     </div>
 
-                    <h5 class="modal-title" id="myModalLabel5" style="color: blue; font-size: 15px" >录用信息</h5><hr>
+                    <h5 class="modal-title" style="color: blue; font-size: 15px" >录用信息</h5><hr>
                     <div class="form-group">
                         <label class="col-sm-1 control-label" style="font-size: 10px">发放offer</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-offered" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-offered" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -245,7 +315,7 @@
 
                         <label class="col-sm-1 control-label" style="font-size: 10px">入职报到</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="add-entry" style="font-size: 10px">
+                            <select class="form-control input-sm" id="add-entry" style="font-size: 10px">
                                 <option></option>
                                 <option value="0">是</option>
                                 <option value="1">否</option>
@@ -262,18 +332,176 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="save">保存</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="addConfirm">保存</button>
             </div>
         </div>
     </div>
 </div>
+<!-- 创建模态窗口结束 -->
+
+<!-- 修改模态窗口 -->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div>
+        <input type="hidden" id="update-id">
+    </div>
+    <div class="modal-dialog" role="document" style="width: 85%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" style="color: blue">修改应聘人员信息</h4>
+            </div>
+            <div class="modal-body">
+
+                <form class="form-horizontal" role="form" id="updateForm">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">登记人<span style="font-size: 10px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-username" style="font-size: 10px">
+                                <option></option>
+                                <option value="左传茹">左传茹</option>
+                                <option value="张翠环">张翠环</option>
+                                <option value="崔顽勇">崔顽勇</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">来源<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-sitename" style="font-size: 10px">
+                                <option></option>
+                                <option value="智联">智联</option>
+                                <option value="boss">boss</option>
+                                <option value="58同城">58同城</option>
+                                <option value="内部推荐">内部推荐</option>
+                                <option value="其他">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <h5 class="modal-title" style="font-size: 15px; color: blue">应聘人员基本信息</h5><hr>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">姓名<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <input type="text" class="form-control" id="update-candidate" style="font-size: 10px">
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">岗位<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <input type="text" class="form-control" id="update-jobtitle" style="font-size: 10px">
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">电话<span style="font-size: 15px; color: red;">*</span></label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <input type="text" class="form-control" id="update-mobile" style="font-size: 10px">
+                        </div>
+
+                        <label class="col-sm-1 control-label" style="font-size: 10px">预约日期</label>
+                        <div class="col-sm-10" style="width: 150px;">
+                            <input type="date" class="form-control" id="update-appointdate" style="font-size: 10px">
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">时间</label>
+                        <div class="col-sm-10" style="width: 150px;">
+                            <input type="time" class="form-control" id="update-appointtime" style="font-size: 10px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">沟通情况</label>
+                        <div class="col-sm-10" style="width: 90%;">
+                            <textarea class="form-control" rows="3" id="update-communication" style="font-size: 10px"></textarea>
+                        </div>
+                    </div>
+
+                    <h5 class="modal-title" style="font-size: 15px;color: blue">初试情况</h5><hr>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-onepattern" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">视频</option>
+                                <option value="1">面谈</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="aupdate-onepass" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
+                        <div class="col-sm-10" style="width: 90%;">
+                            <textarea class="form-control" rows="3" id="update-oneremark" style="font-size: 10px"></textarea>
+                        </div>
+                    </div>
+                    <h5 class="modal-title" style="font-size: 15px; color: blue">复试情况</h5><hr>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">面试形式</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-secondpattern" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">视频</option>
+                                <option value="1">面谈</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-secondpass" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
+                        <div class="col-sm-10" style="width: 90%;">
+                            <textarea class="form-control" rows="3" id="update-secondremark" style="font-size: 10px"></textarea>
+                        </div>
+                    </div>
+
+                    <h5 class="modal-title" style="color: blue; font-size: 15px" >录用信息</h5><hr>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">发放offer</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-offered" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+
+                        <label class="col-sm-1 control-label" style="font-size: 10px">入职报到</label>
+                        <div class="col-sm-10" style="width: 130px;">
+                            <select class="form-control" id="update-entry" style="font-size: 10px">
+                                <option></option>
+                                <option value="0">是</option>
+                                <option value="1">否</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" style="font-size: 10px">备注</label>
+                        <div class="col-sm-10" style="width: 90%;">
+                            <textarea class="form-control" rows="3" id="update-remark" style="font-size: 10px"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" >关闭</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateConfirm">修改</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 修改模态窗口结束 -->
 
 <div style="position: relative; height: 100%;">
     <div class="btn-toolbar" role="toolbar" style="height: 80px; padding: 0 20px">
         <form role="form" action="/report/candidate/export.do" method="post" style="position: relative; top: 8%; left: 5px;font-size: medium" id="queryForm" target="iframe">
             <div class="row">
                 <div class="form-group col-xs-3">
-                    <div class="input-group" style="position: relative;">
+                    <div class="input-group input-group-sm" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">
                             登记人
                         </div>
@@ -282,14 +510,14 @@
                 </div>
 
                 <div class="form-group col-xs-3">
-                    <div class="input-group" style="position: relative;">
+                    <div class="input-group input-group-sm" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">应聘人姓名</div>
                         <input class="form-control" type="text" id="query-candidate">
                     </div>
                 </div>
 
                 <div class="form-group col-xs-3">
-                    <div class="input-group" style="position: relative;">
+                    <div class="input-group input-group-sm" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">岗位分类</div>
                         <input class="form-control" type="text" id="query-jobtype">
                     </div>
@@ -297,27 +525,29 @@
             </div>
             <div class="row">
                 <div class="form-group col-xs-3 col-md-3">
-                    <div class="input-group" style="position: relative;">
+                    <div class="input-group input-group-sm" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">开始日期</div>
                         <input class="form-control" type="date" id="query-startdate">
                     </div>
                 </div>
                 <div class="form-group col-xs-3 col-md-3">
-                    <div class="input-group" style="position: relative;">
+                    <div class="input-group input-group-sm" style="position: relative;">
                         <div class="input-group-addon" style="color: blue">结束日期</div>
                         <input class="form-control" type="date" id="query-enddate">
                     </div>
                 </div>
-                <div class="form-group col-xs-1">
-                    <button type="button" class="btn btn-primary" id="search"> 查 询</button>
-                </div>
-                <div class="form-group col-xs-1">
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal" id="add"> 新 增</button>
+                <div class="form-group col-xs-6">
+                    <button type="button" class="btn btn-primary btn-sm" id="search">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true">查询</span>
+                    </button>
+                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal" id="add">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true">新增</span>
+                    </button>
+                    <button type="button" class="btn btn-warning btn-sm" id="update">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">修改</span>
+                    </button>
                 </div>
 
-                <div class="form-group col-xs-1">
-                    <button type="button" class="btn btn-info"  id="export"> 导出Excel</button>
-                </div>
             </div>
         </form>
         <iframe id="iframe" name="iframe" style="display:none;"></iframe>
@@ -326,26 +556,28 @@
     <div style="position: relative;top: 20px; font-size: medium">
         <table class="table table-hover">
             <thead>
-            <tr style="color: blue; font-size: x-small">
-                <td>序号</td>
-                <td>登记日期</td>
-                <td>登记人</td>
-                <td>来源</td>
-                <td>姓名</td>
-                <td>岗位</td>
-                <td>电话</td>
-                <td>预约日期</td>
-                <td>预约时间</td>
-                <td>形式</td>
-                <td>通过</td>
-                <td>备注</td>
-                <td>形式</td>
-                <td>通过</td>
-                <td>备注</td>
-                <td>愿意入职</td>
-                <td>入职报到</td>
-                <td>备注</td>
-            </tr>
+                <tr style="color: blue; font-size: x-small">
+                    <th><input type="checkbox"></th>
+                    <th>序号</th>
+                    <th>登记日期</th>
+                    <th>登记人</th>
+                    <th>来源</th>
+                    <th>姓名</th>
+                    <th>岗位</th>
+                    <th>电话</th>
+                    <th>预约日期</th>
+                    <th>预约时间</th>
+                    <th>沟通情况</th>
+                    <th>形式</th>
+                    <th>通过</th>
+                    <th>备注</th>
+                    <th>形式</th>
+                    <th>通过</th>
+                    <th>备注</th>
+                    <th>愿意入职</th>
+                    <th>入职报到</th>
+                    <th>备注</th>
+                </tr>
             </thead>
             <tbody id="candidatetbody"></tbody>
 <%--            <tfoot id="candidatetfoot"></tfoot>--%>

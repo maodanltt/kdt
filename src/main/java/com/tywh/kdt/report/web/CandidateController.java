@@ -40,4 +40,16 @@ public class CandidateController {
         String str = "test";
         this.candidateService.add(candidate);
     }
+
+    @RequestMapping("/queryById")
+    @ResponseBody
+    public Candidate queryById(Integer id) {
+        Integer id1 = id;
+        return this.candidateService.queryById(id);
+    }
+
+    @RequestMapping("/update")
+    public void update(Candidate candidate) {
+        this.candidateService.update(candidate);
+    }
 }

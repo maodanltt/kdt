@@ -16,6 +16,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          #{appointtime},#{onepattern},#{onepass},#{oneremark},#{secondpattern},#{secondpass},#{secondremark},#{offered},#{entry},#{remark})
     </insert>
 
+    <select id="queryById" parameterType="int" resultType="candidate">
+        select * from candidate where id = #{id}
+    </select>
+
+    <update id="update" parameterType="candidate">
+        update candidate set username=#{username},sitename=#{sitename},candidate=#{candidate},jobtitle=#{jobtitle},jobtype=#{jobtype},
+        mobile=#{mobile},communication=#{communication},appointdate=#{appointdate},appointtime=#{appointtime},onepattern=#{onepattern},
+        onepass=#{onepass},oneremark=#{oneremark},secondpattern=#{secondpattern},secondpass=#{secondpass},secondremark=#{secondremark},
+        offered=#{offered},entry=#{entry},remark=#{remark} where id = #{id}
+    </update>
+
 </mapper>
 
 
