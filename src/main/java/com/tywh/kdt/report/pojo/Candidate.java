@@ -8,20 +8,25 @@ public class Candidate {
     private String sitename;
     private String candidate;
     private String jobtitle;
-    private String jobtype;
     private String mobile;
     private String communication;
     private String appointdate;
     private String appointtime;
-    private Integer onepattern;
-    private Integer onepass;
+    private String onepattern;
+    private String onepass;
     private String oneremark;
-    private Integer secondpattern;
-    private Integer secondpass;
+    private String secondpattern;
+    private String secondpass;
     private String secondremark;
-    private Integer offered;
-    private Integer entry;
+    private String offered;
+    private String entry;
     private String remark;
+    private Integer pageno;
+    private Integer pagesize;
+    private Integer startno;
+    private Integer endno;
+    private String startdate;
+    private String enddate;
 
     public Integer getId() {
         return id;
@@ -71,14 +76,6 @@ public class Candidate {
         this.jobtitle = jobtitle;
     }
 
-    public String getJobtype() {
-        return jobtype;
-    }
-
-    public void setJobtype(String jobtype) {
-        this.jobtype = jobtype;
-    }
-
     public String getMobile() {
         return mobile;
     }
@@ -111,19 +108,19 @@ public class Candidate {
         this.appointtime = appointtime;
     }
 
-    public Integer getOnepattern() {
+    public String getOnepattern() {
         return onepattern;
     }
 
-    public void setOnepattern(Integer onepattern) {
+    public void setOnepattern(String onepattern) {
         this.onepattern = onepattern;
     }
 
-    public Integer getOnepass() {
+    public String getOnepass() {
         return onepass;
     }
 
-    public void setOnepass(Integer onepass) {
+    public void setOnepass(String onepass) {
         this.onepass = onepass;
     }
 
@@ -135,19 +132,19 @@ public class Candidate {
         this.oneremark = oneremark;
     }
 
-    public Integer getSecondpattern() {
+    public String getSecondpattern() {
         return secondpattern;
     }
 
-    public void setSecondpattern(Integer secondpattern) {
+    public void setSecondpattern(String secondpattern) {
         this.secondpattern = secondpattern;
     }
 
-    public Integer getSecondpass() {
+    public String getSecondpass() {
         return secondpass;
     }
 
-    public void setSecondpass(Integer secondpass) {
+    public void setSecondpass(String secondpass) {
         this.secondpass = secondpass;
     }
 
@@ -159,19 +156,19 @@ public class Candidate {
         this.secondremark = secondremark;
     }
 
-    public Integer getOffered() {
+    public String getOffered() {
         return offered;
     }
 
-    public void setOffered(Integer offered) {
+    public void setOffered(String offered) {
         this.offered = offered;
     }
 
-    public Integer getEntry() {
+    public String getEntry() {
         return entry;
     }
 
-    public void setEntry(Integer entry) {
+    public void setEntry(String entry) {
         this.entry = entry;
     }
 
@@ -181,5 +178,45 @@ public class Candidate {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public Integer getPageno() {
+        return pageno;
+    }
+
+    public void setPageno(Integer pageno) {
+        this.pageno = pageno;
+    }
+
+    public Integer getPagesize() {
+        return pagesize;
+    }
+
+    public void setPagesize(Integer pagesize) {
+        this.pagesize = pagesize;
+    }
+
+    public Integer getStartno() {
+        return pageno * pagesize - pagesize + 1;
+    }
+
+    public Integer getEndno() {
+        return pageno * pagesize;
+    }
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 }

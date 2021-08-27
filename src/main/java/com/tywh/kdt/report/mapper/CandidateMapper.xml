@@ -5,14 +5,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.tywh.kdt.report.mapper.CandidateMapper">
 
     <select id="queryCandidateList" resultType="candidate">
-        select * from candidate
+        select t.rowid,t.createdate,t.username,t.sitename,t.candidate,t.jobtitle,t.mobile,t.communication,t.appointdate,
+        t.appointtime,t.onepattern,t.onepass,t.oneremark,t.secondpattern,t.secondpass,t.secondremark,t.offered,t.entry,t.remark
+        from (select ROW_NUMBER()  over(order by id desc) as rowid,id,createdate,username,sitename,candidate,jobtitle,mobile,
+        communication,appointdate,appointtime,onepattern,onepass,oneremark,secondpattern,secondpass,secondremark,offered,entry,remark
+        from candidate
+        <where>
+            <if test="username != null and username != ''">
+                and username like '%' + #{username} + '%'
+            </if>
+            <if test="candidate != null and candidate != ''">
+                and candidate like '%' + #{candidate} + '%'
+            </if>
+            <if test="jobtitle != null and jobtitle != ''">
+                and jobtitle like '%' + #{jobtitle} + '%'
+            </if>
+            <if test="startdate != null and startdate != ''">
+                and createdate >= #{startdate}
+            </if>
+            <if test="enddate != null and enddate != ''">
+                and createdate &lt;= #{enddate}
+            </if>
+        </where>
+        ) t where t.rowid between #{startno} and #{endno}
+    </select>
+
+    <select id="queryTotalRecords" resultType="hashMap">
+        select count(*) total from candidate
+        <where>
+            <if test="username != null and username != ''">
+                and username like '%' + #{username} + '%'
+            </if>
+            <if test="candidate != null and candidate != ''">
+                and candidate like '%' + #{candidate} + '%'
+            </if>
+            <if test="jobtitle != null and jobtitle != ''">
+                and jobtitle like '%' + #{jobtitle} + '%'
+            </if>
+            <if test="startdate != null and startdate != ''">
+                and createdate >= #{startdate}
+            </if>
+            <if test="enddate != null and enddate != ''">
+                and createdate &lt;= #{enddate}
+            </if>
+        </where>
+
     </select>
 
     <insert id="add" parameterType="candidate">
-        insert into candidate(createdate,username,sitename,candidate,jobtitle,jobtype,mobile,communication,appointdate,
+        insert into candidate(createdate,username,sitename,candidate,jobtitle,mobile,communication,appointdate,
         appointtime,onepattern,onepass,oneremark,secondpattern,secondpass,secondremark,offered,entry,remark)
         values
-        (#{createdate},#{username},#{sitename},#{candidate},#{jobtitle},#{jobtype},#{mobile},#{communication},#{appointdate},
+        (#{createdate},#{username},#{sitename},#{candidate},#{jobtitle},#{mobile},#{communication},#{appointdate},
          #{appointtime},#{onepattern},#{onepass},#{oneremark},#{secondpattern},#{secondpass},#{secondremark},#{offered},#{entry},#{remark})
     </insert>
 
@@ -21,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <update id="update" parameterType="candidate">
-        update candidate set username=#{username},sitename=#{sitename},candidate=#{candidate},jobtitle=#{jobtitle},jobtype=#{jobtype},
+        update candidate set username=#{username},sitename=#{sitename},candidate=#{candidate},jobtitle=#{jobtitle},
         mobile=#{mobile},communication=#{communication},appointdate=#{appointdate},appointtime=#{appointtime},onepattern=#{onepattern},
         onepass=#{onepass},oneremark=#{oneremark},secondpattern=#{secondpattern},secondpass=#{secondpass},secondremark=#{secondremark},
         offered=#{offered},entry=#{entry},remark=#{remark} where id = #{id}

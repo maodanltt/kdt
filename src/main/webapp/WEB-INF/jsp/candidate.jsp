@@ -15,7 +15,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#search").click(function () {
+            $("#search").click(function (pageno,pagesize) {
                 if ($.trim($("#query-startdate").val()) == '') {
                     alert("开始日期必须输入");
                     $("#query-startdate").focus();
@@ -26,57 +26,11 @@
                     $("#query-enddate").focus();
                     return false;
                 }
-                $.ajax({
-                    url : "/hr/candidate/list.do",
-                    data : {
-                        "username" : $.trim($("#query-username").val()),
-                        "candidate" : $.trim($("#query-candidate").val()),
-                        "startdate" : $.trim($("#query-startdate").val()),
-                        "enddate" : $.trim($("#query-enddate").val()),
-                    },
-                    type : "post",
-                    dataType : "json",
-                    success : function(data) {
-                        var tbodyHtml = "";
-                        $.each(data.list,function(i,item) {
-                            tbodyHtml += '<tr style="font-size: xx-small">';
-                            tbodyHtml += '<td><input type="checkbox" name="xz" value="' + (item.id) + '"></td>';
-                            tbodyHtml += '<td>' + (i + 1) +'</td>';
-                            tbodyHtml += '<td>' + item.createdate +'</td>';
-                            tbodyHtml += '<td>' + item.username +'</td>';
-                            tbodyHtml += '<td>' + item.sitename +'</td>';
-                            tbodyHtml += '<td>' + item.candidate +'</td>';
-                            tbodyHtml += '<td>' + item.jobtitle +'</td>';
-                            tbodyHtml += '<td>' + item.mobile +'</td>';
-                            tbodyHtml += '<td>' + item.appointdate +'</td>';
-                            tbodyHtml += '<td>' + item.appointtime +'</td>';
-                            tbodyHtml += '<td>' + item.communication +'</td>';
-                            tbodyHtml += '<td>' + item.onepattern +'</td>';
-                            tbodyHtml += '<td>' + item.onepass +'</td>';
-                            tbodyHtml += '<td>' + item.oneremark +'</td>';
-                            tbodyHtml += '<td>' + item.secondpattern +'</td>';
-                            tbodyHtml += '<td>' + item.secondpass +'</td>';
-                            tbodyHtml += '<td>' + item.secondremark +'</td>';
-                            tbodyHtml += '<td>' + item.offered +'</td>';
-                            tbodyHtml += '<td>' + item.entry +'</td>';
-                            tbodyHtml += '<td>' + item.remark +'</td>';
-                            tbodyHtml += '</tr>';
 
-                        })
-                        $("#candidatetbody").html(tbodyHtml);
-                        // var tfootHtml = '<tr class="active" style="font-size: small">';
-                        // tfootHtml += '<td colspan="4" align="center" style="color: blue">汇总</td>';
-                        // tfootHtml += '<td>' + data.zqckc +'</td>';
-                        // tfootHtml += '<td>' + data.zqmkc +'</td>';
-                        // tfootHtml += '<td>' + data.zxscs +'</td>';
-                        // tfootHtml += '<td>--</td>';
-                        // tfootHtml += '<td>--</td>';
-                        // tfootHtml += '</tr>';
-                        // $("#itemtfoot").html(tfootHtml);
-                    }
-                })
 
             })
+
+        })
 
             $("#addConfirm").click(function () {
                 $.ajax({
@@ -257,16 +211,16 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-onepattern" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">视频</option>
-                                <option value="1">面谈</option>
+                                <option value="视频">视频</option>
+                                <option value="面谈">面谈</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-onepass" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -282,16 +236,16 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-secondpattern" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">视频</option>
-                                <option value="1">面谈</option>
+                                <option value="视频">视频</option>
+                                <option value="面谈">面谈</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-secondpass" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -308,8 +262,8 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-offered" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
 
@@ -317,8 +271,8 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control input-sm" id="add-entry" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -414,16 +368,16 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control" id="update-onepattern" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">视频</option>
-                                <option value="1">面谈</option>
+                                <option value="视频">视频</option>
+                                <option value="面谈">面谈</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
-                            <select class="form-control" id="aupdate-onepass" style="font-size: 10px">
+                            <select class="form-control" id="update-onepass" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -439,16 +393,16 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control" id="update-secondpattern" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">视频</option>
-                                <option value="1">面谈</option>
+                                <option value="视频">视频</option>
+                                <option value="面谈">面谈</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label" style="font-size: 10px">通过</label>
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control" id="update-secondpass" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -465,8 +419,8 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control" id="update-offered" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
 
@@ -474,8 +428,8 @@
                         <div class="col-sm-10" style="width: 130px;">
                             <select class="form-control" id="update-entry" style="font-size: 10px">
                                 <option></option>
-                                <option value="0">是</option>
-                                <option value="1">否</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                     </div>
@@ -518,8 +472,8 @@
 
                 <div class="form-group col-xs-3">
                     <div class="input-group input-group-sm" style="position: relative;">
-                        <div class="input-group-addon" style="color: blue">岗位分类</div>
-                        <input class="form-control" type="text" id="query-jobtype">
+                        <div class="input-group-addon" style="color: blue">岗位名称</div>
+                        <input class="form-control" type="text" id="query-jobtitle">
                     </div>
                 </div>
             </div>
@@ -584,8 +538,10 @@
         </table>
     </div>
 
+    <div style="height: 50px; position: relative; top:30px">
+        <div id="candidatePage"></div>
+    </div>
 </div>
-
 
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CandidateServiceImpl implements CandidateService {
@@ -17,9 +18,10 @@ public class CandidateServiceImpl implements CandidateService {
     private CandidateMapper candidateMapper;
 
     @Override
-    public List<Candidate> queryCandidateList() throws Exception{
-        return candidateMapper.queryCandidateList();
+    public List<Candidate> queryCandidateList(Candidate candidate) throws Exception{
+        return candidateMapper.queryCandidateList(candidate);
     }
+
 
     @Override
     public void add(Candidate candidate) throws Exception {
@@ -36,5 +38,10 @@ public class CandidateServiceImpl implements CandidateService {
     @Override
     public void update(Candidate candidate) {
         this.candidateMapper.update(candidate);
+    }
+
+    @Override
+    public Map<String, Integer> queryTotalRecords(Candidate candidate) {
+        return candidateMapper.queryTotalRecords(candidate);
     }
 }

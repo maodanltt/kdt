@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/hr/candidate")
@@ -27,12 +28,28 @@ public class CandidateController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResultCandidate list() throws Exception{
+    public ResultCandidate list(Candidate candidate) {
 
-        List<Candidate> list = candidateService.queryCandidateList();
-        ResultCandidate resultCandidate = new ResultCandidate();
-        resultCandidate.setList(list);
-        return resultCandidate;
+        try {
+
+            if (candidate == null) {
+                candidate = new Candidate();
+            }
+            if (candidate.getPageno() == null) {
+                candidate.setPageno(1);
+            }
+
+            List<Candidate> list = candidateService.queryCandidateList(candidate);
+            ResultCandidate resultCandidate = new ResultCandidate();
+            resultCandidate.setList(list);
+
+            Map<String, Integer> map = candidateService.queryTotalRecords(candidate);
+            resultCandidate.setTotal(map.get("total"));
+            return resultCandidate;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @RequestMapping("/add")
