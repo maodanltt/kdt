@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="/js/jquery-1.11.1-min.js"></script>
+    <script type="text/javascript" src="/js/querycandidate.js"></script>
     <link href="/js/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <link href="/js/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet"/>
     <script type="text/javascript" src="/js/bootstrap_3.3.0/js/bootstrap.min.js"></script>
@@ -15,22 +16,9 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#search").click(function (pageno,pagesize) {
-                if ($.trim($("#query-startdate").val()) == '') {
-                    alert("开始日期必须输入");
-                    $("#query-startdate").focus();
-                    return false;
-                }
-                if ($.trim($("#query-enddate").val()) == '') {
-                    alert("结束日期必须输入");
-                    $("#query-enddate").focus();
-                    return false;
-                }
-
-
+            $("#search").click(function () {
+                queryDataList(1,5);
             })
-
-        })
 
             $("#addConfirm").click(function () {
                 $.ajax({

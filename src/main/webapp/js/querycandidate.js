@@ -1,9 +1,9 @@
 
-    function queryDataList(pageNo, pageSize) {
+    function queryDataList(pageno, pagesize) {
         $.ajax({
             url : "/hr/candidate/list.do",
             data: {
-                "pageno" :pageno,
+                "pageno" : pageno,
                 "pagesize" : pagesize,
                 "username" : $.trim($("#query-username").val()),
                 "candidate" : $.trim($("#query-candidate").val()),
@@ -41,14 +41,13 @@
                     tbodyHtml += '<td>' + item.entry +'</td>';
                     tbodyHtml += '<td>' + item.remark +'</td>';
                     tbodyHtml += '</tr>';
-
                 })
                 $("#candidatetbody").html(tbodyHtml);
 
-                var totalPages = data.total%pageSize == 0 ? data.total/pageSize : parseInt(data.total/pageSize) + 1;
-                $("#activityPage").bs_pagination({
-                    currentPage: pageNo, // 页码
-                    rowsPerPage: pageSize, // 每页显示的记录条数
+                var totalPages = data.total%pagesize == 0 ? data.total/pagesize : parseInt(data.total/pagesize) + 1;
+                $("#candidatePage").bs_pagination({
+                    currentPage: pageno, // 页码
+                    rowsPerPage: pagesize, // 每页显示的记录条数
                     maxRowsPerPage: 20, // 每页最多显示的记录条数
                     totalPages: totalPages, // 总页数
                     totalRows: data.total, // 总记录条数

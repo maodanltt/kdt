@@ -2,6 +2,7 @@ package com.tywh.kdt.report.service.impl;
 
 import com.tywh.kdt.report.mapper.CandidateMapper;
 import com.tywh.kdt.report.pojo.Candidate;
+import com.tywh.kdt.report.pojo.QueryConditionCandidate;
 import com.tywh.kdt.report.service.CandidateService;
 import com.tywh.kdt.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,8 @@ public class CandidateServiceImpl implements CandidateService {
     private CandidateMapper candidateMapper;
 
     @Override
-    public List<Candidate> queryCandidateList(Candidate candidate) throws Exception{
-        return candidateMapper.queryCandidateList(candidate);
+    public List<Candidate> queryCandidateList(QueryConditionCandidate queryConditionCandidate) throws Exception{
+        return candidateMapper.queryCandidateList(queryConditionCandidate);
     }
 
 
@@ -41,7 +42,7 @@ public class CandidateServiceImpl implements CandidateService {
     }
 
     @Override
-    public Map<String, Integer> queryTotalRecords(Candidate candidate) {
-        return candidateMapper.queryTotalRecords(candidate);
+    public Map<String, Integer> queryTotalRecords(QueryConditionCandidate queryConditionCandidate) {
+        return candidateMapper.queryTotalRecords(queryConditionCandidate);
     }
 }

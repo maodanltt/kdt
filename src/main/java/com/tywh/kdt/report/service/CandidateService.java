@@ -1,13 +1,14 @@
 package com.tywh.kdt.report.service;
 
 import com.tywh.kdt.report.pojo.Candidate;
+import com.tywh.kdt.report.pojo.QueryConditionCandidate;
 
 import java.util.List;
 import java.util.Map;
 
 public interface CandidateService {
 
-    List<Candidate> queryCandidateList(Candidate candidate) throws Exception;
+    List<Candidate> queryCandidateList(QueryConditionCandidate queryConditionCandidate) throws Exception;
 
     void add(Candidate candidate) throws Exception;
 
@@ -15,5 +16,5 @@ public interface CandidateService {
 
     void update(Candidate candidate);
 
-    Map<String, Integer> queryTotalRecords(Candidate candidate);
+    Map<String, Integer> queryTotalRecords(QueryConditionCandidate queryConditionCandidate);
 }

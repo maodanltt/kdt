@@ -21,12 +21,6 @@ public class Candidate {
     private String offered;
     private String entry;
     private String remark;
-    private Integer pageno;
-    private Integer pagesize;
-    private Integer startno;
-    private Integer endno;
-    private String startdate;
-    private String enddate;
 
     public Integer getId() {
         return id;
@@ -178,45 +172,5 @@ public class Candidate {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public Integer getPageno() {
-        return pageno;
-    }
-
-    public void setPageno(Integer pageno) {
-        this.pageno = pageno;
-    }
-
-    public Integer getPagesize() {
-        return pagesize;
-    }
-
-    public void setPagesize(Integer pagesize) {
-        this.pagesize = pagesize;
-    }
-
-    public Integer getStartno() {
-        return pageno * pagesize - pagesize + 1;
-    }
-
-    public Integer getEndno() {
-        return pageno * pagesize;
-    }
-
-    public String getStartdate() {
-        return startdate;
-    }
-
-    public void setStartdate(String startdate) {
-        this.startdate = startdate;
-    }
-
-    public String getEnddate() {
-        return enddate;
-    }
-
-    public void setEnddate(String enddate) {
-        this.enddate = enddate;
     }
 }

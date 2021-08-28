@@ -1,6 +1,7 @@
 package com.tywh.kdt.report.web;
 
 import com.tywh.kdt.report.pojo.Candidate;
+import com.tywh.kdt.report.pojo.QueryConditionCandidate;
 import com.tywh.kdt.report.pojo.ResultCandidate;
 import com.tywh.kdt.report.service.CandidateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,22 +29,26 @@ public class CandidateController {
 
     @RequestMapping("/list")
     @ResponseBody
-    public ResultCandidate list(Candidate candidate) {
+    public ResultCandidate list(QueryConditionCandidate queryConditionCandidate) {
 
         try {
 
-            if (candidate == null) {
-                candidate = new Candidate();
+            if (queryConditionCandidate == null) {
+                queryConditionCandidate = new QueryConditionCandidate();
             }
-            if (candidate.getPageno() == null) {
-                candidate.setPageno(1);
+            if (queryConditionCandidate.getPageno() == null) {
+                queryConditionCandidate.setPageno(1);
             }
 
-            List<Candidate> list = candidateService.queryCandidateList(candidate);
+            if (queryConditionCandidate.getPagesize() == null) {
+                queryConditionCandidate.setPagesize(3);
+            }
+
+            List<Candidate> list = candidateService.queryCandidateList(queryConditionCandidate);
             ResultCandidate resultCandidate = new ResultCandidate();
             resultCandidate.setList(list);
 
-            Map<String, Integer> map = candidateService.queryTotalRecords(candidate);
+            Map<String, Integer> map = candidateService.queryTotalRecords(queryConditionCandidate);
             resultCandidate.setTotal(map.get("total"));
             return resultCandidate;
         } catch (Exception e) {
@@ -61,7 +66,7 @@ public class CandidateController {
     @RequestMapping("/queryById")
     @ResponseBody
     public Candidate queryById(Integer id) {
-        Integer id1 = id;
+
         return this.candidateService.queryById(id);
     }
 
