@@ -5,8 +5,8 @@
 <mapper namespace="com.tywh.kdt.api.mapper.ThdMapper">
 
     <select id="queryThdList" parameterType="string" resultType="dbd">
-        select fhdbh,sxh,sum(cs) cs,kwbh,bz from xsmxview where fhdbh = #{dh} and fhzt = '已发'
-        group by fhdbh,sxh,kwbh,bz
+        select fhdbh,sxh,ABS(sum(cs)) cs,kwbh,bz,khmc,shdz from xsmxnview where fhdbh = #{dh} and fhzt = '已发'
+        group by fhdbh,sxh,kwbh,bz,khmc,shdz
     </select>
 
 </mapper>

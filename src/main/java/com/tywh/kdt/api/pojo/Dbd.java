@@ -11,6 +11,8 @@ public class Dbd {
     private String kwbh;
     private Integer cs;
     private String bz;
+    private String khmc;
+    private String shdz;
 
     public String getFhdbh() {
         return fhdbh;
@@ -58,5 +60,21 @@ public class Dbd {
 
     public void setBz(String bz) {
         this.bz = bz;
+    }
+
+    public String getKhmc() {
+        return khmc;
+    }
+
+    public void setKhmc(String khmc) {
+        this.khmc = khmc;
+    }
+
+    public String getShdz() {
+        return shdz;
+    }
+
+    public void setShdz(String shdz) {
+        this.shdz = shdz;
     }
 }

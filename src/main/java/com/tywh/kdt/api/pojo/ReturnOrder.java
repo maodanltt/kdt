@@ -4,10 +4,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * 封装WMS入库单接口信息
+ * 封装WMS退货入库单接口信息
  */
 
-@XmlType(propOrder = {"returnOrderCode","ownerCode","orderType","warehouseCode","logisticsCode","remark","receiverInfo","senderInfo"})
+@XmlType(propOrder = {"returnOrderCode","ownerCode","orderType","warehouseCode","logisticsCode","remark","senderInfo"})
 @XmlRootElement(name = "returnOrder")
 public class ReturnOrder {
 
@@ -22,8 +22,6 @@ public class ReturnOrder {
     private String logisticsCode;
 
     private String remark;
-
-    private ReceiverInfo receiverInfo;
 
     private SenderInfo senderInfo;
 
@@ -73,14 +71,6 @@ public class ReturnOrder {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public ReceiverInfo getReceiverInfo() {
-        return receiverInfo;
-    }
-
-    public void setReceiverInfo(ReceiverInfo receiverInfo) {
-        this.receiverInfo = receiverInfo;
     }
 
     public SenderInfo getSenderInfo() {

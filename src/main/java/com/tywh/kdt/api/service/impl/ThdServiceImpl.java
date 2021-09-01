@@ -1,25 +1,18 @@
 package com.tywh.kdt.api.service.impl;
 
-import com.tywh.kdt.api.mapper.RkMapper;
 import com.tywh.kdt.api.mapper.ThdMapper;
 import com.tywh.kdt.api.pojo.*;
 import com.tywh.kdt.api.service.ThdService;
-import com.tywh.kdt.util.DateUtil;
 import com.tywh.kdt.util.XmlUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+@Service
 public class ThdServiceImpl implements ThdService {
-
-    @Autowired
-    private ReceiverInfo receiverInfo;
-
-    @Autowired
-    private SenderInfo senderInfo;
 
     @Value("${orderType.thrk}")
     private String orderType;
@@ -41,7 +34,13 @@ public class ThdServiceImpl implements ThdService {
         returnOrder.setWarehouseCode(thdList.get(0).getKwbh());
         returnOrder.setLogisticsCode("OTHER");
         returnOrder.setRemark(thdList.get(0).getBz());
-        returnOrder.setReceiverInfo(receiverInfo);
+        //退货人信息
+        SenderInfo senderInfo = new SenderInfo();
+        senderInfo.setName(thdList.get(0).getKhmc());
+        senderInfo.setMobile("0371-65791837");
+        senderInfo.setProvince(".");
+        senderInfo.setCity(".");
+        senderInfo.setDetailAddress(thdList.get(0).getShdz());
         returnOrder.setSenderInfo(senderInfo);
 
         String returnOrderXml = XmlUtil.objToXml(returnOrder);
