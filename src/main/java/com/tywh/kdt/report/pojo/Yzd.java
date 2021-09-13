@@ -5,8 +5,8 @@ public class Yzd {
     //印装单记录
     private String txrq;
     private String ywrq;
-    private Integer bcys;
-    private Integer yscs; //已收货册数
+    private String bcys;
+    private String yscs; //已收货册数
     private String cycjc;
     private String sxh;
     private String shum;
@@ -29,19 +29,19 @@ public class Yzd {
         this.ywrq = ywrq;
     }
 
-    public Integer getBcys() {
+    public String getBcys() {
         return bcys;
     }
 
-    public void setBcys(Integer bcys) {
+    public void setBcys(String bcys) {
         this.bcys = bcys;
     }
 
-    public Integer getYscs() {
+    public String getYscs() {
         return yscs;
     }
 
-    public void setYscs(Integer yscs) {
+    public void setYscs(String yscs) {
         this.yscs = yscs;
     }
 

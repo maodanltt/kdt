@@ -64,10 +64,11 @@ public class SearchServiceImpl implements SearchService {
                 yzd.setYc("");
             }
 
-            if (yzd.getYscs() == null || yzd.getYscs() == 0) {
-                yzd.setYscs(0);
+            Integer yscs = Integer.parseInt(yzd.getYscs());
+            if (yscs == null || yscs == 0) {
+                yzd.setYscs("0");
                 newYzdList.add(yzd);
-            } else if (yzd.getYscs() != null && yzd.getYscs() > 0 && (yzd.getYscs().doubleValue() / yzd.getBcys().doubleValue()) < 0.9) {
+            } else if (yscs != null && yscs > 0 && ( yscs.doubleValue() / yscs.doubleValue()) < 0.9) {
                 newYzdList.add(yzd);
             }
         }

@@ -53,13 +53,14 @@ public class RkdController {
 
         String method = "WDT_WMS_ENTRYORDER_CREATE";
         List<Goods> list = Arrays.asList(
-                new Goods("20170000",0)
+                new Goods("20201327",288),
+                new Goods("20201326",296)
 
         );
 
         try {
-            String dh = "";
-            String warehouseCode = "";
+            String dh = "CYTZ202109060002";
+            String warehouseCode = "00HG";
             String bz = "调整差异";
             String xml = rkdService.createXml(dh,warehouseCode,list,bz);
             String url = apiService.makeUrl(method, xml.replace(" ",""));

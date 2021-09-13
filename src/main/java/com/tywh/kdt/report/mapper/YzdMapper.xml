@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tywh.kdt.report.mapper.YzdMapper">
+
+    <select id="queryYzdList" parameterType="queryConditionYzd" resultType="yzd">
+
+        select t.rowid,t.txrq,t.ywrq,t.bcys,t.shum,t.zbh,t.cycjc,t.sxh,t.fydh,t.yscs from
+        (select ROW_NUMBER()  over(order by a.fydh desc) as rowid,CONVERT(varchar(100), a.txrq, 23) txrq,CONVERT(varchar(100),
+        a.ywrq, 23) ywrq ,a.bcys bcys,a.shum shum,a.zbh zbh,a.cycjc cycjc,a.sxh sxh,a.fydh fydh,b.yscs yscs
+        from perpby01..FykView a left join (select sxh,bz as fydh,sum(cs) yscs from (select rkdbh,djlx,txrq,
+        sxh,kwbh,cs,bz from rkmxview union select rkdbh,djlx,txrq,sxh,kwbh,cs,bz from rkmxnview) rkmxjl where
+        txrq >= '2021-07-01' and djlx = '产品入库' and bz like '202%' and len(bz) = 9
+        group by sxh,bz) b on a.sxh = b.sxh and a.fydh = b.fydh
+        <where>
+            txrq > '2021-07-01' and bzfs = '送货'
+            <if test="shum != null and shum != ''">
+                and shum like '%' + #{shum} + '%'
+            </if>
+            <if test="tsflmc != null and tsflmc != ''">
+                and tsflmc like '%' + #{tsflmc} + '%'
+            </if>
+            <if test="sxh != null and sxh != ''">
+                and jobtitle like '%' + #{sxh} + '%'
+            </if>
+            <if test="startdate != null and startdate != ''">
+                and txrq >= #{startdate}
+            </if>
+            <if test="enddate != null and enddate != ''">
+                and txrq &lt;= #{enddate}
+            </if>
+        </where>
+        ) t where t.rowid between #{startno} and #{endno}
+    </select>
+
+    <select id="queryTotalRecords"  parameterType="queryConditionYzd" resultType="hashMap">
+        select count(*) total from perpby01..FykView a left join (select sxh,bz as fydh,sum(cs) yscs from (
+        select rkdbh,djlx,txrq,sxh,kwbh,cs,bz from rkmxview union select rkdbh,djlx,txrq,sxh,kwbh,cs,bz
+        from rkmxnview) rkmxjl where
+        txrq >= '2021-07-01' and djlx = '产品入库' and bz like '202%' and len(bz) = 9
+        group by sxh,bz) b on a.sxh = b.sxh and a.fydh = b.fydh
+        <where>
+            txrq > '2021-07-01' and bzfs = '送货'
+            <if test="shum != null and shum != ''">
+                and shum like '%' + #{shum} + '%'
+            </if>
+            <if test="tsflmc != null and tsflmc != ''">
+                and tsflmc like '%' + #{tsflmc} + '%'
+            </if>
+            <if test="sxh != null and sxh != ''">
+                and jobtitle like '%' + #{sxh} + '%'
+            </if>
+            <if test="startdate != null and startdate != ''">
+                and txrq >= #{startdate}
+            </if>
+            <if test="enddate != null and enddate != ''">
+                and txrq &lt;= #{enddate}
+            </if>
+        </where>
+    </select>
+
+</mapper>
